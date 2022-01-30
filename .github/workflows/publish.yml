@@ -12,11 +12,6 @@ jobs:
       - run: yarn install --frozen-lockfile
       - run: yarn prettier-ci
       - run: yarn build
-      # Setup .npmrc file to publish to npm
-      - uses: actions/setup-node@v2
+      - uses: ArnaudBarre/npm-publish@v1
         with:
-          node-version: "16.x"
-          registry-url: "https://registry.npmjs.org"
-      - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          npm-token: ${{ secrets.NPM_TOKEN }}
