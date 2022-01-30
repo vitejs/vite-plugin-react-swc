@@ -1,9 +1,9 @@
 # Changelog
 
-# 0.1.1
+## 0.1.1
 
-Add licence
+Add LICENSE
 
-# 0.1.0
+## 0.1.0
 
 Initial release
