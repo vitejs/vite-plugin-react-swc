@@ -1,5 +1,0 @@
-*.ts
-!*.d.ts
-tsconfig.json
-.github
-CHANGELOG.md
