@@ -3,8 +3,7 @@
 Use the versatility of [swc](https://swc.rs/) for development and the maturity of [esbuild](https://esbuild.github.io/) for production.
 
 - ✅ A fast Fast Refresh (~20x faster than Babel)
-- ✅ Skip `import React`
-- ❌ Not compatible with [automatic JSX runtime](https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html). See [this section](#jsx-runtime)
+- ✅ Compatible with [automatic JSX runtime](https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html)
 - ❌ Don't check for consistent components exports. See [this section](#consistent-components-exports)
 
 ## Installation
@@ -15,19 +14,29 @@ npm i -D vite-plugin-swc-react-refresh
 
 ## Usage
 
+With the automatic JSX runtime (requires esbuild => [0.14.51](https://github.com/evanw/esbuild/releases/tag/v0.14.51)):
+
 ```ts
 import { defineConfig } from "vite";
-import swcReactRefresh from "vite-plugin-swc-react-refresh";
+import { swcReactRefresh } from "vite-plugin-swc-react-refresh";
+
+export default defineConfig({
+  plugins: [swcReactRefresh()],
+  esbuild: { runtime: "automatic" },
+});
+```
+
+Without the automatic JSX runtime, but still omitting the `React` default import:
+
+```ts
+import { defineConfig } from "vite";
+import { swcReactRefresh } from "vite-plugin-swc-react-refresh";
 
 export default defineConfig({
   plugins: [swcReactRefresh()],
   esbuild: { jsxInject: `import React from "react"` },
 });
 ```
-
-## JSX Runtime
-
-This plugin is only used in development, and esbuild (which doesn't support the automatic JSX runtime) will be used by Vite for bundling. However, you can omit the default React import with the `esbuild.jsxInject` Vite option.
 
 ## Consistent components exports
 

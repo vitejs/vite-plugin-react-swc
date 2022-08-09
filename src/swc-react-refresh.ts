@@ -13,12 +13,16 @@ window.$RefreshSig$ = () => (type) => type;`;
 const importReactRE = /(^|\n)import\s+(\*\s+as\s+)?React(,|\s+)/;
 
 let define: { [key: string]: string } | undefined;
+let automaticRuntime = false;
 
-export default (): PluginOption => ({
+export const swcReactRefresh = (): PluginOption => ({
   name: "react-refresh",
   apply: "serve",
   config: (config) => {
-    if (config.esbuild) define = config.esbuild.define;
+    if (config.esbuild) {
+      define = config.esbuild.define;
+      automaticRuntime = config.esbuild.jsx === "automatic";
+    }
     config.esbuild = false;
   },
   resolveId: (id) => (id === runtimePublicPath ? id : undefined),
@@ -41,7 +45,12 @@ export default (): PluginOption => ({
       jsc: {
         target: "es2020",
         transform: {
-          react: { refresh: true, development: true, useBuiltins: true },
+          react: {
+            refresh: true,
+            development: true,
+            useBuiltins: true,
+            runtime: automaticRuntime ? "automatic" : undefined,
+          },
           optimizer: { globals: { vars: define } },
         },
       },
