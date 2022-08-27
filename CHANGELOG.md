@@ -1,6 +1,10 @@
 # Changelog
 
-## 0.2.0
+## 2.0.1
+
+Fix esbuild property in documentation.
+
+## 2.0.0
 
 Breaking: Use named export instead of default export for better esm/cjs interop.
 
