@@ -12,7 +12,7 @@ To migrate, replace your import by `import { swcReactRefresh } from "vite-plugin
 
 The JSX automatic runtime is also now supported if you bump esbuild to at least [0.14.51](https://github.com/evanw/esbuild/releases/tag/v0.14.51).
 
-To use it, update your config from `esbuild: { jsxInject: 'import React from "react"' },` to `esbuild: { runtime: "automatic" },`
+To use it, update your config from `esbuild: { jsxInject: 'import React from "react"' },` to `esbuild: { jsx: "automatic" },`
 
 ## 0.1.2
 
