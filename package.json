@@ -1,7 +1,7 @@
 {
   "name": "vite-plugin-swc-react-refresh",
   "description": "Use the versatility of swc for development and the maturity of esbuild for production",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "license": "MIT",
   "author": "Arnaud Barré (https://github.com/ArnaudBarre)",
   "main": "src/swc-react-refresh.js",
@@ -27,7 +27,7 @@
     "trailingComma": "all"
   },
   "dependencies": {
-    "@swc/core": "1.2.141"
+    "@swc/core": "^1.2.245"
   },
   "peerDependencies": {
     "vite": "^2 || ^3"
