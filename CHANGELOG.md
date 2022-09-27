@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.3
+
+Include `react/jsx-dev-runtime` for dependencies optimisation when using automatic runtime.
+
 ## 2.0.2
 
 Unpinned `@swc/core` to get new features (like TS instantiation expression) despite a [30mb bump of bundle size](https://github.com/swc-project/swc/issues/3899)

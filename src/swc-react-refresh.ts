@@ -23,7 +23,12 @@ export const swcReactRefresh = (): PluginOption => ({
       define = config.esbuild.define;
       automaticRuntime = config.esbuild.jsx === "automatic";
     }
-    config.esbuild = false;
+    return automaticRuntime
+      ? {
+          esbuild: false,
+          optimizeDeps: { include: ["react/jsx-dev-runtime"] },
+        }
+      : { esbuild: false };
   },
   resolveId: (id) => (id === runtimePublicPath ? id : undefined),
   load: (id) =>
@@ -57,6 +62,7 @@ export const swcReactRefresh = (): PluginOption => ({
     });
 
     if (
+      !automaticRuntime &&
       result.code.includes("React.createElement") &&
       !importReactRE.test(result.code)
     ) {
