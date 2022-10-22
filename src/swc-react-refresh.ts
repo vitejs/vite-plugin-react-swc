@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import { SourceMapPayload } from "module";
 import { transform } from "@swc/core";
 import { PluginOption } from "vite";
 
@@ -46,7 +47,7 @@ export const swcReactRefresh = (): PluginOption => ({
       filename: id,
       swcrc: false,
       configFile: false,
-
+      sourceMaps: true,
       jsc: {
         target: "es2020",
         transform: {
@@ -60,6 +61,7 @@ export const swcReactRefresh = (): PluginOption => ({
         },
       },
     });
+    let mappingPrefix = "";
 
     if (
       !automaticRuntime &&
@@ -67,10 +69,12 @@ export const swcReactRefresh = (): PluginOption => ({
       !importReactRE.test(result.code)
     ) {
       result.code = `import React from "react";\n${result.code}`;
+      mappingPrefix += ";";
     }
-    if (!result.code.includes("$RefreshReg$")) return result;
 
-    const header = `import * as RefreshRuntime from "${runtimePublicPath}";
+    if (result.code.includes("$RefreshReg$")) {
+      mappingPrefix += ";;;;;;;;;;;;";
+      result.code = `import * as RefreshRuntime from "${runtimePublicPath}";
 
 let prevRefreshReg;
 let prevRefreshSig;
@@ -81,14 +85,20 @@ prevRefreshReg = window.$RefreshReg$;
 prevRefreshSig = window.$RefreshSig$;
 window.$RefreshReg$ = RefreshRuntime.getRefreshReg("${id}");
 window.$RefreshSig$ = RefreshRuntime.createSignatureFunctionForTransform;
-`;
 
-    const footer = `
+${result.code}
+
 window.$RefreshReg$ = prevRefreshReg;
 window.$RefreshSig$ = prevRefreshSig;
 import.meta.hot.accept();
-RefreshRuntime.enqueueUpdate();`;
+RefreshRuntime.enqueueUpdate();
+`;
+    }
 
-    return { code: `${header}${result.code}${footer}`, map: result.map };
+    if (!mappingPrefix) return result;
+
+    const sourceMap: SourceMapPayload = JSON.parse(result.map!);
+    sourceMap.mappings = mappingPrefix + sourceMap.mappings;
+    return { code: result.code, map: sourceMap };
   },
 });

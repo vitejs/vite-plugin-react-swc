@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.0
+
+Add source maps support
+
 ## 2.0.3
 
 Include `react/jsx-dev-runtime` for dependencies optimisation when using automatic runtime.
