@@ -1,7 +1,7 @@
-import fs from "fs";
-import path from "path";
+import { readFileSync } from "fs";
+import { join, extname } from "path";
 import { SourceMapPayload } from "module";
-import { transform } from "@swc/core";
+import { Output, ParserConfig, transform } from "@swc/core";
 import { PluginOption } from "vite";
 
 const runtimePublicPath = "/@react-refresh";
@@ -16,8 +16,15 @@ const importReactRE = /(^|\n)import\s+(\*\s+as\s+)?React(,|\s+)/;
 let define: { [key: string]: string } | undefined;
 let automaticRuntime = false;
 
+const parserMap = new Map<string, ParserConfig>([
+  [".tsx", { syntax: "typescript", tsx: true }],
+  [".ts", { syntax: "typescript", tsx: false }],
+  [".jsx", { syntax: "ecmascript", jsx: true }],
+  [".js", { syntax: "ecmascript", jsx: false }],
+]);
+
 export const swcReactRefresh = (): PluginOption => ({
-  name: "react-refresh",
+  name: "swc-react-refresh",
   apply: "serve",
   config: (config) => {
     if (config.esbuild) {
@@ -34,33 +41,49 @@ export const swcReactRefresh = (): PluginOption => ({
   resolveId: (id) => (id === runtimePublicPath ? id : undefined),
   load: (id) =>
     id === runtimePublicPath
-      ? fs.readFileSync(path.join(__dirname, "refresh-runtime.js"), "utf-8")
+      ? readFileSync(join(__dirname, "refresh-runtime.js"), "utf-8")
       : undefined,
   transformIndexHtml: () => [
     { tag: "script", attrs: { type: "module" }, children: preambleCode },
   ],
   async transform(code, id) {
     if (id.includes("node_modules")) return;
-    if (!/\.[jt]sx?$/.test(id)) return;
+    const parser = parserMap.get(extname(id));
+    if (!parser) return;
 
-    const result = await transform(code, {
-      filename: id,
-      swcrc: false,
-      configFile: false,
-      sourceMaps: true,
-      jsc: {
-        target: "es2020",
-        transform: {
-          react: {
-            refresh: true,
-            development: true,
-            useBuiltins: true,
-            runtime: automaticRuntime ? "automatic" : undefined,
+    let result: Output;
+    try {
+      result = await transform(code, {
+        filename: id,
+        swcrc: false,
+        configFile: false,
+        sourceMaps: true,
+        jsc: {
+          target: "es2020",
+          parser,
+          transform: {
+            react: {
+              refresh: true,
+              development: true,
+              useBuiltins: true,
+              runtime: automaticRuntime ? "automatic" : undefined,
+            },
+            optimizer: { globals: { vars: define } },
           },
-          optimizer: { globals: { vars: define } },
         },
-      },
-    });
+      });
+    } catch (e: any) {
+      const message: string = e.message;
+      const fileStartIndex = message.indexOf("╭─[");
+      if (fileStartIndex !== -1) {
+        const match = message.slice(fileStartIndex).match(/:(\d+):(\d+)]/);
+        if (match) {
+          e.line = match[1];
+          e.column = match[2];
+        }
+      }
+      throw e;
+    }
     let mappingPrefix = "";
 
     if (

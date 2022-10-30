@@ -1,6 +1,6 @@
 # vite-plugin-swc-react-refresh [![npm](https://img.shields.io/npm/v/vite-plugin-swc-react-refresh)](https://www.npmjs.com/package/vite-plugin-swc-react-refresh)
 
-Use the versatility of [swc](https://swc.rs/) for development and the maturity of [esbuild](https://esbuild.github.io/) for production.
+Use the versatility of [SWC](https://swc.rs/) for development and the maturity of [esbuild](https://esbuild.github.io/) for production.
 
 - ✅ A fast Fast Refresh (~20x faster than Babel)
 - ✅ Compatible with [automatic JSX runtime](https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html)

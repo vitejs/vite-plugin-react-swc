@@ -8,10 +8,11 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ contains(github.event.head_commit.message, '[publish]') }}
     steps:
-      - uses: actions/checkout@v2
-      - run: yarn install --frozen-lockfile
-      - run: yarn prettier-ci
-      - run: yarn build
-      - uses: ArnaudBarre/npm-publish@v1
+      - uses: actions/checkout@v3
+      - uses: xhyrom/setup-bun@v0.1.8
+      - run: bun install
+      - run: bun ci
+      - uses: ArnaudBarre/npm-publish@v1.1
         with:
+          working-directory: dist
           npm-token: ${{ secrets.NPM_TOKEN }}

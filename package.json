@@ -1,41 +1,27 @@
 {
   "name": "vite-plugin-swc-react-refresh",
-  "description": "Use the versatility of swc for development and the maturity of esbuild for production",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "license": "MIT",
-  "author": "Arnaud Barré (https://github.com/ArnaudBarre)",
-  "main": "src/swc-react-refresh.js",
-  "files": [
-    "src/*.js",
-    "src/*.d.ts"
-  ],
-  "repository": "github:ArnaudBarre/vite-plugin-swc-react-refresh",
-  "keywords": [
-    "vite",
-    "vite-plugin",
-    "react",
-    "swc",
-    "react-refresh",
-    "fast refresh"
-  ],
   "scripts": {
-    "build": "tsc",
+    "build": "scripts/bundle.ts",
     "prettier": "yarn prettier-ci --write",
-    "prettier-ci": "prettier --check '**/*.{js,ts,json,md,yml}'"
+    "prettier-ci": "prettier --ignore-path=.gitignore --check '**/*.{js,ts,json,md,yml}'",
+    "ci": "tsc && bun prettier-ci && bun run build"
   },
   "prettier": {
     "trailingComma": "all"
   },
   "dependencies": {
-    "@swc/core": "^1.2.245"
+    "@swc/core": "^1.3.10"
   },
   "peerDependencies": {
     "vite": "^2 || ^3"
   },
   "devDependencies": {
-    "@types/node": "^18.0.6",
+    "@nabla/tnode": "^0.7.0",
+    "@types/node": "^18.11.4",
     "prettier": "^2.7.1",
-    "typescript": "^4.7.4",
-    "vite": "^3.0.5"
+    "typescript": "^4.8.4",
+    "vite": "^3.2.1"
   }
 }

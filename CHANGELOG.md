@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.2.0
+
+- Always provide parser options to fix issue with `.jsx` imports. Relying on file extension for this is more buggy [than I though](https://github.com/swc-project/swc/issues/3297)
+- Extract line and column in SWC errors to make overlay filename clickable
+- Fix plugin name (`react-refresh` -> `swc-react-refresh`)
+
 ## 2.1.0
 
 Add source maps support
