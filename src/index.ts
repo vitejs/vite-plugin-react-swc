@@ -46,7 +46,7 @@ export const swcReactRefresh = (): PluginOption => ({
   transformIndexHtml: () => [
     { tag: "script", attrs: { type: "module" }, children: preambleCode },
   ],
-  async transform(code, id) {
+  async transform(code, id, transformOptions) {
     if (id.includes("node_modules")) return;
     const parser = parserMap.get(extname(id));
     if (!parser) return;
@@ -63,7 +63,7 @@ export const swcReactRefresh = (): PluginOption => ({
           parser,
           transform: {
             react: {
-              refresh: true,
+              refresh: !transformOptions?.ssr,
               development: true,
               useBuiltins: true,
               runtime: automaticRuntime ? "automatic" : undefined,
@@ -96,16 +96,12 @@ export const swcReactRefresh = (): PluginOption => ({
     }
 
     if (result.code.includes("$RefreshReg$")) {
-      mappingPrefix += ";;;;;;;;;;;;";
+      mappingPrefix += ";;;;;;;;";
       result.code = `import * as RefreshRuntime from "${runtimePublicPath}";
 
-let prevRefreshReg;
-let prevRefreshSig;
-
 if (!window.$RefreshReg$) throw new Error("React refresh preamble was not loaded. Something is wrong.");
-
-prevRefreshReg = window.$RefreshReg$;
-prevRefreshSig = window.$RefreshSig$;
+const prevRefreshReg = window.$RefreshReg$;
+const prevRefreshSig = window.$RefreshSig$;
 window.$RefreshReg$ = RefreshRuntime.getRefreshReg("${id}");
 window.$RefreshSig$ = RefreshRuntime.createSignatureFunctionForTransform;
 

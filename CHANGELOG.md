@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.2.1
+
+Skip react-refresh on SSR (Fixes [#2](https://github.com/ArnaudBarre/vite-plugin-swc-react-refresh/issues/2))
+
 ## 2.2.0
 
 - Always provide parser options to fix issue with `.jsx` imports. Relying on file extension for this is more buggy [than I though](https://github.com/swc-project/swc/issues/3297)
