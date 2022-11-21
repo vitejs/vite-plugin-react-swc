@@ -5,6 +5,8 @@ import { build } from "esbuild";
 
 import * as packageJSON from "../package.json";
 
+const dev = process.argv.includes("--dev");
+
 rmSync("dist", { force: true, recursive: true });
 
 build({
@@ -17,6 +19,7 @@ build({
   external: Object.keys(packageJSON.peerDependencies).concat(
     Object.keys(packageJSON.dependencies),
   ),
+  watch: dev,
 }).then(() => {
   execSync("cp src/refresh-runtime.js LICENSE README.md dist/");
 

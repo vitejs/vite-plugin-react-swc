@@ -3,10 +3,11 @@
   "version": "3.0.0-alpha.0",
   "license": "MIT",
   "scripts": {
+    "dev": "scripts/bundle.ts --dev",
     "build": "scripts/bundle.ts",
     "prettier": "pnpm prettier-ci --write",
-    "prettier-ci": "prettier --ignore-path=.gitignore --check '**/*.{js,ts,json,md,yml}'",
-    "ci": "tsc && pnpm prettier-ci && pnpm build"
+    "prettier-ci": "prettier --ignore-path=.gitignore --check '**/*.{js,ts,tsx,html,css,json,md,yml}'",
+    "ci": "tsc && pnpm prettier-ci && pnpm build && cd playground && tsc"
   },
   "prettier": {
     "trailingComma": "all"
