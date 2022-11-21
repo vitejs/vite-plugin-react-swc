@@ -1,7 +1,7 @@
+/*! Copyright (c) Meta Platforms, Inc. and affiliates. **/
 /**
  * This is simplified pure-js version of https://github.com/facebook/react/blob/main/packages/react-refresh/src/ReactFreshRuntime.js
- * without IE11 compatibility and functions for the babel plugin
- * Copyright (c) Facebook, Inc. and its affiliates.
+ * without IE11 compatibility and verbose isDev checks.
  */
 
 const REACT_FORWARD_REF_TYPE = Symbol.for("react.forward_ref");
@@ -267,7 +267,7 @@ function debounce(fn, delay) {
   };
 }
 
-export const enqueueUpdate = debounce(performReactRefresh, 16);
+const enqueueUpdate = debounce(performReactRefresh, 16);
 
 function register(type, id) {
   if (type === null) {
@@ -549,4 +549,84 @@ export function createSignatureFunctionForTransform() {
       }
     }
   };
+}
+
+function isLikelyComponentType(type) {
+  switch (typeof type) {
+    case "function": {
+      // First, deal with classes.
+      if (type.prototype != null) {
+        if (type.prototype.isReactComponent) {
+          // React class.
+          return true;
+        }
+        const ownNames = Object.getOwnPropertyNames(type.prototype);
+        if (ownNames.length > 1 || ownNames[0] !== "constructor") {
+          // This looks like a class.
+          return false;
+        }
+        // eslint-disable-next-line no-proto
+        if (type.prototype.__proto__ !== Object.prototype) {
+          // It has a superclass.
+          return false;
+        }
+        // Pass through.
+        // This looks like a regular function with empty prototype.
+      }
+      // For plain functions and arrows, use name as a heuristic.
+      const name = type.name || type.displayName;
+      return typeof name === "string" && /^[A-Z]/.test(name);
+    }
+    case "object": {
+      if (type != null) {
+        switch (getProperty(type, "$$typeof")) {
+          case REACT_FORWARD_REF_TYPE:
+          case REACT_MEMO_TYPE:
+            // Definitely React components.
+            return true;
+          default:
+            return false;
+        }
+      }
+      return false;
+    }
+    default: {
+      return false;
+    }
+  }
+}
+
+export function validateRefreshBoundaryAndEnqueueUpdate(
+  prevExports,
+  nextExports,
+) {
+  if (!predicateOnExport(prevExports, (key) => !!nextExports[key])) {
+    return "Could not Fast Refresh (export removed)";
+  }
+
+  let hasExports = false;
+  const allExportsAreComponentsOrUnchanged = predicateOnExport(
+    nextExports,
+    (key, value) => {
+      hasExports = true;
+      if (isLikelyComponentType(value)) return true;
+      if (!prevExports[key]) return false;
+      return prevExports[key] === nextExports[key];
+    },
+  );
+  if (hasExports && allExportsAreComponentsOrUnchanged) {
+    enqueueUpdate();
+  } else {
+    return "Could not Fast Refresh. Learn more at https://github.com/ArnaudBarre/vite-plugin-swc-react-refresh#consistent-components-exports";
+  }
+}
+
+function predicateOnExport(moduleExports, predicate) {
+  for (const key in moduleExports) {
+    if (key === "__esModule") continue;
+    const desc = Object.getOwnPropertyDescriptor(moduleExports, key);
+    if (desc && desc.get) return false;
+    if (!predicate(key, moduleExports[key])) return false;
+  }
+  return true;
 }

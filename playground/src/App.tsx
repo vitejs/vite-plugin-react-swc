@@ -1,6 +1,7 @@
 import { useState } from "react";
 import reactLogo from "./react.svg";
 import "./App.css";
+import { TitleWithExport, framework } from "./TitleWithExport";
 
 export const App = () => {
   const [count, setCount] = useState(0);
@@ -15,7 +16,7 @@ export const App = () => {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <h1>Vite + React</h1>
+      <TitleWithExport />
       <div className="card">
         <button onClick={() => setCount(count + 1)}>count is {count}</button>
         <p>
@@ -23,7 +24,7 @@ export const App = () => {
         </p>
       </div>
       <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
+        Click on the Vite and {framework} logos to learn more
       </p>
     </div>
   );

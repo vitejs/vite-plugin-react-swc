@@ -87,8 +87,13 @@ export const swcReactRefresh = (): PluginOption[] => [
   
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
-  import.meta.hot.accept();
-    RefreshRuntime.enqueueUpdate();
+  import.meta.hot.accept((nextExports) => {
+  if (!nextExports) return;
+  import(/* @vite-ignore */ import.meta.url).then((current) => {
+    const invalidateMessage = RefreshRuntime.validateRefreshBoundaryAndEnqueueUpdate(current, nextExports);
+    if (invalidateMessage) import.meta.hot.invalidate(invalidateMessage);
+  });
+});
   `;
 
       const sourceMap: SourceMapPayload = JSON.parse(result.map!);

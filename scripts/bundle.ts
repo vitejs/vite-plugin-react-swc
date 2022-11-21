@@ -9,19 +9,30 @@ const dev = process.argv.includes("--dev");
 
 rmSync("dist", { force: true, recursive: true });
 
-build({
-  bundle: true,
-  entryPoints: ["src/index.ts"],
-  outdir: "dist",
-  platform: "node",
-  target: "node14",
-  legalComments: "inline",
-  external: Object.keys(packageJSON.peerDependencies).concat(
-    Object.keys(packageJSON.dependencies),
-  ),
-  watch: dev,
-}).then(() => {
-  execSync("cp src/refresh-runtime.js LICENSE README.md dist/");
+Promise.all([
+  build({
+    entryPoints: ["src/refresh-runtime.js"],
+    outdir: "dist",
+    platform: "browser",
+    format: "esm",
+    target: "safari13",
+    legalComments: "inline",
+    watch: dev,
+  }),
+  build({
+    bundle: true,
+    entryPoints: ["src/index.ts"],
+    outdir: "dist",
+    platform: "node",
+    target: "node14",
+    legalComments: "inline",
+    external: Object.keys(packageJSON.peerDependencies).concat(
+      Object.keys(packageJSON.dependencies),
+    ),
+    watch: dev,
+  }),
+]).then(() => {
+  execSync("cp LICENSE README.md dist/");
 
   writeFileSync(
     "dist/index.d.ts",

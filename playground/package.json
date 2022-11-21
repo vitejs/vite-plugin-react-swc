@@ -2,7 +2,8 @@
   "name": "playground",
   "private": true,
   "scripts": {
-    "dev": "vite"
+    "dev": "vite",
+    "build": "vite build"
   },
   "dependencies": {
     "react": "^18.2.0",
