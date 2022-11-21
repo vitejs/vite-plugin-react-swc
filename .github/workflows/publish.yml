@@ -9,9 +9,9 @@ jobs:
     if: ${{ contains(github.event.head_commit.message, '[publish]') }}
     steps:
       - uses: actions/checkout@v3
-      - uses: xhyrom/setup-bun@v0.1.8
-      - run: bun install
-      - run: bun ci
+      - uses: pnpm/action-setup@v2.2.4
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm ci
       - uses: ArnaudBarre/npm-publish@v1.1
         with:
           working-directory: dist
