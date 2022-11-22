@@ -3,7 +3,7 @@
 Use the versatility of [SWC](https://swc.rs/) for development and the maturity of [esbuild](https://esbuild.github.io/) for production.
 
 - ✅ A fast Fast Refresh (~20x faster than Babel)
-- ✅ Compatible with [automatic JSX runtime](https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html)
+- ✅ Enable [automatic JSX runtime](https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html)
 - ❌ Don't check for consistent components exports. See [this section](#consistent-components-exports)
 
 ## Installation
@@ -14,29 +14,26 @@ npm i -D vite-plugin-swc-react-refresh
 
 ## Usage
 
-With the automatic JSX runtime (requires esbuild => [0.14.51](https://github.com/evanw/esbuild/releases/tag/v0.14.51)):
-
 ```ts
 import { defineConfig } from "vite";
 import { swcReactRefresh } from "vite-plugin-swc-react-refresh";
 
 export default defineConfig({
   plugins: [swcReactRefresh()],
-  esbuild: { jsx: "automatic" },
 });
 ```
 
-Without the automatic JSX runtime, but still omitting the `React` default import:
+## Caveats
 
-```ts
-import { defineConfig } from "vite";
-import { swcReactRefresh } from "vite-plugin-swc-react-refresh";
+This plugin is only used in development and aims to be kept simple to enable good performances and be transpiler agnostic. Here is the list of non-configurable options that impact runtime behaviour:
 
-export default defineConfig({
-  plugins: [swcReactRefresh()],
-  esbuild: { jsxInject: `import React from "react"` },
-});
-```
+- [useDefineForClassFields](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#the-usedefineforclassfields-flag-and-the-declare-property-modifier) is always activated, as this matches the current ECMAScript spec
+- `jsx runtime` is always `automatic`
+- In development:
+  - esbuild is disabled, so the [esbuild configuration](https://vitejs.dev/config/shared-options.html#esbuild) has no effect
+  - `target` is `es2020`
+  - JS files are not transformed
+  - tsconfig is not resolved, so properties other than the ones listed above behaves like TS defaults
 
 ## Consistent components exports
 
