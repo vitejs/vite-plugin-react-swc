@@ -1,18 +1,30 @@
-name: Publish to npm
+name: CI
 on:
   push:
     branches:
       - main
+      - next
+  pull_request:
+    branches:
+      - main
 jobs:
-  publish:
+  ci:
     runs-on: ubuntu-latest
-    if: ${{ contains(github.event.head_commit.message, '[publish]') }}
     steps:
       - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2.2.4
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm ci
-      - uses: ArnaudBarre/npm-publish@v1.1
+      - uses: actions/setup-node@v3
         with:
-          working-directory: dist
-          npm-token: ${{ secrets.NPM_TOKEN }}
+          node-version: 16
+      - run: corepack enable
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: "pnpm"
+          cache-dependency-path: "**/pnpm-lock.yaml"
+      - run: pnpm install --frozen-lockfile --prefer-offline
+      - uses: actions/cache@v3
+        with:
+          key: playwright-bin
+          path: ~/.cache/ms-playwright
+      - run: pnpm playwright install chromium
+      - run: pnpm ci

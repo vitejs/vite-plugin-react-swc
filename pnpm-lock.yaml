@@ -5,6 +5,7 @@ importers:
   .:
     specifiers:
       '@nabla/tnode': ^0.7.0
+      '@playwright/test': ^1.28.1
       '@swc/core': ^1.3.10
       '@types/node': ^18.11.9
       esbuild: ^0.15.15
@@ -15,6 +16,7 @@ importers:
       '@swc/core': 1.3.20
     devDependencies:
       '@nabla/tnode': 0.7.0
+      '@playwright/test': 1.28.1
       '@types/node': 18.11.9
       esbuild: 0.15.15
       prettier: 2.8.0
@@ -59,6 +61,15 @@ packages:
     hasBin: true
     dependencies:
       esbuild: 0.15.15
+    dev: true
+
+  /@playwright/test/1.28.1:
+    resolution: {integrity: sha512-xN6spdqrNlwSn9KabIhqfZR7IWjPpFK1835tFNgjrlysaSezuX8PYUwaz38V/yI8TJLG9PkAMEXoHRXYXlpTPQ==}
+    engines: {node: '>=14'}
+    hasBin: true
+    dependencies:
+      '@types/node': 18.11.9
+      playwright-core: 1.28.1
     dev: true
 
   /@swc/core-darwin-arm64/1.3.20:
@@ -457,6 +468,12 @@ packages:
 
   /picocolors/1.0.0:
     resolution: {integrity: sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ==}
+    dev: true
+
+  /playwright-core/1.28.1:
+    resolution: {integrity: sha512-3PixLnGPno0E8rSBJjtwqTwJe3Yw72QwBBBxNoukIj3lEeBNXwbNiKrNuB1oyQgTBw5QHUhNO3SteEtHaMK6ag==}
+    engines: {node: '>=14'}
+    hasBin: true
     dev: true
 
   /postcss/8.4.19:

@@ -1,5 +1,5 @@
 {
-  "include": ["src", "scripts"],
+  "include": ["src", "scripts", "tests"],
   "compilerOptions": {
     /* Target node 14 */
     "module": "CommonJS",
