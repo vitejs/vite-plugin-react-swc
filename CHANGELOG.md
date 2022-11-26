@@ -2,7 +2,7 @@
 
 ## 2.2.1
 
-Skip react-refresh on SSR (Fixes [#2](https://github.com/ArnaudBarre/vite-plugin-swc-react-refresh/issues/2))
+Skip react-refresh on SSR (Fixes [#2](https://github.com/vitejs/plugin-react-swc/issues/2))
 
 ## 2.2.0
 

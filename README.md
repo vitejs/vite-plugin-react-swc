@@ -1,4 +1,4 @@
-# vite-plugin-swc-react-refresh [![npm](https://img.shields.io/npm/v/vite-plugin-swc-react-refresh)](https://www.npmjs.com/package/vite-plugin-swc-react-refresh)
+# @vitejs/plugin-react-swc [![npm](https://img.shields.io/npm/v/@vitejs/plugin-react-swc)](https://www.npmjs.com/package/@vitejs/plugin-react-swc)
 
 Use the versatility of [SWC](https://swc.rs/) for development and the maturity of [esbuild](https://esbuild.github.io/) for production.
 
@@ -8,14 +8,14 @@ Use the versatility of [SWC](https://swc.rs/) for development and the maturity o
 ## Installation
 
 ```sh
-npm i -D vite-plugin-swc-react-refresh
+npm i -D @vitejs/plugin-react-swc
 ```
 
 ## Usage
 
 ```ts
 import { defineConfig } from "vite";
-import { swcReactRefresh } from "vite-plugin-swc-react-refresh";
+import { swcReactRefresh } from "@vitejs/plugin-react-swc";
 
 export default defineConfig({
   plugins: [swcReactRefresh()],

@@ -34,7 +34,7 @@ test("HMR invalidate", async ({ page }) => {
   // Edit export
   editFile("TitleWithExport.tsx", ["React", "React!"]);
   await waitForLogs(
-    "[vite] invalidate /src/TitleWithExport.tsx: Could not Fast Refresh. Learn more at https://github.com/ArnaudBarre/vite-plugin-swc-react-refresh#consistent-components-exports",
+    "[vite] invalidate /src/TitleWithExport.tsx: Could not Fast Refresh. Learn more at https://github.com/vitejs/plugin-react-swc#consistent-components-exports",
     "[vite] hot updated: /src/App.tsx",
   );
   await expect(page.locator("h1")).toHaveText("Vite * React!");
@@ -45,7 +45,7 @@ test("HMR invalidate", async ({ page }) => {
     'React!";\nexport const useless = 3;',
   ]);
   await waitForLogs(
-    "[vite] invalidate /src/TitleWithExport.tsx: Could not Fast Refresh. Learn more at https://github.com/ArnaudBarre/vite-plugin-swc-react-refresh#consistent-components-exports",
+    "[vite] invalidate /src/TitleWithExport.tsx: Could not Fast Refresh. Learn more at https://github.com/vitejs/plugin-react-swc#consistent-components-exports",
     "[vite] hot updated: /src/App.tsx",
   );
 

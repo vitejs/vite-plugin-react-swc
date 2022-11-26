@@ -1,5 +1,5 @@
 {
-  "name": "vite-plugin-swc-react-refresh",
+  "name": "@vitejs/plugin-react-swc",
   "version": "3.0.0-alpha.0",
   "license": "MIT",
   "scripts": {

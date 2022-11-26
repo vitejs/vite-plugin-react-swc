@@ -51,7 +51,7 @@ export declare const swcReactRefresh: () => PluginOption;
         version: packageJSON.version,
         author: "Arnaud Barré (https://github.com/ArnaudBarre)",
         license: packageJSON.license,
-        repository: "github:ArnaudBarre/vite-plugin-swc-react-refresh",
+        repository: "github:vitejs/plugin-react-swc",
         main: "index.js",
         keywords: [
           "vite",
