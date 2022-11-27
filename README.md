@@ -15,10 +15,10 @@ npm i -D @vitejs/plugin-react-swc
 
 ```ts
 import { defineConfig } from "vite";
-import { swcReactRefresh } from "@vitejs/plugin-react-swc";
+import react from "@vitejs/plugin-react-swc";
 
 export default defineConfig({
-  plugins: [swcReactRefresh()],
+  plugins: [react()],
 });
 ```
 

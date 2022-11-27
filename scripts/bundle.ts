@@ -1,13 +1,25 @@
 #!/usr/bin/env tnode
 import { rmSync, writeFileSync } from "fs";
 import { execSync } from "child_process";
-import { build } from "esbuild";
+import { build, BuildOptions } from "esbuild";
 
 import * as packageJSON from "../package.json";
 
 const dev = process.argv.includes("--dev");
 
 rmSync("dist", { force: true, recursive: true });
+
+const serverOptions: BuildOptions = {
+  bundle: true,
+  entryPoints: ["src/index.ts"],
+  platform: "node",
+  target: "node14",
+  legalComments: "inline",
+  external: Object.keys(packageJSON.peerDependencies).concat(
+    Object.keys(packageJSON.dependencies),
+  ),
+  watch: dev,
+};
 
 Promise.all([
   build({
@@ -19,25 +31,16 @@ Promise.all([
     legalComments: "inline",
     watch: dev,
   }),
-  build({
-    bundle: true,
-    entryPoints: ["src/index.ts"],
-    outdir: "dist",
-    platform: "node",
-    target: "node14",
-    legalComments: "inline",
-    external: Object.keys(packageJSON.peerDependencies).concat(
-      Object.keys(packageJSON.dependencies),
-    ),
-    watch: dev,
-  }),
+  build({ ...serverOptions, outfile: "dist/index.cjs" }),
+  build({ ...serverOptions, format: "esm", outfile: "dist/index.mjs" }),
 ]).then(() => {
   execSync("cp LICENSE README.md dist/");
 
   writeFileSync(
     "dist/index.d.ts",
     `import { PluginOption } from "vite";
-export declare const swcReactRefresh: () => PluginOption;
+declare const react: () => PluginOption[];
+export default react;
 `,
   );
 
@@ -52,7 +55,16 @@ export declare const swcReactRefresh: () => PluginOption;
         author: "Arnaud Barré (https://github.com/ArnaudBarre)",
         license: packageJSON.license,
         repository: "github:vitejs/plugin-react-swc",
-        main: "index.js",
+        main: "index.cjs",
+        types: "index.d.ts",
+        module: "index.mjs",
+        exports: {
+          ".": {
+            require: "index.cjs",
+            types: "index.d.ts",
+            import: "index.mjs",
+          },
+        },
         keywords: [
           "vite",
           "vite-plugin",

@@ -1,7 +1,7 @@
 import { defineConfig } from "vite";
-import { swcReactRefresh } from "../dist";
+import react from "@vitejs/react-plugin-swc";
 
 export default defineConfig({
-  plugins: [swcReactRefresh()],
+  plugins: [react()],
   server: { open: true },
 });

@@ -1,5 +1,6 @@
 import { readFileSync } from "fs";
-import { join } from "path";
+import { dirname, join } from "path";
+import { fileURLToPath } from "url";
 import { SourceMapPayload } from "module";
 import { Output, ParserConfig, transform } from "@swc/core";
 import { PluginOption } from "vite";
@@ -11,7 +12,12 @@ injectIntoGlobalHook(window);
 window.$RefreshReg$ = () => {};
 window.$RefreshSig$ = () => (type) => type;`;
 
-export const swcReactRefresh = (): PluginOption[] => [
+const _dirname =
+  typeof __dirname !== "undefined"
+    ? __dirname
+    : dirname(fileURLToPath(import.meta.url));
+
+const react = (): PluginOption[] => [
   {
     name: "swc-react-refresh",
     apply: "serve",
@@ -22,7 +28,7 @@ export const swcReactRefresh = (): PluginOption[] => [
     resolveId: (id) => (id === runtimePublicPath ? id : undefined),
     load: (id) =>
       id === runtimePublicPath
-        ? readFileSync(join(__dirname, "refresh-runtime.js"), "utf-8")
+        ? readFileSync(join(_dirname, "refresh-runtime.js"), "utf-8")
         : undefined,
     transformIndexHtml: () => [
       { tag: "script", attrs: { type: "module" }, children: preambleCode },
@@ -112,3 +118,5 @@ export const swcReactRefresh = (): PluginOption[] => [
     }),
   },
 ];
+
+export default react;
