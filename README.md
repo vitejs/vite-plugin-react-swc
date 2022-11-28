@@ -5,6 +5,8 @@ Use the versatility of [SWC](https://swc.rs/) for development and the maturity o
 - ✅ A fast Fast Refresh (~20x faster than Babel)
 - ✅ Enable [automatic JSX runtime](https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html)
 
+> ⚠️ This is an alpha release for Vite 4, for the v2 named `vite-plugin-swc-react-refresh`, see the [v2 branch](https://github.com/vitejs/vite-plugin-react-swc/tree/v2).
+
 ## Installation
 
 ```sh
