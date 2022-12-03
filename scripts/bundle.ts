@@ -54,7 +54,7 @@ export default react;
         version: packageJSON.version,
         author: "Arnaud Barré (https://github.com/ArnaudBarre)",
         license: packageJSON.license,
-        repository: "github:vitejs/plugin-react-swc",
+        repository: "github:vitejs/vite-plugin-react-swc",
         main: "index.cjs",
         types: "index.d.ts",
         module: "index.mjs",

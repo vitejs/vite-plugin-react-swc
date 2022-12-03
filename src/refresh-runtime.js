@@ -617,7 +617,7 @@ export function validateRefreshBoundaryAndEnqueueUpdate(
   if (hasExports && allExportsAreComponentsOrUnchanged) {
     enqueueUpdate();
   } else {
-    return "Could not Fast Refresh. Learn more at https://github.com/vitejs/plugin-react-swc#consistent-components-exports";
+    return "Could not Fast Refresh. Learn more at https://github.com/vitejs/vite-plugin-react-swc#consistent-components-exports";
   }
 }
 
