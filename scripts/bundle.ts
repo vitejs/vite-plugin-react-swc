@@ -1,6 +1,6 @@
 #!/usr/bin/env tnode
-import { rmSync, writeFileSync } from "fs";
-import { execSync } from "child_process";
+import { rmSync, writeFileSync } from "node:fs";
+import { execSync } from "node:child_process";
 import { build, BuildOptions } from "esbuild";
 
 import * as packageJSON from "../package.json";
