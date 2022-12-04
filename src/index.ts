@@ -19,7 +19,7 @@ const _dirname =
 
 const react = (): PluginOption[] => [
   {
-    name: "swc-react-refresh",
+    name: "@vitejs/plugin-react-swc",
     apply: "serve",
     config: () => ({
       esbuild: false,
@@ -108,7 +108,7 @@ const react = (): PluginOption[] => [
     },
   },
   {
-    name: "swc-react-refresh",
+    name: "@vitejs/plugin-react-swc",
     apply: "build",
     config: () => ({
       esbuild: {

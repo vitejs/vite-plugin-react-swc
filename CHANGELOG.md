@@ -4,12 +4,12 @@
 
 This is the first alpha version of the official plugin for using [SWC](https://swc.rs/) with React in Vite!
 
-Some breaking changes have been made to make the plugin closer to the Babel one while keeping the smallest API surface possible to reduce bugs, encourage future-proof compilation output and allow easier opt-in into future perf improvements (caching, move to other native toolchain, ...).
+Some breaking changes have been made to make the plugin closer to the Babel one while keeping the smallest API surface possible to reduce bugs, encourage future-proof compilation output and allow easier opt-in into future perf improvements (caching, move to other native toolchain, ...):
 
-- Automatically enable automatic JSX runtime. "Classic" runtime is not supported.
+- Automatically enable automatic JSX runtime. "classic" runtime is not supported
 - Skip transformation for `.js` files
 - Enforce [useDefineForClassFields](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#the-usedefineforclassfields-flag-and-the-declare-property-modifier)
-- Don't pass `esbuild.define` config option to SWC. You can use the [top level define option](https://vitejs.dev/config/shared-options.html#define) instead.
+- Don't pass `esbuild.define` config option to SWC. You can use the [top level define option](https://vitejs.dev/config/shared-options.html#define) instead
 - Use default export
 
 To migrate, change your config to:
@@ -23,8 +23,7 @@ export default defineConfig({
 });
 ```
 
-This new release also include a runtime check for React refresh boundaries. When the conditions are not met (most of the time, exporting React components alongside functions or constant), the module is invalidated with a warning message to help you catch issues while
-keeping you page up-to date with code changes.
+This new release also include a runtime check for React refresh boundaries. When the conditions are not met (most of the time, exporting React components alongside functions or constant), the module is invalidated with a warning message to help you catch issues while keeping you page up-to date with code changes.
 
 ## 2.2.1
 
