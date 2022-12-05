@@ -1,6 +1,6 @@
 # Changelog
 
-## 3.0.0-alpha.0
+## 3.0.0-beta.0
 
 This is the first alpha version of the official plugin for using [SWC](https://swc.rs/) with React in Vite!
 
