@@ -2,7 +2,7 @@
 
 ## 3.0.0-beta.0
 
-This is the first alpha version of the official plugin for using [SWC](https://swc.rs/) with React in Vite!
+This is the first beta version of the official plugin for using [SWC](https://swc.rs/) with React in Vite!
 
 Some breaking changes have been made to make the plugin closer to the Babel one while keeping the smallest API surface possible to reduce bugs, encourage future-proof compilation output and allow easier opt-in into future perf improvements (caching, move to other native toolchain, ...):
 
