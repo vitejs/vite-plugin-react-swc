@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.0.0-beta.1
+
+Fix package.json exports fields
+
 ## 3.0.0-beta.0
 
 This is the first beta version of the official plugin for using [SWC](https://swc.rs/) with React in Vite!

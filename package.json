@@ -1,6 +1,6 @@
 {
   "name": "@vitejs/plugin-react-swc",
-  "version": "3.0.0-beta.0",
+  "version": "3.0.0-beta.1",
   "license": "MIT",
   "scripts": {
     "dev": "scripts/bundle.ts --dev",
