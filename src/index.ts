@@ -16,6 +16,7 @@ const _dirname =
   typeof __dirname !== "undefined"
     ? __dirname
     : dirname(fileURLToPath(import.meta.url));
+const refreshContentRE = /\$Refresh(?:Reg|Sig)\$\(/;
 
 const react = (): PluginOption[] => [
   {
@@ -79,7 +80,9 @@ const react = (): PluginOption[] => [
         throw e;
       }
 
-      if (!result.code.includes("$RefreshReg$")) return result;
+      if (transformOptions?.ssr || !refreshContentRE.test(result.code)) {
+        return result;
+      }
 
       result.code = `import * as RefreshRuntime from "${runtimePublicPath}";
   

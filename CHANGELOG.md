@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- fix: don't add React Refresh wrapper for SSR transform (fixes [#11](https://github.com/vitejs/vite-plugin-react-swc/issues/11))
+
 ## 3.0.0-beta.1
 
 Fix package.json exports fields
