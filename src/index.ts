@@ -20,7 +20,7 @@ const refreshContentRE = /\$Refresh(?:Reg|Sig)\$\(/;
 
 const react = (): PluginOption[] => [
   {
-    name: "@vitejs/plugin-react-swc",
+    name: "vite:react-swc",
     apply: "serve",
     config: () => ({
       esbuild: false,
@@ -111,7 +111,7 @@ const react = (): PluginOption[] => [
     },
   },
   {
-    name: "@vitejs/plugin-react-swc",
+    name: "vite:react-swc",
     apply: "build",
     config: () => ({
       esbuild: {
