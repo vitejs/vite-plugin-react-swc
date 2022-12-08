@@ -1,6 +1,6 @@
 # @vitejs/plugin-react-swc [![npm](https://img.shields.io/npm/v/@vitejs/plugin-react-swc)](https://www.npmjs.com/package/@vitejs/plugin-react-swc)
 
-Use the versatility of [SWC](https://swc.rs/) for development and the maturity of [esbuild](https://esbuild.github.io/) for production.
+Speed up your Vite dev server with [SWC](https://swc.rs/)
 
 - ✅ A fast Fast Refresh (~20x faster than Babel)
 - ✅ Enable [automatic JSX runtime](https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html)

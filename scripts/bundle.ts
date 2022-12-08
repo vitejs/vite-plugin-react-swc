@@ -49,8 +49,7 @@ export default react;
     JSON.stringify(
       {
         name: packageJSON.name,
-        description:
-          "Use the versatility of SWC for development and the maturity of esbuild for production",
+        description: "Speed up your Vite dev server with SWC",
         version: packageJSON.version,
         author: "Arnaud Barré (https://github.com/ArnaudBarre)",
         license: packageJSON.license,
