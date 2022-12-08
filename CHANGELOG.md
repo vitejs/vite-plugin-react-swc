@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 3.0.0-beta.2
 
 - breaking: update plugin name to `vite:react-swc` to match official plugins naming
 - fix: don't add React Refresh wrapper for SSR transform (fixes [#11](https://github.com/vitejs/vite-plugin-react-swc/issues/11))
