@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.0.0
+
+This is plugin is now stable! 🎉
+
+To migrate from `vite-plugin-swc-react-refresh`, see the `3.0.0-beta.0` changelog.
+
 ## 3.0.0-beta.2
 
 - breaking: update plugin name to `vite:react-swc` to match official plugins naming
