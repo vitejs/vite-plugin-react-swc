@@ -11,7 +11,6 @@ rmSync("dist", { force: true, recursive: true });
 
 const serverOptions: BuildOptions = {
   bundle: true,
-  entryPoints: ["src/index.ts"],
   platform: "node",
   target: "node14",
   legalComments: "inline",
@@ -31,8 +30,24 @@ Promise.all([
     legalComments: "inline",
     watch: dev,
   }),
-  build({ ...serverOptions, outfile: "dist/index.cjs" }),
-  build({ ...serverOptions, format: "esm", outfile: "dist/index.mjs" }),
+  build({
+    ...serverOptions,
+    stdin: {
+      contents: `import react from "./src";
+module.exports = react;
+// For backward compatibility with the first broken version
+module.exports.default = react;`,
+      resolveDir: ".",
+    },
+    outfile: "dist/index.cjs",
+    logOverride: { "empty-import-meta": "silent" },
+  }),
+  build({
+    ...serverOptions,
+    entryPoints: ["src/index.ts"],
+    format: "esm",
+    outfile: "dist/index.mjs",
+  }),
 ]).then(() => {
   execSync("cp LICENSE README.md dist/");
 

@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- fix: commonjs default export (fixes [#14](https://github.com/vitejs/vite-plugin-react-swc/issues/14))
+
 ## 3.0.0
 
 This is plugin is now stable! 🎉
