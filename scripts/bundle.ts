@@ -51,7 +51,9 @@ module.exports.default = react;`,
 ]).then(() => {
   execSync("cp LICENSE README.md dist/");
 
-  execSync("tsc src/index.ts --declaration --emitDeclarationOnly --outDir dist --module es2020 --moduleResolution node");
+  execSync(
+    "tsc src/index.ts --declaration --emitDeclarationOnly --outDir dist --module es2020 --moduleResolution node",
+  );
 
   writeFileSync(
     "dist/package.json",
