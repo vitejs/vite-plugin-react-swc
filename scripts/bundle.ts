@@ -51,13 +51,7 @@ module.exports.default = react;`,
 ]).then(() => {
   execSync("cp LICENSE README.md dist/");
 
-  writeFileSync(
-    "dist/index.d.ts",
-    `import { PluginOption } from "vite";
-declare const react: () => PluginOption[];
-export default react;
-`,
-  );
+  execSync("tsc src/index.ts --declaration --emitDeclarationOnly --outDir dist --module es2020 --moduleResolution node");
 
   writeFileSync(
     "dist/package.json",
