@@ -2,7 +2,7 @@ import { readFileSync } from "fs";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 import { SourceMapPayload } from "module";
-import { Output, ParserConfig, transform } from "@swc/core";
+import { Output, ParserConfig, transform, JscConfig } from "@swc/core";
 import { PluginOption } from "vite";
 
 const runtimePublicPath = "/@react-refresh";
@@ -18,7 +18,16 @@ const _dirname =
     : dirname(fileURLToPath(import.meta.url));
 const refreshContentRE = /\$Refresh(?:Reg|Sig)\$\(/;
 
-const react = (): PluginOption[] => [
+export type PluginProps = {
+  /**
+   * Allows passing experimental options such as plugins.
+   *
+   * @see {@link https://swc.rs/docs/configuration/compilation#jscexperimental SWC JSC experimental docs}
+   */
+  experimentalJscConfig: JscConfig['experimental'],
+};
+
+const react = ({ experimentalJscConfig }: PluginProps): PluginOption[] => [
   {
     name: "vite:react-swc",
     apply: "serve",
@@ -56,6 +65,7 @@ const react = (): PluginOption[] => [
           jsc: {
             target: "es2020",
             parser,
+            experimental: experimentalJscConfig,
             transform: {
               useDefineForClassFields: true,
               react: {
