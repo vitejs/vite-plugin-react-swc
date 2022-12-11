@@ -24,10 +24,10 @@ export type PluginProps = {
    *
    * @see {@link https://swc.rs/docs/configuration/compilation#jscexperimental SWC JSC experimental docs}
    */
-  experimentalJscConfig: JscConfig['experimental'],
+  experimentalJscConfig?: JscConfig['experimental'],
 };
 
-const react = ({ experimentalJscConfig }: PluginProps): PluginOption[] => [
+const react = ({ experimentalJscConfig }: PluginProps = {}): PluginOption[] => [
   {
     name: "vite:react-swc",
     apply: "serve",
