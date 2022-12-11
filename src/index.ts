@@ -7,7 +7,7 @@ import { PluginOption } from "vite";
 
 const runtimePublicPath = "/@react-refresh";
 
-const preambleCode = `import { injectIntoGlobalHook } from "${runtimePublicPath}";
+const preambleCode = `import { injectIntoGlobalHook } from "__PATH__";
 injectIntoGlobalHook(window);
 window.$RefreshReg$ = () => {};
 window.$RefreshSig$ = () => (type) => type;`;
@@ -31,8 +31,15 @@ const react = (): PluginOption[] => [
       id === runtimePublicPath
         ? readFileSync(join(_dirname, "refresh-runtime.js"), "utf-8")
         : undefined,
-    transformIndexHtml: () => [
-      { tag: "script", attrs: { type: "module" }, children: preambleCode },
+    transformIndexHtml: (_, config) => [
+      {
+        tag: "script",
+        attrs: { type: "module" },
+        children: preambleCode.replace(
+          "__PATH__",
+          config.server!.config.base + runtimePublicPath.slice(1),
+        ),
+      },
     ],
     async transform(code, id, transformOptions) {
       if (id.includes("node_modules")) return;

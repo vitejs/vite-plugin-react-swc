@@ -3,6 +3,7 @@
 ## Unreleased
 
 - fix: commonjs default export (fixes [#14](https://github.com/vitejs/vite-plugin-react-swc/issues/14))
+- fix: support Vite base option (fixes [#18](https://github.com/vitejs/vite-plugin-react-swc/issues/18))
 
 ## 3.0.0
 
