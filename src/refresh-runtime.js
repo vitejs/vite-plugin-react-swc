@@ -633,8 +633,8 @@ function predicateOnExport(moduleExports, predicate) {
 
 // For backwards compatibility with @vitejs/plugin-react.
 export default {
- getRefreshReg,
- injectIntoGlobalHook,
- createSignatureFunctionForTransform,
- validateRefreshBoundaryAndEnqueueUpdate,
-}
+  getRefreshReg,
+  injectIntoGlobalHook,
+  createSignatureFunctionForTransform,
+  validateRefreshBoundaryAndEnqueueUpdate,
+};
