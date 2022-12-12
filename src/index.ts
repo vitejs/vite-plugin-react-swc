@@ -42,8 +42,6 @@ const react = (): PluginOption[] => [
       },
     ],
     async transform(code, id, transformOptions) {
-      if (id.includes("node_modules")) return;
-
       const parser: ParserConfig | undefined = id.endsWith(".tsx")
         ? { syntax: "typescript", tsx: true }
         : id.endsWith(".ts")
