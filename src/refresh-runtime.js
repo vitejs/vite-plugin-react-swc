@@ -630,3 +630,10 @@ function predicateOnExport(moduleExports, predicate) {
   }
   return true;
 }
+
+export default {
+ getRefreshReg,
+ injectIntoGlobalHook,
+ createSignatureFunctionForTransform,
+ validateRefreshBoundaryAndEnqueueUpdate,
+}
