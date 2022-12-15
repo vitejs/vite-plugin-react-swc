@@ -3,6 +3,15 @@
 ## Unreleased
 
 - Support Emotion via the new `jsxImportSource` option (fixes [#25](https://github.com/vitejs/vite-plugin-react-swc/issues/25))
+
+To use it with Emotion, update your config to:
+
+```ts
+export default defineConfig({
+  plugins: [react({ jsxImportSource: "@emotion/react" })],
+});
+```
+
 - Fix HMR when using Vite `base` option (fixes [#18](https://github.com/vitejs/vite-plugin-react-swc/issues/18))
 - Fix usage with workers (fixes [#23](https://github.com/vitejs/vite-plugin-react-swc/issues/23))
 - Fix usage with `Vite Ruby` and `Laravel Vite` ([#20](https://github.com/vitejs/vite-plugin-react-swc/pull/20))
