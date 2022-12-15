@@ -34,6 +34,19 @@ This plugin is only used in development and aims to be kept simple to enable goo
   - JS files are not transformed
   - tsconfig is not resolved, so properties other than the ones listed above behaves like TS defaults
 
+## Changing the JSX import source
+
+You can use the jsxImportSource option like this:
+
+```ts
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react-swc";
+
+export default defineConfig({
+  plugins: [react({ jsxImportSource: "@emotion/react" })],
+});
+```
+
 ## Consistent components exports
 
 For React refresh to work correctly, your file should only export React components. The best explanation I've read is the one from the [Gatsby docs](https://www.gatsbyjs.com/docs/reference/local-development/fast-refresh/#how-it-works).

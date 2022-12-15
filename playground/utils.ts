@@ -80,3 +80,18 @@ export const setupBuildAndPreview = async (name: string) => {
     server,
   };
 };
+
+export const rgbToHex = (rgb: string): string => {
+  const [_, rs, gs, bs] = rgb.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/)!;
+  return (
+    "#" +
+    componentToHex(parseInt(rs, 10)) +
+    componentToHex(parseInt(gs, 10)) +
+    componentToHex(parseInt(bs, 10))
+  );
+};
+
+const componentToHex = (c: number): string => {
+  const hex = c.toString(16);
+  return hex.length === 1 ? "0" + hex : hex;
+};

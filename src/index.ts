@@ -18,7 +18,15 @@ const _dirname =
     : dirname(fileURLToPath(import.meta.url));
 const refreshContentRE = /\$Refresh(?:Reg|Sig)\$\(/;
 
-const react = (): PluginOption[] => [
+type Options = {
+  /**
+   * Control where the JSX factory is imported from.
+   * @default "react"
+   */
+  jsxImportSource?: string;
+};
+
+const react = (options?: Options): PluginOption[] => [
   {
     name: "vite:react-swc",
     apply: "serve",
@@ -70,6 +78,7 @@ const react = (): PluginOption[] => [
                 development: true,
                 useBuiltins: true,
                 runtime: "automatic",
+                importSource: options?.jsxImportSource,
               },
             },
           },
@@ -123,6 +132,7 @@ const react = (): PluginOption[] => [
     config: () => ({
       esbuild: {
         jsx: "automatic",
+        jsxImportSource: options?.jsxImportSource,
         tsconfigRaw: { compilerOptions: { useDefineForClassFields: true } },
       },
     }),
