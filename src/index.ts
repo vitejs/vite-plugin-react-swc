@@ -49,7 +49,8 @@ const react = (options?: Options): PluginOption[] => [
         ),
       },
     ],
-    async transform(code, id, transformOptions) {
+    async transform(code, _id, transformOptions) {
+      const id = _id.split("?")[0];
       if (id.includes("node_modules")) return;
 
       const parser: ParserConfig | undefined = id.endsWith(".tsx")
