@@ -1,38 +1,39 @@
-import { test, expect } from "@playwright/test";
-import { readFileSync, writeFileSync } from "fs";
+import { expect, test } from "@playwright/test";
+import {
+  setupDevServer,
+  setupBuildAndPreview,
+  setupWaitForLogs,
+} from "../../utils";
+
+test("Default build", async ({ page }) => {
+  const { testUrl, server } = await setupBuildAndPreview("hmr");
+  await page.goto(testUrl);
+
+  await page.click("button");
+  await expect(page.locator("button")).toHaveText("count is 1");
+
+  await server.httpServer.close();
+});
 
 test("HMR invalidate", async ({ page }) => {
-  let logs: string[] = [];
-  page.on("console", (log) => {
-    logs.push(log.text());
-  });
-  const waitForLogs = (...messages: string[]) =>
-    expect
-      .poll(() => {
-        if (messages.every((m) => logs.includes(m))) {
-          logs = [];
-          return true;
-        }
-        return logs;
-      })
-      .toBe(true);
-
-  await page.goto("http://localhost:5173");
+  const { testUrl, server, editFile } = await setupDevServer("hmr");
+  const waitForLogs = await setupWaitForLogs(page);
+  await page.goto(testUrl);
   await waitForLogs("[vite] connected.");
 
   await page.click("button");
   await expect(page.locator("button")).toHaveText("count is 1");
 
-  editFile("App.tsx", ["{count}", "{count}!"]);
+  editFile("src/App.tsx", ["{count}", "{count}!"]);
   await waitForLogs("[vite] hot updated: /src/App.tsx");
   await expect(page.locator("button")).toHaveText("count is 1!");
 
   // Edit component
-  editFile("TitleWithExport.tsx", ["Vite +", "Vite *"]);
+  editFile("src/TitleWithExport.tsx", ["Vite +", "Vite *"]);
   await waitForLogs("[vite] hot updated: /src/TitleWithExport.tsx");
 
   // Edit export
-  editFile("TitleWithExport.tsx", ["React", "React!"]);
+  editFile("src/TitleWithExport.tsx", ["React", "React!"]);
   await waitForLogs(
     "[vite] invalidate /src/TitleWithExport.tsx: Could not Fast Refresh. Learn more at https://github.com/vitejs/vite-plugin-react-swc#consistent-components-exports",
     "[vite] hot updated: /src/App.tsx",
@@ -40,7 +41,7 @@ test("HMR invalidate", async ({ page }) => {
   await expect(page.locator("h1")).toHaveText("Vite * React!");
 
   // Add non-component export
-  editFile("TitleWithExport.tsx", [
+  editFile("src/TitleWithExport.tsx", [
     'React!";',
     'React!";\nexport const useless = 3;',
   ]);
@@ -50,7 +51,7 @@ test("HMR invalidate", async ({ page }) => {
   );
 
   // Add component export
-  editFile("TitleWithExport.tsx", [
+  editFile("src/TitleWithExport.tsx", [
     "</h1>;",
     "</h1>;\nexport const Title2 = () => <h2>Title2</h2>;",
   ]);
@@ -58,7 +59,7 @@ test("HMR invalidate", async ({ page }) => {
 
   // Import new component
   editFile(
-    "App.tsx",
+    "src/App.tsx",
     ["import { TitleWithExport", "import { TitleWithExport, Title2"],
     ["<TitleWithExport />", "<TitleWithExport /> <Title2 />"],
   );
@@ -66,7 +67,7 @@ test("HMR invalidate", async ({ page }) => {
   await expect(page.locator("h2")).toHaveText("Title2");
 
   // Remove component export
-  editFile("TitleWithExport.tsx", [
+  editFile("src/TitleWithExport.tsx", [
     "\nexport const Title2 = () => <h2>Title2</h2>;",
     "",
   ]);
@@ -78,7 +79,7 @@ test("HMR invalidate", async ({ page }) => {
 
   // Remove usage from App
   editFile(
-    "App.tsx",
+    "src/App.tsx",
     ["import { TitleWithExport, Title2", "import { TitleWithExport"],
     ["<TitleWithExport /> <Title2 />", "<TitleWithExport />"],
   );
@@ -86,24 +87,11 @@ test("HMR invalidate", async ({ page }) => {
   await expect(page.locator("button")).toHaveText("count is 1!");
 
   // Remove useless export
-  editFile("TitleWithExport.tsx", ["\nexport const useless = 3;", ""]);
+  editFile("src/TitleWithExport.tsx", ["\nexport const useless = 3;", ""]);
   await waitForLogs(
     "[vite] invalidate /src/TitleWithExport.tsx: Could not Fast Refresh (export removed)",
     "[vite] hot updated: /src/App.tsx",
   );
-});
 
-const editFile = (
-  name: string,
-  ...replacements: [searchValue: string, replaceValue: string][]
-) => {
-  const path = `playground-temp/src/${name}`;
-  let content = readFileSync(path, "utf-8");
-  for (let replacement of replacements) {
-    if (!content.includes(replacement[0])) {
-      throw new Error(`${replacement[0]} not found in ${name}`);
-    }
-    content = content.replace(replacement[0], replacement[1]);
-  }
-  writeFileSync(path, content);
-};
+  await server.close();
+});

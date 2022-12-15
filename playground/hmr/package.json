@@ -1,5 +1,5 @@
 {
-  "name": "playground",
+  "name": "playground-hmr",
   "private": true,
   "scripts": {
     "dev": "vite",
@@ -12,6 +12,6 @@
   "devDependencies": {
     "@types/react-dom": "^18.0.9",
     "@types/react": "^18.0.26",
-    "@vitejs/plugin-react-swc": "../dist"
+    "@vitejs/plugin-react-swc": "../../dist"
   }
 }

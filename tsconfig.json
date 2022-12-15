@@ -1,5 +1,5 @@
 {
-  "include": ["src", "scripts", "tests"],
+  "include": ["src", "scripts", "playground/*/__tests__"],
   "compilerOptions": {
     /* Target node 14 */
     "module": "ES2020",

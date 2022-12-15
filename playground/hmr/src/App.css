@@ -39,12 +39,3 @@
 .read-the-docs {
   color: #888;
 }
-
-.full-height {
-  position: fixed;
-  top: 20px;
-  bottom: 20px;
-  left: 40px;
-  display: flex;
-  align-items: center;
-}

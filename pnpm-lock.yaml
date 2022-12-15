@@ -27,11 +27,11 @@ importers:
       typescript: 4.9.4
       vite: 4.0.0_@types+node@18.11.13
 
-  playground:
+  playground/hmr:
     specifiers:
       '@types/react': ^18.0.26
       '@types/react-dom': ^18.0.9
-      '@vitejs/plugin-react-swc': ../dist
+      '@vitejs/plugin-react-swc': ../../dist
       react: ^18.2.0
       react-dom: ^18.2.0
     dependencies:
@@ -40,7 +40,7 @@ importers:
     devDependencies:
       '@types/react': 18.0.26
       '@types/react-dom': 18.0.9
-      '@vitejs/plugin-react-swc': link:../dist
+      '@vitejs/plugin-react-swc': link:../../dist
 
 packages:
 
