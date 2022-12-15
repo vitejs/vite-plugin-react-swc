@@ -1,14 +1,15 @@
 {
-  "name": "@vitejs/plugin-react-swc",
+  "name": "@vitejs/plugin-react-swc-monorepo",
   "version": "3.0.0",
-  "license": "MIT",
+  "private": true,
   "scripts": {
     "dev": "scripts/bundle.ts --dev",
     "build": "scripts/bundle.ts",
     "test": "playwright test",
     "prettier": "pnpm prettier-ci --write",
     "prettier-ci": "prettier --cache --ignore-path=.gitignore --check '**/*.{js,jsx,ts,tsx,html,css,json,md,yml}'",
-    "ci": "tsc && pnpm prettier-ci && pnpm build && cd playground && tsc && cd .. && pnpm test"
+    "ci": "tsc && pnpm prettier-ci && pnpm build && cd playground && tsc && cd .. && pnpm test",
+    "release": "scripts/release.ts"
   },
   "prettier": {
     "trailingComma": "all"
@@ -17,7 +18,7 @@
     "@swc/core": "^1.3.22"
   },
   "peerDependencies": {
-    "vite": "^4.0.0"
+    "vite": "^4"
   },
   "devDependencies": {
     "@nabla/tnode": "^0.8.0",
@@ -26,6 +27,7 @@
     "@types/node": "^18.11.13",
     "esbuild": "^0.16.4",
     "fs-extra": "^11.1.0",
+    "picocolors": "^1.0.0",
     "prettier": "^2.8.1",
     "typescript": "^4.9.4",
     "vite": "^4.0.0"

@@ -59,11 +59,11 @@ module.exports.default = react;`,
     "dist/package.json",
     JSON.stringify(
       {
-        name: packageJSON.name,
+        name: "@vitejs/plugin-react-swc",
         description: "Speed up your Vite dev server with SWC",
         version: packageJSON.version,
         author: "Arnaud Barré (https://github.com/ArnaudBarre)",
-        license: packageJSON.license,
+        license: "MIT",
         repository: "github:vitejs/vite-plugin-react-swc",
         main: "index.cjs",
         types: "index.d.ts",
