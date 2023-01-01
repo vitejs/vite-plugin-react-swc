@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Fix HMR for styled components exported alongside other components
+
 ## 3.0.1
 
 - Support Emotion via the new `jsxImportSource` option (fixes [#25](https://github.com/vitejs/vite-plugin-react-swc/issues/25))

@@ -102,21 +102,22 @@ const react = (options?: Options): PluginOption[] => [
       }
 
       result.code = `import * as RefreshRuntime from "${runtimePublicPath}";
-  
-  if (!window.$RefreshReg$) throw new Error("React refresh preamble was not loaded. Something is wrong.");
-  const prevRefreshReg = window.$RefreshReg$;
-  const prevRefreshSig = window.$RefreshSig$;
-  window.$RefreshReg$ = RefreshRuntime.getRefreshReg("${id}");
-  window.$RefreshSig$ = RefreshRuntime.createSignatureFunctionForTransform;
-  
-  ${result.code}
-  
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
+
+if (!window.$RefreshReg$) throw new Error("React refresh preamble was not loaded. Something is wrong.");
+const prevRefreshReg = window.$RefreshReg$;
+const prevRefreshSig = window.$RefreshSig$;
+window.$RefreshReg$ = RefreshRuntime.getRefreshReg("${id}");
+window.$RefreshSig$ = RefreshRuntime.createSignatureFunctionForTransform;
+
+${result.code}
+
+window.$RefreshReg$ = prevRefreshReg;
+window.$RefreshSig$ = prevRefreshSig;
+import(/* @vite-ignore */ import.meta.url).then((currentExports) => {
+  RefreshRuntime.registerExportsForReactRefresh("${id}", currentExports);
   import.meta.hot.accept((nextExports) => {
-  if (!nextExports) return;
-  import(/* @vite-ignore */ import.meta.url).then((current) => {
-    const invalidateMessage = RefreshRuntime.validateRefreshBoundaryAndEnqueueUpdate(current, nextExports);
+    if (!nextExports) return;
+    const invalidateMessage = RefreshRuntime.validateRefreshBoundaryAndEnqueueUpdate(currentExports, nextExports);
     if (invalidateMessage) import.meta.hot.invalidate(invalidateMessage);
   });
 });

@@ -2,6 +2,7 @@
 /**
  * This is simplified pure-js version of https://github.com/facebook/react/blob/main/packages/react-refresh/src/ReactFreshRuntime.js
  * without IE11 compatibility and verbose isDev checks.
+ * Some utils are appended at the bottom for HMR integration.
  */
 
 const REACT_FORWARD_REF_TYPE = Symbol.for("react.forward_ref");
@@ -596,6 +597,18 @@ function isLikelyComponentType(type) {
   }
 }
 
+// Taken from https://github.com/pmmmwh/react-refresh-webpack-plugin/blob/main/lib/runtime/RefreshUtils.js#L141
+// This allows to resister components not detected by SWC like styled component
+export function registerExportsForReactRefresh(filename, moduleExports) {
+  for (const key in moduleExports) {
+    if (key === "__esModule") continue;
+    const exportValue = moduleExports[key];
+    if (isLikelyComponentType(exportValue)) {
+      register(exportValue, filename + " " + key);
+    }
+  }
+}
+
 export function validateRefreshBoundaryAndEnqueueUpdate(
   prevExports,
   nextExports,
@@ -632,9 +645,4 @@ function predicateOnExport(moduleExports, predicate) {
 }
 
 // For backwards compatibility with @vitejs/plugin-react.
-export default {
-  getRefreshReg,
-  injectIntoGlobalHook,
-  createSignatureFunctionForTransform,
-  validateRefreshBoundaryAndEnqueueUpdate,
-};
+export default { injectIntoGlobalHook };

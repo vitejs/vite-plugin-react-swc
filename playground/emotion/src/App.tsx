@@ -1,5 +1,5 @@
 import "./App.css";
-import { Button } from "./Button";
+import { Button, StyledCode } from "./Button";
 
 export const App = () => (
   <div>
@@ -18,7 +18,7 @@ export const App = () => (
     <div className="card">
       <Button color="#646cff" />
       <p>
-        Edit <code>src/Button.tsx</code> and save to test HMR
+        Edit <StyledCode>src/Button.tsx</StyledCode> and save to test HMR
       </p>
     </div>
     <p className="read-the-docs">

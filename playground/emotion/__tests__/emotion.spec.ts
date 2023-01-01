@@ -3,7 +3,7 @@ import {
   setupDevServer,
   setupBuildAndPreview,
   setupWaitForLogs,
-  rgbToHex,
+  expectColor,
 } from "../../utils";
 
 test("Emotion build", async ({ page }) => {
@@ -12,12 +12,13 @@ test("Emotion build", async ({ page }) => {
 
   const button = page.locator("button");
   await button.hover();
-  await expect(
-    rgbToHex(await button.evaluate((el) => getComputedStyle(el).color)),
-  ).toBe("#646cff");
+  await expectColor(button, "color", "#646cff");
 
   await button.click();
   await expect(button).toHaveText("count is 1");
+
+  const code = page.locator("code");
+  await expectColor(code, "color", "#646cff");
 
   await server.httpServer.close();
 });
@@ -30,12 +31,13 @@ test("Emotion HMR", async ({ page }) => {
 
   const button = page.locator("button");
   await button.hover();
-  await expect(
-    rgbToHex(await button.evaluate((el) => getComputedStyle(el).color)),
-  ).toBe("#646cff");
+  await expectColor(button, "color", "#646cff");
 
   await button.click();
   await expect(button).toHaveText("count is 1");
+
+  const code = page.locator("code");
+  await expectColor(code, "color", "#646cff");
 
   editFile("src/Button.tsx", [
     "background-color: #d26ac2;",
@@ -43,18 +45,17 @@ test("Emotion HMR", async ({ page }) => {
   ]);
   await waitForLogs("[vite] hot updated: /src/Button.tsx");
   await expect(button).toHaveText("count is 1");
-  await expect(
-    rgbToHex(
-      await button.evaluate((el) => getComputedStyle(el).backgroundColor),
-    ),
-  ).toBe("#646cff");
+  await expectColor(button, "backgroundColor", "#646cff");
 
   editFile("src/App.tsx", ['color="#646cff"', 'color="#d26ac2"']);
   await waitForLogs("[vite] hot updated: /src/App.tsx");
   await expect(button).toHaveText("count is 1");
-  await expect(
-    rgbToHex(await button.evaluate((el) => getComputedStyle(el).color)),
-  ).toBe("#d26ac2");
+  await expectColor(button, "color", "#d26ac2");
+
+  editFile("src/Button.tsx", ["color: #646cff;", "color: #d26ac2;"]);
+  await waitForLogs("[vite] hot updated: /src/Button.tsx");
+  await expect(button).toHaveText("count is 1");
+  await expectColor(code, "color", "#d26ac2");
 
   await server.close();
 });

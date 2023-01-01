@@ -1,5 +1,11 @@
+import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import { useState } from "react";
+
+// Ensure HMR of styled component alongside other components
+export const StyledCode = styled.code`
+  color: #646cff;
+`;
 
 export const Button = ({ color }: { color: string }) => {
   const [count, setCount] = useState(0);

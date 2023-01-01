@@ -1,4 +1,4 @@
-import { expect, Page } from "@playwright/test";
+import { expect, Locator, Page } from "@playwright/test";
 import {
   createServer,
   loadConfigFromFile,
@@ -81,7 +81,22 @@ export const setupBuildAndPreview = async (name: string) => {
   };
 };
 
-export const rgbToHex = (rgb: string): string => {
+export const expectColor = async (
+  locator: Locator,
+  property: "color" | "backgroundColor",
+  color: string,
+) => {
+  await expect(
+    rgbToHex(
+      await locator.evaluate(
+        (el, prop) => getComputedStyle(el)[prop],
+        property,
+      ),
+    ),
+  ).toBe(color);
+};
+
+const rgbToHex = (rgb: string): string => {
   const [_, rs, gs, bs] = rgb.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/)!;
   return (
     "#" +

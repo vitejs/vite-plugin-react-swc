@@ -32,6 +32,7 @@ importers:
   playground/emotion:
     specifiers:
       '@emotion/react': ^11.10.5
+      '@emotion/styled': ^11.10.5
       '@types/react': ^18.0.26
       '@types/react-dom': ^18.0.10
       '@vitejs/plugin-react-swc': ../../dist
@@ -39,6 +40,7 @@ importers:
       react-dom: ^18.2.0
     dependencies:
       '@emotion/react': 11.10.5_kzbn2opkn2327fwg5yzwzya5o4
+      '@emotion/styled': 11.10.5_qvatmowesywn4ye42qoh247szu
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     devDependencies:
@@ -174,6 +176,12 @@ packages:
     resolution: {integrity: sha512-14FtKiHhy2QoPIzdTcvh//8OyBlknNs2nXRwIhG904opCby3l+9Xaf/wuPvICBF0rc1ZCNBd3nKe9cd2mecVkQ==}
     dev: false
 
+  /@emotion/is-prop-valid/1.2.0:
+    resolution: {integrity: sha512-3aDpDprjM0AwaxGE09bOPkNxHpBd+kA6jty3RnaEXdweX1DF1U3VQpPYb0g1IStAuK7SVQ1cy+bNBBKp4W3Fjg==}
+    dependencies:
+      '@emotion/memoize': 0.8.0
+    dev: false
+
   /@emotion/memoize/0.8.0:
     resolution: {integrity: sha512-G/YwXTkv7Den9mXDO7AhLWkE3q+I92B+VqAE+dYG4NGPaHZGvt3G8Q0p9vmE+sq7rTGphUbAvmQ9YpbfMQGGlA==}
     dev: false
@@ -214,6 +222,30 @@ packages:
 
   /@emotion/sheet/1.2.1:
     resolution: {integrity: sha512-zxRBwl93sHMsOj4zs+OslQKg/uhF38MB+OMKoCrVuS0nyTkqnau+BM3WGEoOptg9Oz45T/aIGs1qbVAsEFo3nA==}
+    dev: false
+
+  /@emotion/styled/11.10.5_qvatmowesywn4ye42qoh247szu:
+    resolution: {integrity: sha512-8EP6dD7dMkdku2foLoruPCNkRevzdcBaY6q0l0OsbyJK+x8D9HWjX27ARiSIKNF634hY9Zdoedh8bJCiva8yZw==}
+    peerDependencies:
+      '@babel/core': ^7.0.0
+      '@emotion/react': ^11.0.0-rc.0
+      '@types/react': '*'
+      react: '>=16.8.0'
+    peerDependenciesMeta:
+      '@babel/core':
+        optional: true
+      '@types/react':
+        optional: true
+    dependencies:
+      '@babel/runtime': 7.20.6
+      '@emotion/babel-plugin': 11.10.5
+      '@emotion/is-prop-valid': 1.2.0
+      '@emotion/react': 11.10.5_kzbn2opkn2327fwg5yzwzya5o4
+      '@emotion/serialize': 1.1.1
+      '@emotion/use-insertion-effect-with-fallbacks': 1.0.0_react@18.2.0
+      '@emotion/utils': 1.2.0
+      '@types/react': 18.0.26
+      react: 18.2.0
     dev: false
 
   /@emotion/unitless/0.8.0:
