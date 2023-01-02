@@ -24,6 +24,7 @@ type Options = {
    * @default "react"
    */
   jsxImportSource?: string;
+  define?: { [key: string]: string } | undefined;
 };
 
 const react = (options?: Options): PluginOption[] => [
@@ -81,6 +82,7 @@ const react = (options?: Options): PluginOption[] => [
                 runtime: "automatic",
                 importSource: options?.jsxImportSource,
               },
+              optimizer: { globals: { vars: options?.define } },
             },
           },
         });
@@ -135,6 +137,7 @@ import(/* @vite-ignore */ import.meta.url).then((currentExports) => {
       esbuild: {
         jsx: "automatic",
         jsxImportSource: options?.jsxImportSource,
+        define: options?.define,
         tsconfigRaw: { compilerOptions: { useDefineForClassFields: true } },
       },
     }),
