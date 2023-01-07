@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Fix HMR for styled components exported alongside other components
+- Support TypeScript decorators via the new `tsDecorators` option. This requires `experimentalDecorators` in tsconfig.
 
 ## 3.0.1
 

@@ -24,6 +24,11 @@ type Options = {
    * @default "react"
    */
   jsxImportSource?: string;
+  /**
+   * Enable TypeScript decorators. Requires experimentalDecorators in tsconfig.
+   * @default false
+   */
+  tsDecorators?: boolean;
 };
 
 const react = (options?: Options): PluginOption[] => [
@@ -53,10 +58,11 @@ const react = (options?: Options): PluginOption[] => [
       const id = _id.split("?")[0];
       if (id.includes("node_modules")) return;
 
+      const decorators = options?.tsDecorators ?? false;
       const parser: ParserConfig | undefined = id.endsWith(".tsx")
-        ? { syntax: "typescript", tsx: true }
+        ? { syntax: "typescript", tsx: true, decorators }
         : id.endsWith(".ts")
-        ? { syntax: "typescript", tsx: false }
+        ? { syntax: "typescript", tsx: false, decorators }
         : id.endsWith(".jsx")
         ? { syntax: "ecmascript", jsx: true }
         : undefined;
@@ -121,7 +127,7 @@ import(/* @vite-ignore */ import.meta.url).then((currentExports) => {
     if (invalidateMessage) import.meta.hot.invalidate(invalidateMessage);
   });
 });
-  `;
+`;
 
       const sourceMap: SourceMapPayload = JSON.parse(result.map!);
       sourceMap.mappings = ";;;;;;;;" + sourceMap.mappings;

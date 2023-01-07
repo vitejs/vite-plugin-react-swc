@@ -24,7 +24,7 @@ export default defineConfig({
 
 ## Caveats
 
-This plugin is only used in development and aims to be kept simple to enable good performances and be transpiler agnostic. Here is the list of non-configurable options that impact runtime behaviour:
+This plugin has limited options to enable good performances and be transpiler agnostic. Here is the list of non-configurable options that impact runtime behaviour:
 
 - [useDefineForClassFields](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#the-usedefineforclassfields-flag-and-the-declare-property-modifier) is always activated, as this matches the current ECMAScript spec
 - `jsx runtime` is always `automatic`
@@ -34,17 +34,22 @@ This plugin is only used in development and aims to be kept simple to enable goo
   - JS files are not transformed
   - tsconfig is not resolved, so properties other than the ones listed above behaves like TS defaults
 
-## Changing the JSX import source
+## Options
 
-You can use the jsxImportSource option like this:
+### jsxImportSource
+
+Control where the JSX factory is imported from.
 
 ```ts
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react-swc";
+react({ jsxImportSource: "@emotion/react" });
+```
 
-export default defineConfig({
-  plugins: [react({ jsxImportSource: "@emotion/react" })],
-});
+### tsDecorators
+
+Enable TypeScript decorators. Requires `experimentalDecorators` in tsconfig.
+
+```ts
+react({ tsDecorators: true });
 ```
 
 ## Consistent components exports
