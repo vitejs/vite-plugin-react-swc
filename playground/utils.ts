@@ -86,14 +86,16 @@ export const expectColor = async (
   property: "color" | "backgroundColor",
   color: string,
 ) => {
-  await expect(
-    rgbToHex(
-      await locator.evaluate(
-        (el, prop) => getComputedStyle(el)[prop],
-        property,
+  await expect
+    .poll(async () =>
+      rgbToHex(
+        await locator.evaluate(
+          (el, prop) => getComputedStyle(el)[prop],
+          property,
+        ),
       ),
-    ),
-  ).toBe(color);
+    )
+    .toBe(color);
 };
 
 const rgbToHex = (rgb: string): string => {
