@@ -2,8 +2,9 @@ import { readFileSync } from "fs";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 import { SourceMapPayload } from "module";
-import { Output, ParserConfig, transform } from "@swc/core";
+import { Output, ParserConfig, ReactConfig, transform } from "@swc/core";
 import { PluginOption } from "vite";
+import { createRequire } from "module";
 
 const runtimePublicPath = "/@react-refresh";
 
@@ -16,6 +17,9 @@ const _dirname =
   typeof __dirname !== "undefined"
     ? __dirname
     : dirname(fileURLToPath(import.meta.url));
+const resolve = createRequire(
+  typeof __filename !== "undefined" ? __filename : import.meta.url,
+).resolve;
 const refreshContentRE = /\$Refresh(?:Reg|Sig)\$\(/;
 
 type Options = {
@@ -29,122 +33,164 @@ type Options = {
    * @default false
    */
   tsDecorators?: boolean;
+  /**
+   * Use SWC plugins. Enable SWC at build time.
+   * @default undefined
+   */
+  plugins?: [string, Record<string, any>][];
 };
 
-const react = (options?: Options): PluginOption[] => [
-  {
-    name: "vite:react-swc",
-    apply: "serve",
-    config: () => ({
-      esbuild: false,
-      optimizeDeps: { include: ["react/jsx-dev-runtime"] },
-    }),
-    resolveId: (id) => (id === runtimePublicPath ? id : undefined),
-    load: (id) =>
-      id === runtimePublicPath
-        ? readFileSync(join(_dirname, "refresh-runtime.js"), "utf-8")
-        : undefined,
-    transformIndexHtml: (_, config) => [
-      {
-        tag: "script",
-        attrs: { type: "module" },
-        children: preambleCode.replace(
-          "__PATH__",
-          config.server!.config.base + runtimePublicPath.slice(1),
-        ),
+const react = (_options?: Options): PluginOption[] => {
+  const options = {
+    jsxImportSource: _options?.jsxImportSource,
+    tsDecorators: _options?.tsDecorators,
+    plugins: _options?.plugins
+      ? _options?.plugins.map((el): typeof el => [resolve(el[0]), el[1]])
+      : undefined,
+  };
+
+  return [
+    {
+      name: "vite:react-swc",
+      apply: "serve",
+      config: () => ({
+        esbuild: false,
+        optimizeDeps: { include: ["react/jsx-dev-runtime"] },
+      }),
+      resolveId: (id) => (id === runtimePublicPath ? id : undefined),
+      load: (id) =>
+        id === runtimePublicPath
+          ? readFileSync(join(_dirname, "refresh-runtime.js"), "utf-8")
+          : undefined,
+      transformIndexHtml: (_, config) => [
+        {
+          tag: "script",
+          attrs: { type: "module" },
+          children: preambleCode.replace(
+            "__PATH__",
+            config.server!.config.base + runtimePublicPath.slice(1),
+          ),
+        },
+      ],
+      async transform(code, _id, transformOptions) {
+        const id = _id.split("?")[0];
+
+        const result = await transformWithOptions(id, code, options, {
+          refresh: !transformOptions?.ssr,
+          development: true,
+          useBuiltins: true,
+          runtime: "automatic",
+          importSource: options?.jsxImportSource,
+        });
+        if (!result) return;
+
+        if (transformOptions?.ssr || !refreshContentRE.test(result.code)) {
+          return result;
+        }
+
+        result.code = `import * as RefreshRuntime from "${runtimePublicPath}";
+  
+  if (!window.$RefreshReg$) throw new Error("React refresh preamble was not loaded. Something is wrong.");
+  const prevRefreshReg = window.$RefreshReg$;
+  const prevRefreshSig = window.$RefreshSig$;
+  window.$RefreshReg$ = RefreshRuntime.getRefreshReg("${id}");
+  window.$RefreshSig$ = RefreshRuntime.createSignatureFunctionForTransform;
+  
+  ${result.code}
+  
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+  import(/* @vite-ignore */ import.meta.url).then((currentExports) => {
+    RefreshRuntime.registerExportsForReactRefresh("${id}", currentExports);
+    import.meta.hot.accept((nextExports) => {
+      if (!nextExports) return;
+      const invalidateMessage = RefreshRuntime.validateRefreshBoundaryAndEnqueueUpdate(currentExports, nextExports);
+      if (invalidateMessage) import.meta.hot.invalidate(invalidateMessage);
+    });
+  });
+  `;
+
+        const sourceMap: SourceMapPayload = JSON.parse(result.map!);
+        sourceMap.mappings = ";;;;;;;;" + sourceMap.mappings;
+        return { code: result.code, map: sourceMap };
       },
-    ],
-    async transform(code, _id, transformOptions) {
-      const id = _id.split("?")[0];
-      if (id.includes("node_modules")) return;
-
-      const decorators = options?.tsDecorators ?? false;
-      const parser: ParserConfig | undefined = id.endsWith(".tsx")
-        ? { syntax: "typescript", tsx: true, decorators }
-        : id.endsWith(".ts")
-        ? { syntax: "typescript", tsx: false, decorators }
-        : id.endsWith(".jsx")
-        ? { syntax: "ecmascript", jsx: true }
-        : undefined;
-      if (!parser) return;
-
-      let result: Output;
-      try {
-        result = await transform(code, {
-          filename: id,
-          swcrc: false,
-          configFile: false,
-          sourceMaps: true,
-          jsc: {
-            target: "es2020",
-            parser,
-            transform: {
-              useDefineForClassFields: true,
-              react: {
-                refresh: !transformOptions?.ssr,
-                development: true,
-                useBuiltins: true,
-                runtime: "automatic",
-                importSource: options?.jsxImportSource,
+    },
+    options.plugins
+      ? {
+          name: "vite:react-swc",
+          apply: "build",
+          transform: (code, _id) =>
+            transformWithOptions(_id.split("?")[0], code, options, {
+              useBuiltins: true,
+              runtime: "automatic",
+              importSource: options?.jsxImportSource,
+            }),
+        }
+      : {
+          name: "vite:react-swc",
+          apply: "build",
+          config: () => ({
+            esbuild: {
+              jsx: "automatic",
+              jsxImportSource: options?.jsxImportSource,
+              tsconfigRaw: {
+                compilerOptions: { useDefineForClassFields: true },
               },
             },
-          },
-        });
-      } catch (e: any) {
-        const message: string = e.message;
-        const fileStartIndex = message.indexOf("╭─[");
-        if (fileStartIndex !== -1) {
-          const match = message.slice(fileStartIndex).match(/:(\d+):(\d+)]/);
-          if (match) {
-            e.line = match[1];
-            e.column = match[2];
-          }
-        }
-        throw e;
-      }
+          }),
+        },
+  ];
+};
 
-      if (transformOptions?.ssr || !refreshContentRE.test(result.code)) {
-        return result;
-      }
+const transformWithOptions = async (
+  id: string,
+  code: string,
+  options: Options,
+  reactConfig: ReactConfig,
+) => {
+  if (id.includes("node_modules")) return;
 
-      result.code = `import * as RefreshRuntime from "${runtimePublicPath}";
+  const decorators = options?.tsDecorators ?? false;
+  const parser: ParserConfig | undefined = id.endsWith(".tsx")
+    ? { syntax: "typescript", tsx: true, decorators }
+    : id.endsWith(".ts")
+    ? { syntax: "typescript", tsx: false, decorators }
+    : id.endsWith(".jsx")
+    ? { syntax: "ecmascript", jsx: true }
+    : undefined;
+  if (!parser) return;
 
-if (!window.$RefreshReg$) throw new Error("React refresh preamble was not loaded. Something is wrong.");
-const prevRefreshReg = window.$RefreshReg$;
-const prevRefreshSig = window.$RefreshSig$;
-window.$RefreshReg$ = RefreshRuntime.getRefreshReg("${id}");
-window.$RefreshSig$ = RefreshRuntime.createSignatureFunctionForTransform;
-
-${result.code}
-
-window.$RefreshReg$ = prevRefreshReg;
-window.$RefreshSig$ = prevRefreshSig;
-import(/* @vite-ignore */ import.meta.url).then((currentExports) => {
-  RefreshRuntime.registerExportsForReactRefresh("${id}", currentExports);
-  import.meta.hot.accept((nextExports) => {
-    if (!nextExports) return;
-    const invalidateMessage = RefreshRuntime.validateRefreshBoundaryAndEnqueueUpdate(currentExports, nextExports);
-    if (invalidateMessage) import.meta.hot.invalidate(invalidateMessage);
-  });
-});
-`;
-
-      const sourceMap: SourceMapPayload = JSON.parse(result.map!);
-      sourceMap.mappings = ";;;;;;;;" + sourceMap.mappings;
-      return { code: result.code, map: sourceMap };
-    },
-  },
-  {
-    name: "vite:react-swc",
-    apply: "build",
-    config: () => ({
-      esbuild: {
-        jsx: "automatic",
-        jsxImportSource: options?.jsxImportSource,
-        tsconfigRaw: { compilerOptions: { useDefineForClassFields: true } },
+  let result: Output;
+  try {
+    result = await transform(code, {
+      filename: id,
+      swcrc: false,
+      configFile: false,
+      sourceMaps: true,
+      jsc: {
+        target: "es2020",
+        parser,
+        experimental: { plugins: options.plugins },
+        transform: {
+          useDefineForClassFields: true,
+          react: reactConfig,
+        },
       },
-    }),
-  },
-];
+    });
+  } catch (e: any) {
+    const message: string = e.message;
+    const fileStartIndex = message.indexOf("╭─[");
+    if (fileStartIndex !== -1) {
+      const match = message.slice(fileStartIndex).match(/:(\d+):(\d+)]/);
+      if (match) {
+        e.line = match[1];
+        e.column = match[2];
+      }
+    }
+    throw e;
+  }
+
+  return result;
+};
 
 export default react;

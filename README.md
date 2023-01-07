@@ -52,6 +52,14 @@ Enable TypeScript decorators. Requires `experimentalDecorators` in tsconfig.
 react({ tsDecorators: true });
 ```
 
+## plugins
+
+Use SWC plugins. Enable SWC at build time.
+
+```ts
+react({ plugins: [["@swc/plugin-styled-components", {}]] });
+```
+
 ## Consistent components exports
 
 For React refresh to work correctly, your file should only export React components. The best explanation I've read is the one from the [Gatsby docs](https://www.gatsbyjs.com/docs/reference/local-development/fast-refresh/#how-it-works).

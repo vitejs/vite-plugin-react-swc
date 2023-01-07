@@ -15,6 +15,7 @@ fs.copySync(resolve(__dirname, "playground"), tempDir, {
 const config: PlaywrightTestConfig = {
   forbidOnly: !!process.env.CI,
   workers: 1,
+  timeout: 10_000,
   reporter: process.env.CI ? "github" : "list",
   projects: [{ name: "chromium", use: devices["Desktop Chrome"] }],
 };
