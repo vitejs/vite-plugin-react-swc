@@ -1,18 +1,11 @@
 #!/usr/bin/env tnode
 import { readFileSync, writeFileSync } from "node:fs";
-import {
-  execSync,
-  ExecSyncOptionsWithBufferEncoding,
-} from "node:child_process";
-import { stdin, stdout } from "node:process";
-import { createInterface } from "node:readline";
 import * as colors from "picocolors";
+import { ask, getPackageJSON, main, run } from "./utils";
 
-async function main(): Promise<void> {
+main(async () => {
   run("pnpm i --loglevel error");
-  const packageJSON = JSON.parse(readFileSync("package.json", "utf-8")) as {
-    version: string;
-  };
+  const packageJSON = getPackageJSON();
   const changelog = readFileSync("CHANGELOG.md", "utf-8");
   if (!changelog.includes("## Unreleased")) {
     throw new Error("Can't find '## Unreleased' section in CHANGELOG.md");
@@ -40,22 +33,5 @@ async function main(): Promise<void> {
 
   run(`git commit -am "release: v${newVersion}"`);
   run(`git tag v${newVersion}`);
-  run("pnpm build");
-  run("npm publish", { cwd: "dist" });
   run("git push --tags");
-}
-
-const ask = (question: string) =>
-  new Promise<string>((res) =>
-    createInterface({ input: stdin, output: stdout }).question(question, res),
-  );
-
-const run = (cmd: string, opts?: ExecSyncOptionsWithBufferEncoding) => {
-  console.log(colors.dim(`$ ${cmd}`));
-  execSync(cmd, { stdio: "inherit", ...opts });
-};
-
-main().catch((err) => {
-  console.error(err);
-  process.exit(1);
 });

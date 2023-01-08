@@ -15,6 +15,7 @@
     "moduleResolution": "node", // Allow `index` imports
     "resolveJsonModule": true, // Allow json import
     "forceConsistentCasingInFileNames": true, // Avoid difference in case between file name and import
+    "allowSyntheticDefaultImports": true,
 
     /* Linting */
     "strict": true,

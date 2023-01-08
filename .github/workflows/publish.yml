@@ -1,14 +1,14 @@
-name: CI
+name: Publish
+
 on:
   push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+    tags:
+      - "v*"
+
 jobs:
-  ci:
+  publish:
     runs-on: ubuntu-latest
+    environment: Release
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -21,9 +21,8 @@ jobs:
           cache: "pnpm"
           cache-dependency-path: "**/pnpm-lock.yaml"
       - run: pnpm install --frozen-lockfile --prefer-offline
-      - uses: actions/cache@v3
-        with:
-          key: playwright-bin
-          path: ~/.cache/ms-playwright
-      - run: pnpm playwright install chromium
-      - run: pnpm ci
+      - name: pnpm build
+      - run: ./scripts/publish.ts ${{ github.ref_name }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - uses: ArnaudBarre/github-release@v1
