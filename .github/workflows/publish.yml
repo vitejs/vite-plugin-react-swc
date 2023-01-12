@@ -21,7 +21,7 @@ jobs:
           cache: "pnpm"
           cache-dependency-path: "**/pnpm-lock.yaml"
       - run: pnpm install --frozen-lockfile --prefer-offline
-      - name: pnpm build
+      - run: pnpm build
       - run: ./scripts/publish.ts ${{ github.ref_name }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
