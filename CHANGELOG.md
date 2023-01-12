@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 3.1.0-beta.2
+
 ## 3.1.0-beta.1
 
 ## 3.1.0-beta.0
