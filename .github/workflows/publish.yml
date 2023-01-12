@@ -22,7 +22,7 @@ jobs:
           cache-dependency-path: "**/pnpm-lock.yaml"
       - run: pnpm install --frozen-lockfile --prefer-offline
       - run: pnpm build
-      - run: ./scripts/publish.ts ${{ github.ref_name }}
+      - run: pnpm publishCI ${{ github.ref_name }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - uses: ArnaudBarre/github-release@v1

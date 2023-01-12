@@ -9,7 +9,8 @@
     "prettier": "pnpm prettier-ci --write",
     "prettier-ci": "prettier --cache --ignore-path=.gitignore --check '**/*.{js,jsx,ts,tsx,html,css,json,md,yml}'",
     "ci": "tsc && pnpm prettier-ci && pnpm build && cd playground && tsc && cd .. && pnpm test",
-    "release": "scripts/release.ts"
+    "release": "scripts/release.ts",
+    "publishCI": "scripts/publish.ts"
   },
   "prettier": {
     "trailingComma": "all"
