@@ -3,14 +3,13 @@
   "version": "3.1.0-beta.2",
   "private": true,
   "scripts": {
-    "dev": "scripts/bundle.ts --dev",
-    "build": "scripts/bundle.ts",
+    "dev": "tsx scripts/bundle.ts --dev",
+    "build": "tsx scripts/bundle.ts",
     "test": "playwright test",
     "prettier": "pnpm prettier-ci --write",
     "prettier-ci": "prettier --cache --ignore-path=.gitignore --check '**/*.{js,jsx,ts,tsx,html,css,json,md,yml}'",
     "ci": "tsc && pnpm prettier-ci && pnpm build && cd playground && tsc && cd .. && pnpm test",
-    "release": "scripts/release.ts",
-    "publishCI": "scripts/publish.ts"
+    "release": "tsx scripts/release.ts"
   },
   "prettier": {
     "trailingComma": "all"
@@ -22,16 +21,15 @@
     "vite": "^4"
   },
   "devDependencies": {
-    "@nabla/tnode": "^0.8.0",
     "@playwright/test": "^1.29.2",
     "@types/fs-extra": "^11.0.1",
     "@types/node": "^18.11.18",
-    "@types/semver": "^7.3.13",
+    "@vitejs/release-scripts": "^1.0.4",
     "esbuild": "^0.16.17",
     "fs-extra": "^11.1.0",
     "picocolors": "^1.0.0",
     "prettier": "^2.8.2",
-    "semver": "^7.3.8",
+    "tsx": "^3.12.2",
     "typescript": "^4.9.4",
     "vite": "^4.0.4"
   }

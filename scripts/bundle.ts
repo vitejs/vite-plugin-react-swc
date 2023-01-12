@@ -1,4 +1,3 @@
-#!/usr/bin/env tnode
 import { rmSync, writeFileSync } from "node:fs";
 import { execSync } from "node:child_process";
 import { build, BuildOptions } from "esbuild";
