@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 3.1.0-beta.1
+
 ## 3.1.0-beta.0
 
 - Fix HMR for styled components exported alongside other components
