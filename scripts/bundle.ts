@@ -1,6 +1,6 @@
 import { rmSync, writeFileSync } from "node:fs";
 import { execSync } from "node:child_process";
-import { build, BuildOptions } from "esbuild";
+import { build, BuildOptions, context } from "esbuild";
 
 import * as packageJSON from "../package.json";
 
@@ -16,20 +16,23 @@ const serverOptions: BuildOptions = {
   external: Object.keys(packageJSON.peerDependencies).concat(
     Object.keys(packageJSON.dependencies),
   ),
-  watch: dev,
+};
+
+const buildOrWatch = async (options: BuildOptions) => {
+  if (dev) await (await context(options)).watch();
+  else await build(options);
 };
 
 Promise.all([
-  build({
+  buildOrWatch({
     entryPoints: ["src/refresh-runtime.js"],
     outdir: "dist",
     platform: "browser",
     format: "esm",
     target: "safari13",
     legalComments: "inline",
-    watch: dev,
   }),
-  build({
+  buildOrWatch({
     ...serverOptions,
     stdin: {
       contents: `import react from "./src";
@@ -41,7 +44,7 @@ module.exports.default = react;`,
     outfile: "dist/index.cjs",
     logOverride: { "empty-import-meta": "silent" },
   }),
-  build({
+  buildOrWatch({
     ...serverOptions,
     entryPoints: ["src/index.ts"],
     format: "esm",
