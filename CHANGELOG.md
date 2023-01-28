@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Update embedded refresh runtime to 0.14 (fixes [#46](https://github.com/vitejs/vite-plugin-react-swc/issues/46))
+
 ## 3.1.0-beta.2
 
 - Fix HMR for styled components exported alongside other components
