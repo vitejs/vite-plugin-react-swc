@@ -1,11 +1,11 @@
+import { fileURLToPath } from "node:url";
 import { devices, PlaywrightTestConfig } from "@playwright/test";
-import { resolve } from "node:path";
-import * as fs from "fs-extra";
+import fs from "fs-extra";
 
-const tempDir = resolve(__dirname, "playground-temp");
+const tempDir = fileURLToPath(new URL("playground-temp", import.meta.url));
 fs.ensureDirSync(tempDir);
 fs.emptyDirSync(tempDir);
-fs.copySync(resolve(__dirname, "playground"), tempDir, {
+fs.copySync(fileURLToPath(new URL("playground", import.meta.url)), tempDir, {
   filter: (src) =>
     !src.includes("/__tests__") &&
     !src.includes("/.vite") &&

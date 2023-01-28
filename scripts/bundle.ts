@@ -72,8 +72,8 @@ module.exports.default = react;`,
         module: "index.mjs",
         exports: {
           ".": {
-            require: "./index.cjs",
             types: "./index.d.ts",
+            require: "./index.cjs",
             import: "./index.mjs",
           },
         },

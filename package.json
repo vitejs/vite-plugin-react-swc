@@ -1,6 +1,7 @@
 {
   "name": "@vitejs/plugin-react-swc-monorepo",
   "version": "3.1.0-beta.2",
+  "type": "module",
   "private": true,
   "scripts": {
     "dev": "tsx scripts/bundle.ts --dev",
@@ -9,7 +10,7 @@
     "prettier": "pnpm prettier-ci --write",
     "prettier-ci": "prettier --cache --ignore-path=.gitignore --check '**/*.{js,jsx,ts,tsx,html,css,json,md,yml}'",
     "ci": "tsc && pnpm prettier-ci && pnpm build && cd playground && tsc && cd .. && pnpm test",
-    "release": "tsx scripts/release.ts"
+    "release": "pnpm build && tsx scripts/release.ts"
   },
   "prettier": {
     "trailingComma": "all"
@@ -24,7 +25,7 @@
     "@playwright/test": "^1.29.2",
     "@types/fs-extra": "^11.0.1",
     "@types/node": "^18.11.18",
-    "@vitejs/release-scripts": "^1.0.4",
+    "@vitejs/release-scripts": "^1.1.0",
     "esbuild": "^0.17.4",
     "fs-extra": "^11.1.0",
     "picocolors": "^1.0.0",
