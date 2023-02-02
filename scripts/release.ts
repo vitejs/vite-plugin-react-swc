@@ -21,6 +21,9 @@ release({
   },
   generateChangelog: (_, version) => {
     console.log(colors.dim("Write package.json & CHANGELOG.md"));
+    const pkg = JSON.parse(readFileSync("package.json", "utf-8"));
+    pkg.version = version;
+    writeFileSync("package.json", `${JSON.stringify(pkg, null, 2)}\n`);
     writeFileSync(
       "CHANGELOG.md",
       changelog.replace("## Unreleased", `## Unreleased\n\n## ${version}`),

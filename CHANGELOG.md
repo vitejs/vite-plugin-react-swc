@@ -4,13 +4,10 @@
 
 ## 3.1.0
 
-- Update embedded refresh runtime to 0.14 (fixes [#46](https://github.com/vitejs/vite-plugin-react-swc/issues/46))
-
-## 3.1.0-beta.2
-
-- Fix HMR for styled components exported alongside other components
-- Support TypeScript decorators via the new `tsDecorators` option. This requires `experimentalDecorators` in tsconfig.
 - Support plugins via the new `plugins` options
+- Support TypeScript decorators via the new `tsDecorators` option. This requires `experimentalDecorators` in tsconfig.
+- Fix HMR for styled components exported alongside other components
+- Update embedded refresh runtime to 0.14 (fixes [#46](https://github.com/vitejs/vite-plugin-react-swc/issues/46))
 
 ## 3.0.1
 
