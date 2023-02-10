@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Support HMR for MDX (fixes #52)
 - Fix: use jsxImportSource in optimizeDeps
 
 ## 3.1.0

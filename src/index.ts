@@ -91,26 +91,26 @@ const react = (_options?: Options): PluginOption[] => {
         }
 
         result.code = `import * as RefreshRuntime from "${runtimePublicPath}";
-  
-  if (!window.$RefreshReg$) throw new Error("React refresh preamble was not loaded. Something is wrong.");
-  const prevRefreshReg = window.$RefreshReg$;
-  const prevRefreshSig = window.$RefreshSig$;
-  window.$RefreshReg$ = RefreshRuntime.getRefreshReg("${id}");
-  window.$RefreshSig$ = RefreshRuntime.createSignatureFunctionForTransform;
-  
-  ${result.code}
-  
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-  import(/* @vite-ignore */ import.meta.url).then((currentExports) => {
-    RefreshRuntime.registerExportsForReactRefresh("${id}", currentExports);
-    import.meta.hot.accept((nextExports) => {
-      if (!nextExports) return;
-      const invalidateMessage = RefreshRuntime.validateRefreshBoundaryAndEnqueueUpdate(currentExports, nextExports);
-      if (invalidateMessage) import.meta.hot.invalidate(invalidateMessage);
-    });
+
+if (!window.$RefreshReg$) throw new Error("React refresh preamble was not loaded. Something is wrong.");
+const prevRefreshReg = window.$RefreshReg$;
+const prevRefreshSig = window.$RefreshSig$;
+window.$RefreshReg$ = RefreshRuntime.getRefreshReg("${id}");
+window.$RefreshSig$ = RefreshRuntime.createSignatureFunctionForTransform;
+
+${result.code}
+
+window.$RefreshReg$ = prevRefreshReg;
+window.$RefreshSig$ = prevRefreshSig;
+import(/* @vite-ignore */ import.meta.url).then((currentExports) => {
+  RefreshRuntime.registerExportsForReactRefresh("${id}", currentExports);
+  import.meta.hot.accept((nextExports) => {
+    if (!nextExports) return;
+    const invalidateMessage = RefreshRuntime.validateRefreshBoundaryAndEnqueueUpdate(currentExports, nextExports);
+    if (invalidateMessage) import.meta.hot.invalidate(invalidateMessage);
   });
-  `;
+});
+`;
 
         const sourceMap: SourceMapPayload = JSON.parse(result.map!);
         sourceMap.mappings = ";;;;;;;;" + sourceMap.mappings;
@@ -159,6 +159,9 @@ const transformWithOptions = async (
     ? { syntax: "typescript", tsx: false, decorators }
     : id.endsWith(".jsx")
     ? { syntax: "ecmascript", jsx: true }
+    : id.endsWith(".mdx")
+    ? // JSX is required to trigger fast refresh transformations, even if MDX already transforms it
+      { syntax: "ecmascript", jsx: true }
     : undefined;
   if (!parser) return;
 
