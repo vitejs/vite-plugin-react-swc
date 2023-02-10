@@ -5,6 +5,7 @@ import {
   mergeConfig,
   preview,
   build,
+  InlineConfig,
 } from "vite";
 import { readFileSync, writeFileSync } from "fs";
 
@@ -38,8 +39,8 @@ export const setupDevServer = async (name: string) => {
     root,
     logLevel: "silent",
     configFile: false,
-    server: { port: port++ },
-  });
+    server: { port: port++, watch: { usePolling: true } },
+  } satisfies InlineConfig);
   const server = await (await createServer(testConfig)).listen();
   return {
     testUrl: `http://localhost:${server.config.server.port}${server.config.base}`,
