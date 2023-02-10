@@ -20,16 +20,14 @@ test("MDX HMR", async ({ page }) => {
 
   await expect(page.getByRole("heading", { name: "Hello" })).toBeVisible();
 
-  const promise1 = waitForLogs("[vite] hot updated: /src/Counter.tsx");
   editFile("src/Counter.tsx", ["{count}", "{count}!"]);
-  await promise1;
+  await waitForLogs("[vite] hot updated: /src/Counter.tsx");
   const button = await page.locator("button");
   await button.click();
   await expect(button).toHaveText("count is 1!");
 
-  const promise2 = waitForLogs("[vite] hot updated: /src/hello.mdx");
   editFile("src/hello.mdx", ["Hello", "Hello world"]);
-  await promise2;
+  await waitForLogs("[vite] hot updated: /src/hello.mdx");
   await expect(
     page.getByRole("heading", { name: "Hello world" }),
   ).toBeVisible();
