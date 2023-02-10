@@ -18,6 +18,8 @@ test("MDX HMR", async ({ page }) => {
   await page.goto(testUrl);
   await waitForLogs("[vite] connected.");
 
+  await expect(page.getByRole("heading", { name: "Hello" })).toBeVisible();
+
   editFile("src/Counter.tsx", ["{count}", "{count}!"]);
   await waitForLogs("[vite] hot updated: /src/Counter.tsx");
   const button = await page.locator("button");
