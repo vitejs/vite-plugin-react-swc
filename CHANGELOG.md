@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Fix: use jsxImportSource in optimizeDeps
+
 ## 3.1.0
 
 - Support plugins via the new `plugins` options

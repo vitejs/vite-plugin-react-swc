@@ -42,7 +42,7 @@ type Options = {
 
 const react = (_options?: Options): PluginOption[] => {
   const options = {
-    jsxImportSource: _options?.jsxImportSource,
+    jsxImportSource: _options?.jsxImportSource ?? "react",
     tsDecorators: _options?.tsDecorators,
     plugins: _options?.plugins
       ? _options?.plugins.map((el): typeof el => [resolve(el[0]), el[1]])
@@ -55,7 +55,9 @@ const react = (_options?: Options): PluginOption[] => {
       apply: "serve",
       config: () => ({
         esbuild: false,
-        optimizeDeps: { include: ["react/jsx-dev-runtime"] },
+        optimizeDeps: {
+          include: [`${options.jsxImportSource}/jsx-dev-runtime`],
+        },
       }),
       resolveId: (id) => (id === runtimePublicPath ? id : undefined),
       load: (id) =>
@@ -80,7 +82,7 @@ const react = (_options?: Options): PluginOption[] => {
           development: true,
           useBuiltins: true,
           runtime: "automatic",
-          importSource: options?.jsxImportSource,
+          importSource: options.jsxImportSource,
         });
         if (!result) return;
 
@@ -123,7 +125,7 @@ const react = (_options?: Options): PluginOption[] => {
             transformWithOptions(_id.split("?")[0], code, options, {
               useBuiltins: true,
               runtime: "automatic",
-              importSource: options?.jsxImportSource,
+              importSource: options.jsxImportSource,
             }),
         }
       : {
@@ -132,7 +134,7 @@ const react = (_options?: Options): PluginOption[] => {
           config: () => ({
             esbuild: {
               jsx: "automatic",
-              jsxImportSource: options?.jsxImportSource,
+              jsxImportSource: options.jsxImportSource,
               tsconfigRaw: {
                 compilerOptions: { useDefineForClassFields: true },
               },
