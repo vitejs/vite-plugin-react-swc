@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Support HMR for MDX (fixes #52)
+- Fix: when using plugins, apply SWC before esbuild so that automatic runtime is respected for JSX (fixes #56)
 - Fix: use jsxImportSource in optimizeDeps
 
 ## 3.1.0

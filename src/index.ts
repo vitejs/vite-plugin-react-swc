@@ -121,6 +121,7 @@ import(/* @vite-ignore */ import.meta.url).then((currentExports) => {
       ? {
           name: "vite:react-swc",
           apply: "build",
+          enforce: "pre", // Run before esbuild
           transform: (code, _id) =>
             transformWithOptions(_id.split("?")[0], code, options, {
               useBuiltins: true,
