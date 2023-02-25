@@ -34,6 +34,11 @@ type Options = {
    */
   tsDecorators?: boolean;
   /**
+   * Enable TypeScript decorator metadata.
+   * @default false
+   */
+  decoratorMetadata?: boolean;
+  /**
    * Use SWC plugins. Enable SWC at build time.
    * @default undefined
    */
@@ -44,6 +49,7 @@ const react = (_options?: Options): PluginOption[] => {
   const options = {
     jsxImportSource: _options?.jsxImportSource ?? "react",
     tsDecorators: _options?.tsDecorators,
+    decoratorMetadata: _options?.decoratorMetadata,
     plugins: _options?.plugins
       ? _options?.plugins.map((el): typeof el => [resolve(el[0]), el[1]])
       : undefined,
@@ -154,6 +160,7 @@ const transformWithOptions = async (
   if (id.includes("node_modules")) return;
 
   const decorators = options?.tsDecorators ?? false;
+  const decoratorMetadata = options?.decoratorMetadata ?? false;
   const parser: ParserConfig | undefined = id.endsWith(".tsx")
     ? { syntax: "typescript", tsx: true, decorators }
     : id.endsWith(".ts")
@@ -180,6 +187,7 @@ const transformWithOptions = async (
         transform: {
           useDefineForClassFields: true,
           react: reactConfig,
+          decoratorMetadata,
         },
       },
     });
