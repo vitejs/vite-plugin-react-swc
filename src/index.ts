@@ -3,7 +3,7 @@ import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 import { SourceMapPayload } from "module";
 import { Output, ParserConfig, ReactConfig, transform } from "@swc/core";
-import { PluginOption } from "vite";
+import { PluginOption, ESBuildOptions } from "vite";
 import { createRequire } from "module";
 
 const runtimePublicPath = "/@react-refresh";
@@ -34,6 +34,12 @@ type Options = {
    */
   tsDecorators?: boolean;
   /**
+   * Enable JavaScript decorators. Requires experimentalDecorators in jsconfig.
+   * JSX will be treated as TSX at build time.
+   * @default false
+   */
+  jsxDecorators?: boolean;
+  /**
    * Use SWC plugins. Enable SWC at build time.
    * @default undefined
    */
@@ -44,9 +50,13 @@ const react = (_options?: Options): PluginOption[] => {
   const options = {
     jsxImportSource: _options?.jsxImportSource ?? "react",
     tsDecorators: _options?.tsDecorators,
+    jsxDecorators: _options?.jsxDecorators,
     plugins: _options?.plugins
       ? _options?.plugins.map((el): typeof el => [resolve(el[0]), el[1]])
       : undefined,
+  };
+  const esbuildConfig: ESBuildOptions = {
+    loader: options.jsxDecorators ? "tsx" : undefined,
   };
 
   return [
@@ -134,6 +144,7 @@ import(/* @vite-ignore */ import.meta.url).then((currentExports) => {
           apply: "build",
           config: () => ({
             esbuild: {
+              ...esbuildConfig,
               jsx: "automatic",
               jsxImportSource: options.jsxImportSource,
               tsconfigRaw: {
@@ -154,15 +165,16 @@ const transformWithOptions = async (
   if (id.includes("node_modules")) return;
 
   const decorators = options?.tsDecorators ?? false;
+  const jsxDecorators = options?.jsxDecorators ?? false;
   const parser: ParserConfig | undefined = id.endsWith(".tsx")
     ? { syntax: "typescript", tsx: true, decorators }
     : id.endsWith(".ts")
     ? { syntax: "typescript", tsx: false, decorators }
     : id.endsWith(".jsx")
-    ? { syntax: "ecmascript", jsx: true }
+    ? { syntax: "ecmascript", jsx: true, decorators: jsxDecorators }
     : id.endsWith(".mdx")
     ? // JSX is required to trigger fast refresh transformations, even if MDX already transforms it
-      { syntax: "ecmascript", jsx: true }
+      { syntax: "ecmascript", jsx: true, decorators: jsxDecorators }
     : undefined;
   if (!parser) return;
 
@@ -180,6 +192,7 @@ const transformWithOptions = async (
         transform: {
           useDefineForClassFields: true,
           react: reactConfig,
+          legacyDecorator: jsxDecorators,
         },
       },
     });
