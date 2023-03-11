@@ -118,6 +118,21 @@ importers:
       '@types/react-dom': 18.0.10
       '@vitejs/plugin-react-swc': link:../../dist
 
+  playground/shadow-export:
+    specifiers:
+      '@types/react': ^18.0.27
+      '@types/react-dom': ^18.0.10
+      '@vitejs/plugin-react-swc': ../../dist
+      react: ^18.2.0
+      react-dom: ^18.2.0
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    devDependencies:
+      '@types/react': 18.0.27
+      '@types/react-dom': 18.0.10
+      '@vitejs/plugin-react-swc': link:../../dist
+
   playground/styled-components:
     specifiers:
       '@swc/plugin-styled-components': ^1.5.40

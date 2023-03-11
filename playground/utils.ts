@@ -52,7 +52,7 @@ export const setupDevServer = async (name: string) => {
       let content = readFileSync(path, "utf-8");
       for (let [search, replace] of replacements) {
         if (!content.includes(search)) {
-          throw new Error(`${search} not found in ${name}`);
+          throw new Error(`'${search}' not found in ${name}`);
         }
         content = content.replace(search, replace);
       }
