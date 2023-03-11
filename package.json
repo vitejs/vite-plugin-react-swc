@@ -9,7 +9,7 @@
     "test": "playwright test",
     "prettier": "pnpm prettier-ci --write",
     "prettier-ci": "prettier --cache --ignore-path=.gitignore --check \"**/*.{js,jsx,ts,tsx,html,css,json,md,yml}\"",
-    "ci": "tsc && pnpm prettier-ci && pnpm build && cd playground && tsc && cd .. && pnpm test",
+    "ci": "tsc && pnpm prettier-ci && pnpm build && pnpm test",
     "release": "pnpm build && tsx scripts/release.ts"
   },
   "prettier": {
@@ -22,7 +22,7 @@
     "vite": "^4"
   },
   "devDependencies": {
-    "@playwright/test": "^1.31.2",
+    "@playwright/test": "1.30.0",
     "@types/fs-extra": "^11.0.1",
     "@types/node": "^18.15.0",
     "@vitejs/release-scripts": "^1.1.0",
