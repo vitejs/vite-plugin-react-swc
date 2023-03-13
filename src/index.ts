@@ -109,6 +109,7 @@ import(/* @vite-ignore */ import.meta.url).then((currentExports) => {
     const invalidateMessage = RefreshRuntime.validateRefreshBoundaryAndEnqueueUpdate(currentExports, nextExports);
     if (invalidateMessage) import.meta.hot.invalidate(invalidateMessage);
   });
+  console.log('registered');
 });
 `;
 
