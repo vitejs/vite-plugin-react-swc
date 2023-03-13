@@ -1,4 +1,4 @@
-import { rmSync, writeFileSync } from "node:fs";
+import { rmSync, writeFileSync, copyFileSync } from "node:fs";
 import { execSync } from "node:child_process";
 import { build, BuildOptions, context } from "esbuild";
 
@@ -51,7 +51,8 @@ module.exports.default = react;`,
     outfile: "dist/index.mjs",
   }),
 ]).then(() => {
-  execSync("cp LICENSE README.md dist/");
+  copyFileSync('LICENSE', 'dist/LICENSE');
+  copyFileSync('README.md', 'dist/README.md');
 
   execSync(
     "tsc src/index.ts --declaration --emitDeclarationOnly --outDir dist --module es2020 --moduleResolution node",
