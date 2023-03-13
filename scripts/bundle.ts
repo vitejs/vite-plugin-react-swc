@@ -51,8 +51,8 @@ module.exports.default = react;`,
     outfile: "dist/index.mjs",
   }),
 ]).then(() => {
-  copyFileSync('LICENSE', 'dist/LICENSE');
-  copyFileSync('README.md', 'dist/README.md');
+  copyFileSync("LICENSE", "dist/LICENSE");
+  copyFileSync("README.md", "dist/README.md");
 
   execSync(
     "tsc src/index.ts --declaration --emitDeclarationOnly --outDir dist --module es2020 --moduleResolution node",
