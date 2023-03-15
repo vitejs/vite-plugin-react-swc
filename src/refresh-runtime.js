@@ -558,9 +558,10 @@ export function registerExportsForReactRefresh(filename, moduleExports) {
     if (key === "__esModule") continue;
     const exportValue = moduleExports[key];
     if (isLikelyComponentType(exportValue)) {
-      // `export` is required to avoid key collision when renamed exports that
+      // 'export' is required to avoid key collision when renamed exports that
       // shadow a local component name: https://github.com/vitejs/vite-plugin-react/issues/116
-      // Register has an identity check to not register twice the same component, so this is safe.
+      // The register function has an identity check to not register twice the same component,
+      // so this is safe to not used the same key here.
       register(exportValue, filename + " export " + key);
     }
   }
