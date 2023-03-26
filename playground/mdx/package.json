@@ -1,10 +1,11 @@
 {
   "name": "playground-mdx",
-  "private": true,
   "type": "module",
+  "private": true,
   "scripts": {
     "dev": "vite",
-    "build": "vite build"
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -12,7 +13,7 @@
   },
   "devDependencies": {
     "@mdx-js/rollup": "^2.3.0",
-    "@types/react": "^18.0.28",
+    "@types/react": "^18.0.29",
     "@types/react-dom": "^18.0.11",
     "@vitejs/plugin-react-swc": "../../dist"
   }

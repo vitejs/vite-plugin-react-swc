@@ -4,7 +4,7 @@ import {
   setupBuildAndPreview,
   setupWaitForLogs,
   expectColor,
-} from "../../utils";
+} from "../../utils.ts";
 
 test("Emotion build", async ({ page }) => {
   const { testUrl, server } = await setupBuildAndPreview("emotion");
