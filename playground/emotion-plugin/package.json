@@ -1,5 +1,6 @@
 {
-  "name": "playground-emotion",
+  "name": "playground-emotion-plugin",
+  "type": "module",
   "private": true,
   "scripts": {
     "dev": "vite",

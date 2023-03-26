@@ -10,11 +10,9 @@
     "isolatedModules": true,
     "skipLibCheck": true,
     "experimentalDecorators": true,
-
-    /* Imports */
-    "moduleResolution": "node", // Allow `index` imports
-    "resolveJsonModule": true, // Allow json import
-    "forceConsistentCasingInFileNames": true, // Avoid difference in case between file name and import
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
 
     /* Linting */
     "strict": true,

@@ -1,10 +1,11 @@
 {
   "name": "playground-mdx",
-  "private": true,
   "type": "module",
+  "private": true,
   "scripts": {
     "dev": "vite",
-    "build": "vite build"
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
     "react": "^18.2.0",

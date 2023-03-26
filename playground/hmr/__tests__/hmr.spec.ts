@@ -3,7 +3,7 @@ import {
   setupDevServer,
   setupBuildAndPreview,
   setupWaitForLogs,
-} from "../../utils";
+} from "../../utils.ts";
 
 test("Default build", async ({ page }) => {
   const { testUrl, server } = await setupBuildAndPreview("hmr");

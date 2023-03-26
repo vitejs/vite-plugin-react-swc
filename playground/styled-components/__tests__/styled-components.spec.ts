@@ -4,7 +4,7 @@ import {
   setupBuildAndPreview,
   setupWaitForLogs,
   expectColor,
-} from "../../utils";
+} from "../../utils.ts";
 
 test("styled-components build", async ({ page }) => {
   const { testUrl, server } = await setupBuildAndPreview("styled-components");

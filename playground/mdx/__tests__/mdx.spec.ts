@@ -3,7 +3,7 @@ import {
   setupDevServer,
   setupBuildAndPreview,
   setupWaitForLogs,
-} from "../../utils.js";
+} from "../../utils.ts";
 
 test("MDX build", async ({ page }) => {
   const { testUrl, server } = await setupBuildAndPreview("mdx");
