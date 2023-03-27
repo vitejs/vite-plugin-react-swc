@@ -1,5 +1,5 @@
 import "./App.css";
-import { Button, StyledCode } from "./Button";
+import { Button, StyledCode } from "./Button.jsx";
 
 export const App = () => (
   <div>

@@ -1,5 +1,5 @@
 import "./App.css";
-import { Counter, StyledCode } from "./Button";
+import { Counter, StyledCode } from "./Button.tsx";
 
 export const App = () => (
   <div>
