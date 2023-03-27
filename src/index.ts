@@ -2,7 +2,13 @@ import { readFileSync } from "fs";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 import { SourceMapPayload } from "module";
-import { Output, ParserConfig, ReactConfig, transform } from "@swc/core";
+import {
+  Output,
+  ParserConfig,
+  ReactConfig,
+  JscTarget,
+  transform,
+} from "@swc/core";
 import { PluginOption } from "vite";
 import { createRequire } from "module";
 
@@ -77,10 +83,9 @@ const react = (_options?: Options): PluginOption[] => {
       async transform(code, _id, transformOptions) {
         const id = _id.split("?")[0];
 
-        const result = await transformWithOptions(id, code, options, {
+        const result = await transformWithOptions(id, code, "es2020", options, {
           refresh: !transformOptions?.ssr,
           development: true,
-          useBuiltins: true,
           runtime: "automatic",
           importSource: options.jsxImportSource,
         });
@@ -123,8 +128,7 @@ import(/* @vite-ignore */ import.meta.url).then((currentExports) => {
           apply: "build",
           enforce: "pre", // Run before esbuild
           transform: (code, _id) =>
-            transformWithOptions(_id.split("?")[0], code, options, {
-              useBuiltins: true,
+            transformWithOptions(_id.split("?")[0], code, "esnext", options, {
               runtime: "automatic",
               importSource: options.jsxImportSource,
             }),
@@ -148,11 +152,10 @@ import(/* @vite-ignore */ import.meta.url).then((currentExports) => {
 const transformWithOptions = async (
   id: string,
   code: string,
+  target: JscTarget,
   options: Options,
   reactConfig: ReactConfig,
 ) => {
-  if (id.includes("node_modules")) return;
-
   const decorators = options?.tsDecorators ?? false;
   const parser: ParserConfig | undefined = id.endsWith(".tsx")
     ? { syntax: "typescript", tsx: true, decorators }
@@ -174,7 +177,7 @@ const transformWithOptions = async (
       configFile: false,
       sourceMaps: true,
       jsc: {
-        target: "es2020",
+        target,
         parser,
         experimental: { plugins: options.plugins },
         transform: {
