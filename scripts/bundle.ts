@@ -19,8 +19,10 @@ const serverOptions: BuildOptions = {
 };
 
 const buildOrWatch = async (options: BuildOptions) => {
-  if (dev) await (await context(options)).watch();
-  else await build(options);
+  if (!dev) return build(options);
+  const ctx = await context(options);
+  await ctx.watch();
+  await ctx.rebuild();
 };
 
 Promise.all([
