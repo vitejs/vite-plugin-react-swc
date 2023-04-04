@@ -26,4 +26,4 @@ jobs:
           key: playwright-bin
           path: ~/.cache/ms-playwright
       - run: pnpm playwright install chromium
-      - run: pnpm ci
+      - run: pnpm qa

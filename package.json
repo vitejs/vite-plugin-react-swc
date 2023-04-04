@@ -9,7 +9,7 @@
     "test": "playwright test",
     "prettier": "pnpm prettier-ci --write",
     "prettier-ci": "prettier --cache --ignore-path=.gitignore --check \"**/*.{js,jsx,ts,tsx,html,css,json,md,yml}\"",
-    "ci": "tsc && pnpm prettier-ci && pnpm build && pnpm test",
+    "qa": "tsc && pnpm prettier-ci && pnpm build && pnpm test",
     "release": "pnpm build && tsx scripts/release.ts"
   },
   "prettier": {
