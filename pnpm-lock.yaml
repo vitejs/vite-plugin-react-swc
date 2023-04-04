@@ -162,7 +162,7 @@ importers:
       '@types/react': ^18.0.29
       '@types/react-dom': ^18.0.11
       '@vitejs/plugin-react-swc': ../../dist
-      generouted: ^1.11.7
+      generouted: 1.11.7
       react: ^18.2.0
       react-dom: ^18.2.0
       react-router-dom: ^6.9.0
