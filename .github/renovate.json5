@@ -3,4 +3,5 @@
   labels: ["dependencies"],
   rangeStrategy: "bump",
   packageRules: [{ depTypeList: ["peerDependencies"], enabled: false }],
+  ignoreDeps: ["generouted"]
 }
