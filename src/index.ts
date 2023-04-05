@@ -9,7 +9,7 @@ import {
   JscTarget,
   transform,
 } from "@swc/core";
-import { PluginOption } from "vite";
+import { PluginOption, UserConfig, BuildOptions } from "vite";
 import { createRequire } from "module";
 
 const runtimePublicPath = "/@react-refresh";
@@ -127,6 +127,9 @@ import(/* @vite-ignore */ import.meta.url).then((currentExports) => {
           name: "vite:react-swc",
           apply: "build",
           enforce: "pre", // Run before esbuild
+          config: (userConfig) => ({
+            build: silenceUseClientWarning(userConfig),
+          }),
           transform: (code, _id) =>
             transformWithOptions(_id.split("?")[0], code, "esnext", options, {
               runtime: "automatic",
@@ -136,7 +139,8 @@ import(/* @vite-ignore */ import.meta.url).then((currentExports) => {
       : {
           name: "vite:react-swc",
           apply: "build",
-          config: () => ({
+          config: (userConfig) => ({
+            build: silenceUseClientWarning(userConfig),
             esbuild: {
               jsx: "automatic",
               jsxImportSource: options.jsxImportSource,
@@ -201,5 +205,23 @@ const transformWithOptions = async (
 
   return result;
 };
+
+const silenceUseClientWarning = (userConfig: UserConfig): BuildOptions => ({
+  rollupOptions: {
+    onwarn(warning, defaultHandler) {
+      if (
+        warning.code === "MODULE_LEVEL_DIRECTIVE" &&
+        warning.message.includes("use client")
+      ) {
+        return;
+      }
+      if (userConfig.build?.rollupOptions?.onwarn) {
+        userConfig.build.rollupOptions.onwarn(warning, defaultHandler);
+      } else {
+        defaultHandler(warning);
+      }
+    },
+  },
+});
 
 export default react;
