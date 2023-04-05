@@ -57,6 +57,16 @@ const react = (_options?: Options): PluginOption[] => {
 
   return [
     {
+      name: "vite:react-swc:resolve-runtime",
+      apply: "serve",
+      enforce: "pre", // Run before Vite default resolve to avoid syscalls
+      resolveId: (id) => (id === runtimePublicPath ? id : undefined),
+      load: (id) =>
+        id === runtimePublicPath
+          ? readFileSync(join(_dirname, "refresh-runtime.js"), "utf-8")
+          : undefined,
+    },
+    {
       name: "vite:react-swc",
       apply: "serve",
       config: () => ({
@@ -65,11 +75,6 @@ const react = (_options?: Options): PluginOption[] => {
           include: [`${options.jsxImportSource}/jsx-dev-runtime`],
         },
       }),
-      resolveId: (id) => (id === runtimePublicPath ? id : undefined),
-      load: (id) =>
-        id === runtimePublicPath
-          ? readFileSync(join(_dirname, "refresh-runtime.js"), "utf-8")
-          : undefined,
       transformIndexHtml: (_, config) => [
         {
           tag: "script",
