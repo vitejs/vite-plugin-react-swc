@@ -2,9 +2,16 @@
 
 ## Unreleased
 
+## 3.3.0
+
 - Support TS/JSX in node_modules to help the community experiment with it. Note that for now this not supported by TS and errors from these files cannot be silenced if the user is using a stricter configuration than the library author: https://github.com/microsoft/TypeScript/issues/30511. I advise to use it only for internal libraries for now (fixes #53)
 - Silence `"use client"` warning when building library like `@tanstack/react-query`
 - Fix fast refresh issue when exporting a component with a name that shadow another local component
+
+This release goes in hand with the upcoming Vite 4.3 release focusing on performances:
+
+- Move resolve of runtime code into a "pre" plugin ([#79](https://github.com/vitejs/vite-plugin-react-swc/pull/79))
+- Wrap dynamic import to speedup analysis ([#80](https://github.com/vitejs/vite-plugin-react-swc/pull/80))
 
 ## 3.2.0
 
