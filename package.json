@@ -15,7 +15,7 @@
   "prettier": {
     "trailingComma": "all"
   },
-  "packageManager": "pnpm@7.30.5",
+  "packageManager": "pnpm@8.2.0",
   "dependencies": {
     "@swc/core": "^1.3.42"
   },
