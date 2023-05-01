@@ -17,22 +17,22 @@
   },
   "packageManager": "pnpm@8.3.1",
   "dependencies": {
-    "@swc/core": "^1.3.53"
+    "@swc/core": "^1.3.56"
   },
   "peerDependencies": {
     "vite": "^4"
   },
   "devDependencies": {
-    "@playwright/test": "^1.32.3",
+    "@playwright/test": "^1.33.0",
     "@types/fs-extra": "^11.0.1",
-    "@types/node": "^18.16.0",
+    "@types/node": "^18.16.3",
     "@vitejs/release-scripts": "^1.1.0",
     "esbuild": "^0.17.18",
     "fs-extra": "^11.1.1",
     "picocolors": "^1.0.0",
     "prettier": "^2.8.8",
-    "tsx": "^3.12.6",
+    "tsx": "^3.12.7",
     "typescript": "^5.0.4",
-    "vite": "^4.3.1"
+    "vite": "^4.3.3"
   }
 }
