@@ -84,7 +84,7 @@ const react = (_options?: Options): PluginOption[] => {
           mdxIndex >
             config.plugins.findIndex((p) => p.name === "vite:react-swc")
         ) {
-          config.logger.warn(
+          throw new Error(
             "[vite:react-swc] The MDX plugin should be placed before this plugin",
           );
         }
