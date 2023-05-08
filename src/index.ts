@@ -75,6 +75,20 @@ const react = (_options?: Options): PluginOption[] => {
           include: [`${options.jsxImportSource}/jsx-dev-runtime`],
         },
       }),
+      configResolved(config) {
+        const mdxIndex = config.plugins.findIndex(
+          (p) => p.name === "@mdx-js/rollup",
+        );
+        if (
+          mdxIndex !== -1 &&
+          mdxIndex >
+            config.plugins.findIndex((p) => p.name === "vite:react-swc")
+        ) {
+          config.logger.warn(
+            "[vite:react-swc] The MDX plugin should be placed before this plugin",
+          );
+        }
+      },
       transformIndexHtml: (_, config) => [
         {
           tag: "script",
