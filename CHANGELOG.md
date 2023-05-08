@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+## 3.3.1
+
+- Add `type: module` to package.json ([#101](https://github.com/vitejs/vite-plugin-react-swc/pull/101)). Because the library already publish `.cjs` & `.mjs` files, the only change is for typing when using the node16 module resolution (fixes [#95](https://github.com/vitejs/vite-plugin-react-swc/issues/95))
+- Throw an error when the MDX plugin is after this one ([#100](https://github.com/vitejs/vite-plugin-react-swc/pull/100)). This is an expected breaking change added in `3.2.0` and this should people that were using both plugins before this version to migrate.
+
 ## 3.3.0
 
 - Support TS/JSX in node_modules to help the community experiment with it. Note that for now this not supported by TS and errors from these files cannot be silenced if the user is using a stricter configuration than the library author: https://github.com/microsoft/TypeScript/issues/30511. I advise to use it only for internal libraries for now (fixes #53)
