@@ -55,6 +55,7 @@ const react = (_options?: Options): PluginOption[] => {
   const options = {
     jsxImportSource: _options?.jsxImportSource ?? "react",
     tsDecorators: _options?.tsDecorators,
+    tsDecoratorsMeta: _options?.tsDecoratorsMeta,
     plugins: _options?.plugins
       ? _options?.plugins.map((el): typeof el => [resolve(el[0]), el[1]])
       : undefined,
@@ -196,6 +197,7 @@ const transformWithOptions = async (
         transform: {
           useDefineForClassFields: true,
           react: reactConfig,
+          decoratorMetadata: options.tsDecoratorsMeta,
         },
       },
     });
