@@ -1,16 +1,16 @@
-import { readFileSync } from "fs";
-import { dirname, join } from "path";
-import { fileURLToPath } from "url";
-import { SourceMapPayload } from "module";
 import {
+  JscTarget,
   Output,
   ParserConfig,
   ReactConfig,
-  JscTarget,
   transform,
 } from "@swc/core";
-import { PluginOption, UserConfig, BuildOptions } from "vite";
+import { readFileSync } from "fs";
 import { createRequire } from "module";
+import { SourceMapPayload } from "module";
+import { dirname, join } from "path";
+import { fileURLToPath } from "url";
+import { BuildOptions, PluginOption, UserConfig } from "vite";
 
 const runtimePublicPath = "/@react-refresh";
 
@@ -141,34 +141,19 @@ RefreshRuntime.__hmr_import(import.meta.url).then((currentExports) => {
         return { code: result.code, map: sourceMap };
       },
     },
-    options.plugins
-      ? {
-          name: "vite:react-swc",
-          apply: "build",
-          enforce: "pre", // Run before esbuild
-          config: (userConfig) => ({
-            build: silenceUseClientWarning(userConfig),
-          }),
-          transform: (code, _id) =>
-            transformWithOptions(_id.split("?")[0], code, "esnext", options, {
-              runtime: "automatic",
-              importSource: options.jsxImportSource,
-            }),
-        }
-      : {
-          name: "vite:react-swc",
-          apply: "build",
-          config: (userConfig) => ({
-            build: silenceUseClientWarning(userConfig),
-            esbuild: {
-              jsx: "automatic",
-              jsxImportSource: options.jsxImportSource,
-              tsconfigRaw: {
-                compilerOptions: { useDefineForClassFields: true },
-              },
-            },
-          }),
-        },
+    {
+      name: "vite:react-swc",
+      apply: "build",
+      enforce: "pre", // Run before esbuild
+      config: (userConfig) => ({
+        build: silenceUseClientWarning(userConfig),
+      }),
+      transform: (code, _id) =>
+        transformWithOptions(_id.split("?")[0], code, "esnext", options, {
+          runtime: "automatic",
+          importSource: options.jsxImportSource,
+        }),
+    },
   ];
 };
 
