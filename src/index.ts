@@ -40,6 +40,11 @@ type Options = {
    */
   tsDecorators?: boolean;
   /**
+   * Enable TypeScript emit decorators Metadata. Requires emitDecoratorMetadata in tsconfig.
+   * @default false
+   */
+  tsDecoratorsMeta?: boolean;
+  /**
    * Use SWC plugins. Enable SWC at build time.
    * @default undefined
    */
