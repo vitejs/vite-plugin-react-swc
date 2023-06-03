@@ -2,7 +2,9 @@
 
 ## Unreleased
 
-- Support [Vitest deps.experimentalOptimizer](https://vitest.dev/config/#deps-experimentaloptimizer)
+## 3.3.2
+
+- Support [Vitest deps.experimentalOptimizer](https://vitest.dev/config/#deps-experimentaloptimizer) ([#115](https://github.com/vitejs/vite-plugin-react-swc/pull/115))
 
 ## 3.3.1
 
