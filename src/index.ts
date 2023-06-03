@@ -101,16 +101,17 @@ const react = (_options?: Options): PluginOption[] => {
       ],
       async transform(code, _id, transformOptions) {
         const id = _id.split("?")[0];
+        const refresh = !transformOptions?.ssr && !process.env.TEST;
 
         const result = await transformWithOptions(id, code, "es2020", options, {
-          refresh: !transformOptions?.ssr,
+          refresh,
           development: true,
           runtime: "automatic",
           importSource: options.jsxImportSource,
         });
         if (!result) return;
 
-        if (transformOptions?.ssr || !refreshContentRE.test(result.code)) {
+        if (!refresh || !refreshContentRE.test(result.code)) {
           return result;
         }
 

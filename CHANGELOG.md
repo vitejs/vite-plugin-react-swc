@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Support [Vitest deps.experimentalOptimizer](https://vitest.dev/config/#deps-experimentaloptimizer)
+
 ## 3.3.1
 
 - Add `type: module` to package.json ([#101](https://github.com/vitejs/vite-plugin-react-swc/pull/101)). Because the library already publish `.cjs` & `.mjs` files, the only change is for typing when using the node16 module resolution (fixes [#95](https://github.com/vitejs/vite-plugin-react-swc/issues/95))
