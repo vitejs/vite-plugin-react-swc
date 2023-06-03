@@ -2,7 +2,7 @@ import { rmSync, writeFileSync, copyFileSync } from "node:fs";
 import { execSync } from "node:child_process";
 import { build, BuildOptions, context } from "esbuild";
 
-import * as packageJSON from "../package.json";
+import packageJSON from "../package.json";
 
 const dev = process.argv.includes("--dev");
 

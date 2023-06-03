@@ -4,13 +4,13 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "tsx scripts/bundle.ts --dev",
-    "build": "tsx scripts/bundle.ts",
+    "dev": "tnode scripts/bundle.ts --dev",
+    "build": "tnode scripts/bundle.ts",
     "test": "playwright test",
     "prettier": "pnpm prettier-ci --write",
     "prettier-ci": "prettier --cache --ignore-path=.gitignore --check \"**/*.{js,jsx,ts,tsx,html,css,json,md,yml}\"",
     "qa": "tsc && pnpm prettier-ci && pnpm build && pnpm test",
-    "release": "pnpm build && tsx scripts/release.ts"
+    "release": "pnpm build && tnode scripts/release.ts"
   },
   "prettier": {
     "trailingComma": "all"
@@ -23,6 +23,7 @@
     "vite": "^4"
   },
   "devDependencies": {
+    "@arnaud-barre/tnode": "^0.17.1",
     "@playwright/test": "^1.34.3",
     "@types/fs-extra": "^11.0.1",
     "@types/node": "^18.16.16",
@@ -31,7 +32,6 @@
     "fs-extra": "^11.1.1",
     "picocolors": "^1.0.0",
     "prettier": "^2.8.8",
-    "tsx": "^3.12.7",
     "typescript": "^5.1.3",
     "vite": "^4.3.9"
   }
