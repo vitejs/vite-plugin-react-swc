@@ -47,6 +47,7 @@ type Options = {
 };
 
 const react = (_options?: Options): PluginOption[] => {
+  let hmrDisabled = true;
   const options = {
     jsxImportSource: _options?.jsxImportSource ?? "react",
     tsDecorators: _options?.tsDecorators,
@@ -76,6 +77,7 @@ const react = (_options?: Options): PluginOption[] => {
         },
       }),
       configResolved(config) {
+        if (config.server.hmr === false) hmrDisabled = true;
         const mdxIndex = config.plugins.findIndex(
           (p) => p.name === "@mdx-js/rollup",
         );
@@ -101,7 +103,7 @@ const react = (_options?: Options): PluginOption[] => {
       ],
       async transform(code, _id, transformOptions) {
         const id = _id.split("?")[0];
-        const refresh = !transformOptions?.ssr && !process.env.TEST;
+        const refresh = !transformOptions?.ssr && !hmrDisabled;
 
         const result = await transformWithOptions(id, code, "es2020", options, {
           refresh,
