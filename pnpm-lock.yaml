@@ -46,6 +46,25 @@ importers:
         specifier: ^4.3.9
         version: 4.3.9(@types/node@18.16.18)
 
+  playground/base-path:
+    dependencies:
+      react:
+        specifier: ^18.2.0
+        version: 18.2.0
+      react-dom:
+        specifier: ^18.2.0
+        version: 18.2.0(react@18.2.0)
+    devDependencies:
+      '@types/react':
+        specifier: ^18.2.14
+        version: 18.2.14
+      '@types/react-dom':
+        specifier: ^18.2.6
+        version: 18.2.6
+      '@vitejs/plugin-react-swc':
+        specifier: ../../dist
+        version: link:../../dist
+
   playground/decorators:
     dependencies:
       react:
