@@ -11,11 +11,11 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-is": "^18.2.0",
-    "styled-components": "^6.0.4"
+    "styled-components": "^6.0.5"
   },
   "devDependencies": {
-    "@swc/plugin-styled-components": "^1.5.69",
-    "@types/react": "^18.2.15",
+    "@swc/plugin-styled-components": "^1.5.70",
+    "@types/react": "^18.2.18",
     "@types/react-dom": "^18.2.7",
     "@types/styled-components": "^5.1.26",
     "@vitejs/plugin-react-swc": "../../dist"
