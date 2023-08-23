@@ -76,7 +76,7 @@ export const setupBuildAndPreview = async (name: string) => {
   await build(testConfig);
   const server = await preview(testConfig);
   return {
-    testUrl: server.resolvedUrls.local[0],
+    testUrl: server.resolvedUrls!.local[0],
     server,
   };
 };

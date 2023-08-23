@@ -23,9 +23,8 @@ test("styled-components build", async ({ page }) => {
 });
 
 test("styled-components HMR", async ({ page }) => {
-  const { testUrl, server, editFile } = await setupDevServer(
-    "styled-components",
-  );
+  const { testUrl, server, editFile } =
+    await setupDevServer("styled-components");
   const waitForLogs = await setupWaitForLogs(page);
   await page.goto(testUrl);
   await waitForLogs("[vite] connected.");
