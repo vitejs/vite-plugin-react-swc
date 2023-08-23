@@ -8,14 +8,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@generouted/react-router": "^1.15.3",
+    "@generouted/react-router": "^1.15.6",
     "generouted": "1.11.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.14.2"
+    "react-router-dom": "^6.15.0"
   },
   "devDependencies": {
-    "@types/react": "^18.2.18",
+    "@types/react": "^18.2.21",
     "@types/react-dom": "^18.2.7",
     "@vitejs/plugin-react-swc": "../../dist"
   }
