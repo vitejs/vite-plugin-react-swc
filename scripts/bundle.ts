@@ -58,6 +58,7 @@ module.exports.default = react;`,
 
   execSync(
     "tsc src/index.ts --declaration --emitDeclarationOnly --outDir dist --module es2020 --moduleResolution node",
+    { stdio: "inherit" },
   );
 
   writeFileSync(
