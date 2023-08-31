@@ -46,7 +46,7 @@ test("HMR invalidate", async ({ page }) => {
     'React!";\nexport const useless = 3;',
   ]);
   await waitForLogs(
-    "[vite] invalidate /src/TitleWithExport.tsx: Could not Fast Refresh. Learn more at https://github.com/vitejs/vite-plugin-react-swc#consistent-components-exports",
+    "[vite] invalidate /src/TitleWithExport.tsx: Could not Fast Refresh (new export)",
     "[vite] hot updated: /src/App.tsx",
   );
 

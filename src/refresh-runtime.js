@@ -587,8 +587,11 @@ export function validateRefreshBoundaryAndEnqueueUpdate(
   prevExports,
   nextExports,
 ) {
-  if (!predicateOnExport(prevExports, (key) => !!nextExports[key])) {
+  if (!predicateOnExport(prevExports, (key) => key in nextExports)) {
     return "Could not Fast Refresh (export removed)";
+  }
+  if (!predicateOnExport(nextExports, (key) => key in prevExports)) {
+    return "Could not Fast Refresh (new export)";
   }
 
   let hasExports = false;
@@ -597,7 +600,6 @@ export function validateRefreshBoundaryAndEnqueueUpdate(
     (key, value) => {
       hasExports = true;
       if (isLikelyComponentType(value)) return true;
-      if (!prevExports[key]) return false;
       return prevExports[key] === nextExports[key];
     },
   );
