@@ -40,6 +40,8 @@ This plugin has limited options to enable good performances and be transpiler ag
 
 Control where the JSX factory is imported from.
 
+`@default` "react"
+
 ```ts
 react({ jsxImportSource: "@emotion/react" });
 ```
@@ -47,6 +49,8 @@ react({ jsxImportSource: "@emotion/react" });
 ### tsDecorators
 
 Enable TypeScript decorators. Requires `experimentalDecorators` in tsconfig.
+
+`@default` false
 
 ```ts
 react({ tsDecorators: true });
@@ -58,6 +62,18 @@ Use SWC plugins. Enable SWC at build time.
 
 ```ts
 react({ plugins: [["@swc/plugin-styled-components", {}]] });
+```
+
+## devTarget
+
+Set the target for SWC in dev. This can avoid to down-transpile private class method for example.
+
+For production target, see https://vitejs.dev/config/build-options.html#build-target.
+
+`@default` "es2020"
+
+```ts
+react({ devTarget: "es2022" });
 ```
 
 ## Consistent components exports
