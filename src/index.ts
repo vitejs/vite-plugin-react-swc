@@ -44,6 +44,12 @@ type Options = {
    * @default undefined
    */
   plugins?: [string, Record<string, any>][];
+  /**
+   * Set the target for SWC in dev. This can avoid to down-transpile private class method for example.
+   * For production target, see https://vitejs.dev/config/build-options.html#build-target
+   * @default "es2020"
+   */
+  devTarget?: JscTarget;
 };
 
 const isWebContainer = globalThis.process?.versions?.webcontainer;
@@ -56,6 +62,7 @@ const react = (_options?: Options): PluginOption[] => {
     plugins: _options?.plugins
       ? _options?.plugins.map((el): typeof el => [resolve(el[0]), el[1]])
       : undefined,
+    devTarget: _options?.devTarget ?? "es2020",
   };
 
   return [
@@ -112,12 +119,18 @@ const react = (_options?: Options): PluginOption[] => {
         const id = _id.split("?")[0];
         const refresh = !transformOptions?.ssr && !hmrDisabled;
 
-        const result = await transformWithOptions(id, code, "es2020", options, {
-          refresh,
-          development: true,
-          runtime: "automatic",
-          importSource: options.jsxImportSource,
-        });
+        const result = await transformWithOptions(
+          id,
+          code,
+          options.devTarget,
+          options,
+          {
+            refresh,
+            development: true,
+            runtime: "automatic",
+            importSource: options.jsxImportSource,
+          },
+        );
         if (!result) return;
 
         if (!refresh || !refreshContentRE.test(result.code)) {
