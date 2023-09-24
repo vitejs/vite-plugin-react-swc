@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 3.4.0
+
 - Add `devTarget` option (fixes [#141](https://github.com/vitejs/vite-plugin-react-swc/issues/141))
 - Disable Fast Refresh based on `config.server.hmr === false` instead of `process.env.TEST`
 - Warn when plugin is in WebContainers (see [#118](https://github.com/vitejs/vite-plugin-react-swc/issues/118))
