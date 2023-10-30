@@ -2,7 +2,13 @@
 
 ## Unreleased
 
-- Add support for `.mts` (fixes [#161](https://github.com/vitejs/vite-plugin-react-swc/issues/161))
+## 3.4.1
+
+### Add support for `.mts` (fixes [#161](https://github.com/vitejs/vite-plugin-react-swc/issues/161))
+
+Using CJS in source code will not work in Vite (and will never be supported), so this is better to only use `.ts`.
+
+But to better align with [Vite core defaults](https://vitejs.dev/config/shared-options.html#resolve-extensions), `.mts` extension will now be processed like `.ts`. This maybe reverted in a future major.
 
 ## 3.4.0
 
