@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Add support for `.mts` (fixes [#161](https://github.com/vitejs/vite-plugin-react-swc/issues/161))
+
 ## 3.4.0
 
 - Add `devTarget` option (fixes [#141](https://github.com/vitejs/vite-plugin-react-swc/issues/141))

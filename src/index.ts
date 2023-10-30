@@ -205,7 +205,7 @@ const transformWithOptions = async (
   const decorators = options?.tsDecorators ?? false;
   const parser: ParserConfig | undefined = id.endsWith(".tsx")
     ? { syntax: "typescript", tsx: true, decorators }
-    : id.endsWith(".ts")
+    : id.endsWith(".ts") || id.endsWith(".mts")
     ? { syntax: "typescript", tsx: false, decorators }
     : id.endsWith(".jsx")
     ? { syntax: "ecmascript", jsx: true }
