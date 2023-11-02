@@ -14,8 +14,8 @@
     "styled-components": "^6.1.0"
   },
   "devDependencies": {
-    "@swc/plugin-styled-components": "^1.5.95",
-    "@types/react": "^18.2.33",
+    "@swc/plugin-styled-components": "^1.5.96",
+    "@types/react": "^18.2.34",
     "@types/react-dom": "^18.2.14",
     "@types/styled-components": "^5.1.29",
     "@vitejs/plugin-react-swc": "../../dist"
