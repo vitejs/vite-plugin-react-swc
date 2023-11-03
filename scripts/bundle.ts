@@ -57,7 +57,7 @@ module.exports.default = react;`,
   copyFileSync("README.md", "dist/README.md");
 
   execSync(
-    "tsc src/index.ts --declaration --emitDeclarationOnly --outDir dist --module es2020 --moduleResolution node",
+    "tsc src/index.ts --declaration --emitDeclarationOnly --outDir dist --module es2020 --moduleResolution bundler",
     { stdio: "inherit" },
   );
 
