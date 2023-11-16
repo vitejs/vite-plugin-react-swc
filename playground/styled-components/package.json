@@ -11,13 +11,13 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-is": "^18.2.0",
-    "styled-components": "^6.1.0"
+    "styled-components": "^6.1.1"
   },
   "devDependencies": {
-    "@swc/plugin-styled-components": "^1.5.97",
-    "@types/react": "^18.2.36",
-    "@types/react-dom": "^18.2.14",
-    "@types/styled-components": "^5.1.29",
+    "@swc/plugin-styled-components": "^1.5.98",
+    "@types/react": "^18.2.37",
+    "@types/react-dom": "^18.2.15",
+    "@types/styled-components": "^5.1.30",
     "@vitejs/plugin-react-swc": "../../dist"
   }
 }
