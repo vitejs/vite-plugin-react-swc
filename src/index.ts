@@ -83,6 +83,7 @@ const react = (_options?: Options): PluginOption[] => {
         esbuild: false,
         optimizeDeps: {
           include: [`${options.jsxImportSource}/jsx-dev-runtime`],
+          esbuildOptions: { jsx: "automatic" },
         },
       }),
       configResolved(config) {

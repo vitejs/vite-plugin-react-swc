@@ -3,5 +3,8 @@
   labels: ["dependencies"],
   rangeStrategy: "bump",
   packageRules: [{ depTypeList: ["peerDependencies"], enabled: false }],
-  ignoreDeps: ["generouted"]
+  ignoreDeps: [
+    "generouted", // testing lib shipping JSX (new version ship transpiled JS)
+    "prettier", // waiting for stable choice on ternaries
+  ],
 }
