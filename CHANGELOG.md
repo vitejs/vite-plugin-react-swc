@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+### Align jsx runtime for optimized dependencies
+
+This will only affect people using internal libraries that contains untranspiled JSX. This change aligns the optimizer with the source code and avoid issues when the published source don't have `React` in the scope.
+
+Reminder: While being partially supported in Vite, publishing TS & JSX outside of internal libraries is highly discouraged.
+
 ## 3.4.1
 
 ### Add support for `.mts` (fixes [#161](https://github.com/vitejs/vite-plugin-react-swc/issues/161))
