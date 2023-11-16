@@ -15,7 +15,7 @@ release({
     const index = changelog.indexOf("## Unreleased") + 13;
     console.log(
       colors.dim(
-        changelog.slice(index, changelog.indexOf("## ", index)).trim(),
+        changelog.slice(index, changelog.indexOf("\n## ", index)).trim(),
       ),
     );
   },

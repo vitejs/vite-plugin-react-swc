@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 3.5.0
+
 ### Update peer dependency range to target Vite 5
 
 There were no breaking change that impacted this plugin, so any combination of React plugins and Vite core version will work.
