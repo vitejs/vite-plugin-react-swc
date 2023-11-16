@@ -19,11 +19,11 @@ importers:
         specifier: ^1.39.0
         version: 1.39.0
       '@types/fs-extra':
-        specifier: ^11.0.3
-        version: 11.0.3
+        specifier: ^11.0.4
+        version: 11.0.4
       '@types/node':
-        specifier: ^20.8.10
-        version: 20.8.10
+        specifier: ^20.9.0
+        version: 20.9.0
       '@vitejs/release-scripts':
         specifier: ^1.3.1
         version: 1.3.1
@@ -44,7 +44,7 @@ importers:
         version: 5.2.2
       vite:
         specifier: ^4.5.0
-        version: 4.5.0(@types/node@20.8.10)
+        version: 4.5.0(@types/node@20.9.0)
 
   playground/base-path:
     dependencies:
@@ -56,11 +56,11 @@ importers:
         version: 18.2.0(react@18.2.0)
     devDependencies:
       '@types/react':
-        specifier: ^18.2.36
-        version: 18.2.36
+        specifier: ^18.2.37
+        version: 18.2.37
       '@types/react-dom':
-        specifier: ^18.2.14
-        version: 18.2.14
+        specifier: ^18.2.15
+        version: 18.2.15
       '@vitejs/plugin-react-swc':
         specifier: ../../dist
         version: link:../../dist
@@ -75,11 +75,11 @@ importers:
         version: 18.2.0(react@18.2.0)
     devDependencies:
       '@types/react':
-        specifier: ^18.2.36
-        version: 18.2.36
+        specifier: ^18.2.37
+        version: 18.2.37
       '@types/react-dom':
-        specifier: ^18.2.14
-        version: 18.2.14
+        specifier: ^18.2.15
+        version: 18.2.15
       '@vitejs/plugin-react-swc':
         specifier: ../../dist
         version: link:../../dist
@@ -88,10 +88,10 @@ importers:
     dependencies:
       '@emotion/react':
         specifier: ^11.11.1
-        version: 11.11.1(@types/react@18.2.36)(react@18.2.0)
+        version: 11.11.1(@types/react@18.2.37)(react@18.2.0)
       '@emotion/styled':
         specifier: ^11.11.0
-        version: 11.11.0(@emotion/react@11.11.1)(@types/react@18.2.36)(react@18.2.0)
+        version: 11.11.0(@emotion/react@11.11.1)(@types/react@18.2.37)(react@18.2.0)
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -100,11 +100,11 @@ importers:
         version: 18.2.0(react@18.2.0)
     devDependencies:
       '@types/react':
-        specifier: ^18.2.36
-        version: 18.2.36
+        specifier: ^18.2.37
+        version: 18.2.37
       '@types/react-dom':
-        specifier: ^18.2.14
-        version: 18.2.14
+        specifier: ^18.2.15
+        version: 18.2.15
       '@vitejs/plugin-react-swc':
         specifier: ../../dist
         version: link:../../dist
@@ -113,10 +113,10 @@ importers:
     dependencies:
       '@emotion/react':
         specifier: ^11.11.1
-        version: 11.11.1(@types/react@18.2.36)(react@18.2.0)
+        version: 11.11.1(@types/react@18.2.37)(react@18.2.0)
       '@emotion/styled':
         specifier: ^11.11.0
-        version: 11.11.0(@emotion/react@11.11.1)(@types/react@18.2.36)(react@18.2.0)
+        version: 11.11.0(@emotion/react@11.11.1)(@types/react@18.2.37)(react@18.2.0)
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -125,14 +125,14 @@ importers:
         version: 18.2.0(react@18.2.0)
     devDependencies:
       '@swc/plugin-emotion':
-        specifier: ^2.5.97
-        version: 2.5.97
+        specifier: ^2.5.98
+        version: 2.5.98
       '@types/react':
-        specifier: ^18.2.36
-        version: 18.2.36
+        specifier: ^18.2.37
+        version: 18.2.37
       '@types/react-dom':
-        specifier: ^18.2.14
-        version: 18.2.14
+        specifier: ^18.2.15
+        version: 18.2.15
       '@vitejs/plugin-react-swc':
         specifier: ../../dist
         version: link:../../dist
@@ -147,11 +147,11 @@ importers:
         version: 18.2.0(react@18.2.0)
     devDependencies:
       '@types/react':
-        specifier: ^18.2.36
-        version: 18.2.36
+        specifier: ^18.2.37
+        version: 18.2.37
       '@types/react-dom':
-        specifier: ^18.2.14
-        version: 18.2.14
+        specifier: ^18.2.15
+        version: 18.2.15
       '@vitejs/plugin-react-swc':
         specifier: ../../dist
         version: link:../../dist
@@ -169,11 +169,11 @@ importers:
         specifier: ^3.0.0
         version: 3.0.0(rollup@3.28.1)
       '@types/react':
-        specifier: ^18.2.36
-        version: 18.2.36
+        specifier: ^18.2.37
+        version: 18.2.37
       '@types/react-dom':
-        specifier: ^18.2.14
-        version: 18.2.14
+        specifier: ^18.2.15
+        version: 18.2.15
       '@vitejs/plugin-react-swc':
         specifier: ../../dist
         version: link:../../dist
@@ -188,11 +188,11 @@ importers:
         version: 18.2.0(react@18.2.0)
     devDependencies:
       '@types/react':
-        specifier: ^18.2.36
-        version: 18.2.36
+        specifier: ^18.2.37
+        version: 18.2.37
       '@types/react-dom':
-        specifier: ^18.2.14
-        version: 18.2.14
+        specifier: ^18.2.15
+        version: 18.2.15
       '@vitejs/plugin-react-swc':
         specifier: ../../dist
         version: link:../../dist
@@ -209,21 +209,21 @@ importers:
         specifier: ^18.2.0
         version: 18.2.0
       styled-components:
-        specifier: ^6.1.0
-        version: 6.1.0(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^6.1.1
+        version: 6.1.1(react-dom@18.2.0)(react@18.2.0)
     devDependencies:
       '@swc/plugin-styled-components':
-        specifier: ^1.5.97
-        version: 1.5.97
+        specifier: ^1.5.98
+        version: 1.5.98
       '@types/react':
-        specifier: ^18.2.36
-        version: 18.2.36
+        specifier: ^18.2.37
+        version: 18.2.37
       '@types/react-dom':
-        specifier: ^18.2.14
-        version: 18.2.14
+        specifier: ^18.2.15
+        version: 18.2.15
       '@types/styled-components':
-        specifier: ^5.1.29
-        version: 5.1.29
+        specifier: ^5.1.30
+        version: 5.1.30
       '@vitejs/plugin-react-swc':
         specifier: ../../dist
         version: link:../../dist
@@ -247,11 +247,11 @@ importers:
         version: 6.18.0(react-dom@18.2.0)(react@18.2.0)
     devDependencies:
       '@types/react':
-        specifier: ^18.2.36
-        version: 18.2.36
+        specifier: ^18.2.37
+        version: 18.2.37
       '@types/react-dom':
-        specifier: ^18.2.14
-        version: 18.2.14
+        specifier: ^18.2.15
+        version: 18.2.15
       '@vitejs/plugin-react-swc':
         specifier: ../../dist
         version: link:../../dist
@@ -266,11 +266,11 @@ importers:
         version: 18.2.0(react@18.2.0)
     devDependencies:
       '@types/react':
-        specifier: ^18.2.36
-        version: 18.2.36
+        specifier: ^18.2.37
+        version: 18.2.37
       '@types/react-dom':
-        specifier: ^18.2.14
-        version: 18.2.14
+        specifier: ^18.2.15
+        version: 18.2.15
       '@vitejs/plugin-react-swc':
         specifier: ../../dist
         version: link:../../dist
@@ -373,7 +373,7 @@ packages:
     resolution: {integrity: sha512-W2P2c/VRW1/1tLox0mVUalvnWXxavmv/Oum2aPsRcoDJuob75FC3Y8FbpfLwUegRcxINtGUMPq0tFCvYNTBXNA==}
     dev: false
 
-  /@emotion/react@11.11.1(@types/react@18.2.36)(react@18.2.0):
+  /@emotion/react@11.11.1(@types/react@18.2.37)(react@18.2.0):
     resolution: {integrity: sha512-5mlW1DquU5HaxjLkfkGN1GA/fvVGdyHURRiX/0FHl2cfIfRxSOfmxEH5YS43edp0OldZrZ+dkBKbngxcNCdZvA==}
     peerDependencies:
       '@types/react': '*'
@@ -389,7 +389,7 @@ packages:
       '@emotion/use-insertion-effect-with-fallbacks': 1.0.1(react@18.2.0)
       '@emotion/utils': 1.2.1
       '@emotion/weak-memoize': 0.3.1
-      '@types/react': 18.2.36
+      '@types/react': 18.2.37
       hoist-non-react-statics: 3.3.2
       react: 18.2.0
     dev: false
@@ -408,7 +408,7 @@ packages:
     resolution: {integrity: sha512-0QBtGvaqtWi+nx6doRwDdBIzhNdZrXUppvTM4dtZZWEGTXL/XE/yJxLMGlDT1Gt+UHH5IX1n+jkXyytE/av7OA==}
     dev: false
 
-  /@emotion/styled@11.11.0(@emotion/react@11.11.1)(@types/react@18.2.36)(react@18.2.0):
+  /@emotion/styled@11.11.0(@emotion/react@11.11.1)(@types/react@18.2.37)(react@18.2.0):
     resolution: {integrity: sha512-hM5Nnvu9P3midq5aaXj4I+lnSfNi7Pmd4EWk1fOZ3pxookaQTNew6bp4JaCBYM4HVFZF9g7UjJmsUmC2JlxOng==}
     peerDependencies:
       '@emotion/react': ^11.0.0-rc.0
@@ -421,11 +421,11 @@ packages:
       '@babel/runtime': 7.20.6
       '@emotion/babel-plugin': 11.11.0
       '@emotion/is-prop-valid': 1.2.1
-      '@emotion/react': 11.11.1(@types/react@18.2.36)(react@18.2.0)
+      '@emotion/react': 11.11.1(@types/react@18.2.37)(react@18.2.0)
       '@emotion/serialize': 1.1.2
       '@emotion/use-insertion-effect-with-fallbacks': 1.0.1(react@18.2.0)
       '@emotion/utils': 1.2.1
-      '@types/react': 18.2.36
+      '@types/react': 18.2.37
       react: 18.2.0
     dev: false
 
@@ -834,7 +834,7 @@ packages:
       generouted: 1.16.1(vite@4.5.0)
       react: 18.2.0
       react-router-dom: 6.18.0(react-dom@18.2.0)(react@18.2.0)
-      vite: 4.5.0(@types/node@20.8.10)
+      vite: 4.5.0(@types/node@20.9.0)
     dev: false
 
   /@mdx-js/mdx@3.0.0:
@@ -1049,12 +1049,12 @@ packages:
     resolution: {integrity: sha512-xVRaR4u9hcYjFvcSg71Lz5Bo4//CyjAAfMxa7UsaDSYxAshflUkVJWiyVWrfxC59z2kP1IzI4/1BEpnhI9o3Mw==}
     dev: false
 
-  /@swc/plugin-emotion@2.5.97:
-    resolution: {integrity: sha512-UowgR6hvWQSgnZNPmctOZl0nJo2upq7I2bsJtqUZDYM7NxfLmuZn5P84Vq23r1c9vpK5Y+GevIlu8jq80ts8fg==}
+  /@swc/plugin-emotion@2.5.98:
+    resolution: {integrity: sha512-64EkaVToDZVX7M0z+d01W9sRdvLBo8W55IhmH4snSMiWCMMDWwXu/Dg9xMKhgChqIQjxtfjdCyUPmTJ/YJuyAg==}
     dev: true
 
-  /@swc/plugin-styled-components@1.5.97:
-    resolution: {integrity: sha512-q6WfwSHzm32JzQgr90b/oIQ+ozqBIrTTsT1tv8A2TUAZbRe11mShP2rJMIVTJ3dBA4mG6EBeXjQALsSuyPgi/g==}
+  /@swc/plugin-styled-components@1.5.98:
+    resolution: {integrity: sha512-6x8pmC8SckFH+Kr67flyoZe3Mqyx8m0oFR1GD+D/sz5YR9fM5AEd85jC7WhPOy6jcQCU2kO5EIZqBYcf9qLT0w==}
     dev: true
 
   /@swc/types@0.1.5:
@@ -1083,11 +1083,11 @@ packages:
     resolution: {integrity: sha512-WulqXMDUTYAXCjZnk6JtIHPigp55cVtDgDrO2gHRwhyJto21+1zbVCtOYB2L1F9w4qCQ0rOGWBnBe0FNTiEJIQ==}
     dev: true
 
-  /@types/fs-extra@11.0.3:
-    resolution: {integrity: sha512-sF59BlXtUdzEAL1u0MSvuzWd7PdZvZEtnaVkzX5mjpdWTJ8brG0jUqve3jPCzSzvAKKMHTG8F8o/WMQLtleZdQ==}
+  /@types/fs-extra@11.0.4:
+    resolution: {integrity: sha512-yTbItCNreRooED33qjunPthRcSjERP1r4MqCZc7wv0u2sUkzTFp45tgUfS5+r7FrZPdmCCNflLhVSP/o+SemsQ==}
     dependencies:
       '@types/jsonfile': 6.1.1
-      '@types/node': 20.8.10
+      '@types/node': 20.9.0
     dev: true
 
   /@types/hast@3.0.2:
@@ -1099,14 +1099,14 @@ packages:
   /@types/hoist-non-react-statics@3.3.1:
     resolution: {integrity: sha512-iMIqiko6ooLrTh1joXodJK5X9xeEALT1kM5G3ZLhD3hszxBdIEd5C75U834D9mLcINgD4OyZf5uQXjkuYydWvA==}
     dependencies:
-      '@types/react': 18.2.36
+      '@types/react': 18.2.37
       hoist-non-react-statics: 3.3.2
     dev: true
 
   /@types/jsonfile@6.1.1:
     resolution: {integrity: sha512-GSgiRCVeapDN+3pqA35IkQwasaCh/0YFH5dEF6S88iDvEn901DjOeH3/QPY+XYP1DFzDZPvIvfeEgk+7br5png==}
     dependencies:
-      '@types/node': 20.8.10
+      '@types/node': 20.9.0
     dev: true
 
   /@types/mdast@4.0.2:
@@ -1123,8 +1123,8 @@ packages:
     resolution: {integrity: sha512-iiUgKzV9AuaEkZqkOLDIvlQiL6ltuZd9tGcW3gwpnX8JbuiuhFlEGmmFXEXkN50Cvq7Os88IY2v0dkDqXYWVgA==}
     dev: true
 
-  /@types/node@20.8.10:
-    resolution: {integrity: sha512-TlgT8JntpcbmKUFzjhsyhGfP2fsiz1Mv56im6enJ905xG1DAYesxJaeSbGqQmAw8OWPdhyJGhGSQGKRNJ45u9w==}
+  /@types/node@20.9.0:
+    resolution: {integrity: sha512-nekiGu2NDb1BcVofVcEKMIwzlx4NjHlcjhoxxKBNLtz15Y1z7MYf549DFvkHSId02Ax6kGwWntIBPC3l/JZcmw==}
     dependencies:
       undici-types: 5.26.5
 
@@ -1135,14 +1135,14 @@ packages:
   /@types/prop-types@15.7.5:
     resolution: {integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==}
 
-  /@types/react-dom@18.2.14:
-    resolution: {integrity: sha512-V835xgdSVmyQmI1KLV2BEIUgqEuinxp9O4G6g3FqO/SqLac049E53aysv0oEFD2kHfejeKU+ZqL2bcFWj9gLAQ==}
+  /@types/react-dom@18.2.15:
+    resolution: {integrity: sha512-HWMdW+7r7MR5+PZqJF6YFNSCtjz1T0dsvo/f1BV6HkV+6erD/nA7wd9NM00KVG83zf2nJ7uATPO9ttdIPvi3gg==}
     dependencies:
-      '@types/react': 18.2.36
+      '@types/react': 18.2.37
     dev: true
 
-  /@types/react@18.2.36:
-    resolution: {integrity: sha512-o9XFsHYLLZ4+sb9CWUYwHqFVoG61SesydF353vFMMsQziiyRu8np4n2OYMUSDZ8XuImxDr9c5tR7gidlH29Vnw==}
+  /@types/react@18.2.37:
+    resolution: {integrity: sha512-RGAYMi2bhRgEXT3f4B92WTohopH6bIXw05FuGlmJEnv/omEn190+QYEIYxIAuIBdKgboYYdVved2p1AxZVQnaw==}
     dependencies:
       '@types/prop-types': 15.7.5
       '@types/scheduler': 0.16.2
@@ -1151,11 +1151,11 @@ packages:
   /@types/scheduler@0.16.2:
     resolution: {integrity: sha512-hppQEBDmlwhFAXKJX2KnWLYu5yMfi91yazPb2l+lbJiwW+wdo1gNeRA+3RgNSO39WYX2euey41KEwnqesU2Jew==}
 
-  /@types/styled-components@5.1.29:
-    resolution: {integrity: sha512-5h/ah9PAblggQ6Laa4peplT4iY5ddA8qM1LMD4HzwToUWs3hftfy0fayeRgbtH1JZUdw5CCaowmz7Lnb8SjIxQ==}
+  /@types/styled-components@5.1.30:
+    resolution: {integrity: sha512-xxJqw0s1myRTgrzHgG5tKHS9hK+KNhjbKMXDWlHRo9eDNVVUqf147QUGYUqwyCDkFyGr2pi1qJKFMEy0ACZb0A==}
     dependencies:
       '@types/hoist-non-react-statics': 3.3.1
-      '@types/react': 18.2.36
+      '@types/react': 18.2.37
       csstype: 3.1.2
     dev: true
 
@@ -1563,7 +1563,7 @@ packages:
     peerDependencies:
       vite: '>=3'
     dependencies:
-      vite: 4.5.0(@types/node@20.8.10)
+      vite: 4.5.0(@types/node@20.9.0)
     dev: false
 
   /generouted@1.16.1(vite@4.5.0):
@@ -1571,7 +1571,7 @@ packages:
     peerDependencies:
       vite: '>=3'
     dependencies:
-      vite: 4.5.0(@types/node@20.8.10)
+      vite: 4.5.0(@types/node@20.9.0)
     dev: false
 
   /get-stream@8.0.1:
@@ -2596,8 +2596,8 @@ packages:
       inline-style-parser: 0.1.1
     dev: true
 
-  /styled-components@6.1.0(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-VWNfYYBuXzuLS/QYEeoPgMErP26WL+dX9//rEh80B2mmlS1yRxRxuL5eax4m6ybYEUoHWlTy2XOU32767mlMkg==}
+  /styled-components@6.1.1(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-cpZZP5RrKRIClBW5Eby4JM1wElLVP4NQrJbJ0h10TidTyJf4SIIwa3zLXOoPb4gJi8MsJ8mjq5mu2IrEhZIAcQ==}
     engines: {node: '>= 16'}
     peerDependencies:
       react: '>= 16.8.0'
@@ -2748,7 +2748,7 @@ packages:
       vfile-message: 4.0.2
     dev: true
 
-  /vite@4.5.0(@types/node@20.8.10):
+  /vite@4.5.0(@types/node@20.9.0):
     resolution: {integrity: sha512-ulr8rNLA6rkyFAlVWw2q5YJ91v098AFQ2R0PRFwPzREXOUJQPtFUG0t+/ZikhaOCDqFoDhN6/v8Sq0o4araFAw==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
@@ -2776,7 +2776,7 @@ packages:
       terser:
         optional: true
     dependencies:
-      '@types/node': 20.8.10
+      '@types/node': 20.9.0
       esbuild: 0.18.18
       postcss: 8.4.31
       rollup: 3.28.1
