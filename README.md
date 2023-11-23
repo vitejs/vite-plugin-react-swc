@@ -76,6 +76,14 @@ For production target, see https://vitejs.dev/config/build-options.html#build-ta
 react({ devTarget: "es2022" });
 ```
 
+## customTransform
+
+Additional options for SWC transform.
+
+```ts
+react({ customTransform: { legacyDecorator: true } });
+```
+
 ## Consistent components exports
 
 For React refresh to work correctly, your file should only export React components. The best explanation I've read is the one from the [Gatsby docs](https://www.gatsbyjs.com/docs/reference/local-development/fast-refresh/#how-it-works).

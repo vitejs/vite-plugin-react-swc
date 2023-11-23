@@ -8,6 +8,7 @@ import {
   ReactConfig,
   JscTarget,
   transform,
+  TransformConfig,
 } from "@swc/core";
 import { PluginOption, UserConfig, BuildOptions } from "vite";
 import { createRequire } from "module";
@@ -50,6 +51,11 @@ type Options = {
    * @default "es2020"
    */
   devTarget?: JscTarget;
+  /**
+   * Additional options for SWC transform.
+   * @default undefined
+   */
+  customTransform?: TransformConfig;
 };
 
 const isWebContainer = globalThis.process?.versions?.webcontainer;
@@ -230,6 +236,7 @@ const transformWithOptions = async (
         transform: {
           useDefineForClassFields: true,
           react: reactConfig,
+          ...options.customTransform,
         },
       },
     });
