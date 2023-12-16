@@ -50,6 +50,12 @@ type Options = {
    * @default "es2020"
    */
   devTarget?: JscTarget;
+  /**
+   * Override the default filtering (.ts, .tsx, .mts, .jsx, .mdx)
+   * If you want to trigger fast refresh on compiled JS, use `jsx: true`
+   * Exclusion of node_modules should be handled by the function if needed
+   */
+  filter?: (id: string) => ParserConfig | undefined;
 };
 
 const isWebContainer = globalThis.process?.versions?.webcontainer;
@@ -63,6 +69,7 @@ const react = (_options?: Options): PluginOption[] => {
       ? _options?.plugins.map((el): typeof el => [resolve(el[0]), el[1]])
       : undefined,
     devTarget: _options?.devTarget ?? "es2020",
+    filter: _options?.filter,
   };
 
   return [
@@ -204,7 +211,9 @@ const transformWithOptions = async (
   reactConfig: ReactConfig,
 ) => {
   const decorators = options?.tsDecorators ?? false;
-  const parser: ParserConfig | undefined = id.endsWith(".tsx")
+  const parser: ParserConfig | undefined = options.filter
+    ? options.filter(id)
+    : id.endsWith(".tsx")
     ? { syntax: "typescript", tsx: true, decorators }
     : id.endsWith(".ts") || id.endsWith(".mts")
     ? { syntax: "typescript", tsx: false, decorators }
