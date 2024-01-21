@@ -76,16 +76,20 @@ For production target, see https://vitejs.dev/config/build-options.html#build-ta
 react({ devTarget: "es2022" });
 ```
 
-### filter
+### parserConfig
 
-Override the default filtering (.ts, .tsx, .mts, .jsx, .mdx).
+Override the default include list (.ts, .tsx, .mts, .jsx, .mdx).
+
+This requires to redefine the config for any file you want to be included (ts, mdx, ...).
 
 If you want to trigger fast refresh on compiled JS, use `jsx: true`. Exclusion of node_modules should be handled by the function if needed. Using this option to use JSX inside `.js` files is highly discouraged and can be removed in any future version.
 
 ```ts
 react({
-  filter: (id) =>
-    id.endsWith(".res") ? { syntax: "ecmascript", jsx: true } : undefined,
+  parserConfig(id) {
+    if (id.endsWith(".res")) return { syntax: "ecmascript", jsx: true };
+    if (id.endsWith(".ts")) return { syntax: "typescript", tsx: false };
+  },
 });
 ```
 
