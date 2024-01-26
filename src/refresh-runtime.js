@@ -581,21 +581,39 @@ function debounce(fn, delay) {
   };
 }
 
-const enqueueUpdate = debounce(performReactRefresh, 16);
+const enqueueUpdate = debounce(() => {
+  window.__beforePerformReactRefresh?.();
+  performReactRefresh();
+}, 16);
 
 export function validateRefreshBoundaryAndEnqueueUpdate(
+  id,
   prevExports,
   nextExports,
 ) {
-  if (!predicateOnExport(prevExports, (key) => key in nextExports)) {
+  const ignoredExports = window.__getReactRefreshIgnoredExports?.({ id }) ?? [];
+  if (
+    predicateOnExport(
+      ignoredExports,
+      prevExports,
+      (key) => key in nextExports,
+    ) !== true
+  ) {
     return "Could not Fast Refresh (export removed)";
   }
-  if (!predicateOnExport(nextExports, (key) => key in prevExports)) {
+  if (
+    predicateOnExport(
+      ignoredExports,
+      nextExports,
+      (key) => key in prevExports,
+    ) !== true
+  ) {
     return "Could not Fast Refresh (new export)";
   }
 
   let hasExports = false;
   const allExportsAreComponentsOrUnchanged = predicateOnExport(
+    ignoredExports,
     nextExports,
     (key, value) => {
       hasExports = true;
@@ -603,19 +621,20 @@ export function validateRefreshBoundaryAndEnqueueUpdate(
       return prevExports[key] === nextExports[key];
     },
   );
-  if (hasExports && allExportsAreComponentsOrUnchanged) {
+  if (hasExports && allExportsAreComponentsOrUnchanged === true) {
     enqueueUpdate();
   } else {
-    return "Could not Fast Refresh. Learn more at https://github.com/vitejs/vite-plugin-react-swc#consistent-components-exports";
+    return `Could not Fast Refresh (${allExportsAreComponentsOrUnchanged} export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react-swc#consistent-components-exports`;
   }
 }
 
-function predicateOnExport(moduleExports, predicate) {
+function predicateOnExport(ignoredExports, moduleExports, predicate) {
   for (const key in moduleExports) {
     if (key === "__esModule") continue;
+    if (ignoredExports.includes(key)) continue;
     const desc = Object.getOwnPropertyDescriptor(moduleExports, key);
-    if (desc && desc.get) return false;
-    if (!predicate(key, moduleExports[key])) return false;
+    if (desc && desc.get) return key;
+    if (!predicate(key, moduleExports[key])) return key;
   }
   return true;
 }
