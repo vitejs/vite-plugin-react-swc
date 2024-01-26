@@ -50,6 +50,13 @@ type Options = {
    * @default "es2020"
    */
   devTarget?: JscTarget;
+  /**
+   * Override the default include list (.ts, .tsx, .mts, .jsx, .mdx).
+   * This requires to redefine the config for any file you want to be included.
+   * If you want to trigger fast refresh on compiled JS, use `jsx: true`.
+   * Exclusion of node_modules should be handled by the function if needed.
+   */
+  parserConfig?: (id: string) => ParserConfig | undefined;
 };
 
 const isWebContainer = globalThis.process?.versions?.webcontainer;
@@ -63,6 +70,7 @@ const react = (_options?: Options): PluginOption[] => {
       ? _options?.plugins.map((el): typeof el => [resolve(el[0]), el[1]])
       : undefined,
     devTarget: _options?.devTarget ?? "es2020",
+    parserConfig: _options?.parserConfig,
   };
 
   return [
@@ -204,7 +212,9 @@ const transformWithOptions = async (
   reactConfig: ReactConfig,
 ) => {
   const decorators = options?.tsDecorators ?? false;
-  const parser: ParserConfig | undefined = id.endsWith(".tsx")
+  const parser: ParserConfig | undefined = options.parserConfig
+    ? options.parserConfig(id)
+    : id.endsWith(".tsx")
     ? { syntax: "typescript", tsx: true, decorators }
     : id.endsWith(".ts") || id.endsWith(".mts")
     ? { syntax: "typescript", tsx: false, decorators }

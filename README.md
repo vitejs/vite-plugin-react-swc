@@ -56,7 +56,7 @@ Enable TypeScript decorators. Requires `experimentalDecorators` in tsconfig.
 react({ tsDecorators: true });
 ```
 
-## plugins
+### plugins
 
 Use SWC plugins. Enable SWC at build time.
 
@@ -64,7 +64,7 @@ Use SWC plugins. Enable SWC at build time.
 react({ plugins: [["@swc/plugin-styled-components", {}]] });
 ```
 
-## devTarget
+### devTarget
 
 Set the target for SWC in dev. This can avoid to down-transpile private class method for example.
 
@@ -74,6 +74,23 @@ For production target, see https://vitejs.dev/config/build-options.html#build-ta
 
 ```ts
 react({ devTarget: "es2022" });
+```
+
+### parserConfig
+
+Override the default include list (.ts, .tsx, .mts, .jsx, .mdx).
+
+This requires to redefine the config for any file you want to be included (ts, mdx, ...).
+
+If you want to trigger fast refresh on compiled JS, use `jsx: true`. Exclusion of node_modules should be handled by the function if needed. Using this option to use JSX inside `.js` files is highly discouraged and can be removed in any future version.
+
+```ts
+react({
+  parserConfig(id) {
+    if (id.endsWith(".res")) return { syntax: "ecmascript", jsx: true };
+    if (id.endsWith(".ts")) return { syntax: "typescript", tsx: false };
+  },
+});
 ```
 
 ## Consistent components exports
