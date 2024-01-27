@@ -581,8 +581,12 @@ function debounce(fn, delay) {
   };
 }
 
-const enqueueUpdate = debounce(() => {
-  window.__beforePerformReactRefresh?.();
+const hooks = [];
+window.__registerBeforePerformReactRefresh = (cb) => {
+  hooks.push(cb);
+};
+const enqueueUpdate = debounce(async () => {
+  if (hooks.length) await Promise.all(hooks.map((cb) => cb()));
   performReactRefresh();
 }, 16);
 
@@ -624,7 +628,7 @@ export function validateRefreshBoundaryAndEnqueueUpdate(
   if (hasExports && allExportsAreComponentsOrUnchanged === true) {
     enqueueUpdate();
   } else {
-    return `Could not Fast Refresh (${allExportsAreComponentsOrUnchanged} export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react-swc#consistent-components-exports`;
+    return `Could not Fast Refresh ("${allExportsAreComponentsOrUnchanged}" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react-swc#consistent-components-exports`;
   }
 }
 
