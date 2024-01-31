@@ -162,7 +162,7 @@ RefreshRuntime.__hmr_import(import.meta.url).then((currentExports) => {
   RefreshRuntime.registerExportsForReactRefresh("${id}", currentExports);
   import.meta.hot.accept((nextExports) => {
     if (!nextExports) return;
-    const invalidateMessage = RefreshRuntime.validateRefreshBoundaryAndEnqueueUpdate(currentExports, nextExports);
+    const invalidateMessage = RefreshRuntime.validateRefreshBoundaryAndEnqueueUpdate("${id}", currentExports, nextExports);
     if (invalidateMessage) import.meta.hot.invalidate(invalidateMessage);
   });
 });
