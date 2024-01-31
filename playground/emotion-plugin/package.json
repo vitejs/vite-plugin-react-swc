@@ -17,6 +17,6 @@
     "@types/react": "^18.2.48",
     "@types/react-dom": "^18.2.18",
     "@vitejs/plugin-react-swc": "../../dist",
-    "@swc/plugin-emotion": "^2.5.115"
+    "@swc/plugin-emotion": "^2.5.116"
   }
 }
