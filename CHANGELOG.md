@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 3.6.0
+
 ### Add parserConfig option
 
 This will unlock to use the plugin in some use cases where the original source code is not in TS. Using this option to keep using JSX inside `.js` files is highly discouraged and can be removed in any future version.
