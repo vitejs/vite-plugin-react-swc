@@ -16,8 +16,7 @@ const runtimePublicPath = "/@react-refresh";
 
 const preambleCode = `import { injectIntoGlobalHook } from "__PATH__";
 injectIntoGlobalHook(window);
-window.$RefreshReg$ = () => {};
-window.$RefreshSig$ = () => (type) => type;`;
+window.__vite_plugin_react_preamble_installed__ = true`;
 
 const _dirname =
   typeof __dirname !== "undefined"
@@ -155,17 +154,11 @@ const react = (_options?: Options): PluginOption[] => {
 ${result.code}`;
 
         if (hasRefresh) {
-          sourceMap.mappings = ";;;;;;" + sourceMap.mappings;
-          result.code = `if (!window.$RefreshReg$) throw new Error("React refresh preamble was not loaded. Something is wrong.");
-const prevRefreshReg = window.$RefreshReg$;
-const prevRefreshSig = window.$RefreshSig$;
-window.$RefreshReg$ = RefreshRuntime.getRefreshReg("${id}");
-window.$RefreshSig$ = RefreshRuntime.createSignatureFunctionForTransform;
-
+          sourceMap.mappings = ";;;" + sourceMap.mappings;
+          result.code = `if (!window.__vite_plugin_react_preamble_installed__) throw new Error("React refresh preamble was not loaded. Something is wrong.");
+const $RefreshReg$ = RefreshRuntime.getRefreshReg("${id}");
+const $RefreshSig$ = RefreshRuntime.createSignatureFunctionForTransform;
 ${result.code}
-
-window.$RefreshReg$ = prevRefreshReg;
-window.$RefreshSig$ = prevRefreshSig;
 `;
         }
 

@@ -547,7 +547,7 @@ function isLikelyComponentType(type) {
  * Plugin utils
  */
 
-if (window.$RefreshReg$) {
+if (window.__vite_plugin_react_preamble_installed__) {
   throw new Error(
     "React refresh runtime was loaded twice. Maybe you forgot the base path?",
   );
