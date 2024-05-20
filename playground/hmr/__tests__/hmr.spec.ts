@@ -19,7 +19,7 @@ test("HMR invalidate", async ({ page }) => {
   const { testUrl, server, editFile } = await setupDevServer("hmr");
   const waitForLogs = await setupWaitForLogs(page);
   await page.goto(testUrl);
-  await waitForLogs("[vite] connected.");
+  await waitForLogs("connected.");
 
   await page.click("button");
   await expect(page.locator("button")).toHaveText("count is 1");
@@ -74,7 +74,7 @@ test("HMR invalidate", async ({ page }) => {
   await waitForLogs(
     "[vite] invalidate /src/TitleWithExport.tsx: Could not Fast Refresh (export removed)",
     "[vite] hot updated: /src/App.tsx",
-    "[hmr] Failed to reload /src/App.tsx. This could be due to syntax errors or importing non-existent modules. (see errors above)",
+    "[vite] Failed to reload /src/App.tsx. This could be due to syntax errors or importing non-existent modules. (see errors above)",
   );
 
   // Remove usage from App

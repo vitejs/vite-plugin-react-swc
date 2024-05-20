@@ -27,7 +27,7 @@ test("styled-components HMR", async ({ page }) => {
     await setupDevServer("styled-components");
   const waitForLogs = await setupWaitForLogs(page);
   await page.goto(testUrl);
-  await waitForLogs("[vite] connected.");
+  await waitForLogs("connected.");
 
   const button = page.locator("button");
   await expect(button).toHaveText("count is 0", { timeout: 30000 });

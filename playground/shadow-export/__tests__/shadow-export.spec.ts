@@ -5,7 +5,7 @@ test("Shadow export HMR", async ({ page }) => {
   const { testUrl, server, editFile } = await setupDevServer("shadow-export");
   const waitForLogs = await setupWaitForLogs(page);
   await page.goto(testUrl);
-  await waitForLogs("[vite] connected.");
+  await waitForLogs("connected.");
   await expect(page.locator("body")).toHaveText("Shadow export");
 
   editFile("src/App.tsx", ["Shadow export", "Shadow export updates!"]);
