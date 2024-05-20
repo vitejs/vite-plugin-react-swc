@@ -93,6 +93,10 @@ react({
 });
 ```
 
+### swcImplementation
+
+Advanced. Pass a custom SWC implementation. This can be used to keep a stable version of SWC instead of using package manager overrides, at the cost of installing it twice.
+
 ## Consistent components exports
 
 For React refresh to work correctly, your file should only export React components. The best explanation I've read is the one from the [Gatsby docs](https://www.gatsbyjs.com/docs/reference/local-development/fast-refresh/#how-it-works).

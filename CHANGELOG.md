@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Add swcImplementation option
+
+Pass a custom SWC implementation. This can be used to keep a stable version of SWC instead of using package manager overrides, at the cost of installing it twice.
+
 ## 3.6.0
 
 ### Add parserConfig option
