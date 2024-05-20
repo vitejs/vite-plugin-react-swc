@@ -12,24 +12,24 @@
     "qa": "tsc && pnpm prettier-ci && pnpm build && pnpm test",
     "release": "pnpm build && tnode scripts/release.ts"
   },
-  "packageManager": "pnpm@8.15.1",
+  "packageManager": "pnpm@8.15.8",
   "dependencies": {
-    "@swc/core": "^1.3.107"
+    "@swc/core": "^1.5.7"
   },
   "peerDependencies": {
     "vite": "^4 || ^5"
   },
   "devDependencies": {
     "@arnaud-barre/tnode": "^0.19.2",
-    "@playwright/test": "^1.41.1",
+    "@playwright/test": "^1.44.0",
     "@types/fs-extra": "^11.0.4",
     "@types/node": "20.11.5",
     "@vitejs/release-scripts": "^1.3.1",
-    "esbuild": "^0.20.0",
+    "esbuild": "^0.21.3",
     "fs-extra": "^11.2.0",
-    "picocolors": "^1.0.0",
+    "picocolors": "^1.0.1",
     "prettier": "^3.0.3",
-    "typescript": "^5.3.3",
-    "vite": "^5.0.12"
+    "typescript": "^5.4.5",
+    "vite": "^5.2.11"
   }
 }
