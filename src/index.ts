@@ -3,10 +3,10 @@ import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 import { SourceMapPayload } from "module";
 import {
-  Output,
-  ParserConfig,
-  ReactConfig,
-  JscTarget,
+  type Output,
+  type ParserConfig,
+  type ReactConfig,
+  type JscTarget,
   transform,
 } from "@swc/core";
 import { PluginOption, UserConfig, BuildOptions } from "vite";
@@ -58,6 +58,12 @@ type Options = {
    * Exclusion of node_modules should be handled by the function if needed.
    */
   parserConfig?: (id: string) => ParserConfig | undefined;
+  /**
+   * Advanced. Pass a custom SWC implementation.
+   * This can be used to keep a stable version of SWC instead of using
+   * package manager overrides, at the cost of installing it twice.
+   */
+  swcImplementation?: any;
 };
 
 const isWebContainer = globalThis.process?.versions?.webcontainer;
@@ -72,6 +78,10 @@ const react = (_options?: Options): PluginOption[] => {
       : undefined,
     devTarget: _options?.devTarget ?? "es2020",
     parserConfig: _options?.parserConfig,
+    transformFn:
+      (_options?.swcImplementation?.transform as
+        | typeof transform
+        | undefined) ?? transform,
   };
 
   return [
@@ -130,6 +140,7 @@ const react = (_options?: Options): PluginOption[] => {
         const refresh = !transformOptions?.ssr && !hmrDisabled;
 
         const result = await transformWithOptions(
+          options.transformFn,
           id,
           code,
           options.devTarget,
@@ -192,10 +203,17 @@ RefreshRuntime.__hmr_import(import.meta.url).then((currentExports) => {
             build: silenceUseClientWarning(userConfig),
           }),
           transform: (code, _id) =>
-            transformWithOptions(_id.split("?")[0], code, "esnext", options, {
-              runtime: "automatic",
-              importSource: options.jsxImportSource,
-            }),
+            transformWithOptions(
+              options.transformFn,
+              _id.split("?")[0],
+              code,
+              "esnext",
+              options,
+              {
+                runtime: "automatic",
+                importSource: options.jsxImportSource,
+              },
+            ),
         }
       : {
           name: "vite:react-swc",
@@ -215,6 +233,7 @@ RefreshRuntime.__hmr_import(import.meta.url).then((currentExports) => {
 };
 
 const transformWithOptions = async (
+  transformFn: typeof transform,
   id: string,
   code: string,
   target: JscTarget,
@@ -238,7 +257,7 @@ const transformWithOptions = async (
 
   let result: Output;
   try {
-    result = await transform(code, {
+    result = await transformFn(code, {
       filename: id,
       swcrc: false,
       configFile: false,
