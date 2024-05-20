@@ -26,6 +26,7 @@ const _dirname =
 const resolve = createRequire(
   typeof __filename !== "undefined" ? __filename : import.meta.url,
 ).resolve;
+const reactCompRE = /extends\s+(?:React\.)?(?:Pure)?Component/;
 const refreshContentRE = /\$Refresh(?:Reg|Sig)\$\(/;
 
 type Options = {
@@ -141,14 +142,21 @@ const react = (_options?: Options): PluginOption[] => {
           },
         );
         if (!result) return;
+        if (!refresh) return result;
 
-        if (!refresh || !refreshContentRE.test(result.code)) {
-          return result;
-        }
+        const hasRefresh = refreshContentRE.test(result.code);
+        if (!hasRefresh && !reactCompRE.test(result.code)) return result;
+
+        const sourceMap: SourceMapPayload = JSON.parse(result.map!);
+        sourceMap.mappings = ";;" + sourceMap.mappings;
 
         result.code = `import * as RefreshRuntime from "${runtimePublicPath}";
 
-if (!window.$RefreshReg$) throw new Error("React refresh preamble was not loaded. Something is wrong.");
+${result.code}`;
+
+        if (hasRefresh) {
+          sourceMap.mappings = ";;;;;;" + sourceMap.mappings;
+          result.code = `if (!window.$RefreshReg$) throw new Error("React refresh preamble was not loaded. Something is wrong.");
 const prevRefreshReg = window.$RefreshReg$;
 const prevRefreshSig = window.$RefreshSig$;
 window.$RefreshReg$ = RefreshRuntime.getRefreshReg("${id}");
@@ -158,6 +166,10 @@ ${result.code}
 
 window.$RefreshReg$ = prevRefreshReg;
 window.$RefreshSig$ = prevRefreshSig;
+`;
+        }
+
+        result.code += `
 RefreshRuntime.__hmr_import(import.meta.url).then((currentExports) => {
   RefreshRuntime.registerExportsForReactRefresh("${id}", currentExports);
   import.meta.hot.accept((nextExports) => {
@@ -168,8 +180,6 @@ RefreshRuntime.__hmr_import(import.meta.url).then((currentExports) => {
 });
 `;
 
-        const sourceMap: SourceMapPayload = JSON.parse(result.map!);
-        sourceMap.mappings = ";;;;;;;;" + sourceMap.mappings;
         return { code: result.code, map: sourceMap };
       },
     },
