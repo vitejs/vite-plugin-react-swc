@@ -74,7 +74,7 @@ test("HMR invalidate", async ({ page }) => {
   await waitForLogs(
     "[vite] invalidate /src/TitleWithExport.tsx: Could not Fast Refresh (export removed)",
     "[vite] hot updated: /src/App.tsx",
-    "[vite] Failed to reload /src/App.tsx. This could be due to syntax errors or importing non-existent modules. (see errors above)",
+    /Failed to reload \/src\/App\.tsx. This could be due to syntax errors or importing non-existent modules\. \(see errors above\)$/,
   );
 
   // Remove usage from App

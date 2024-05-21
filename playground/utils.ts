@@ -13,10 +13,16 @@ export const setupWaitForLogs = async (page: Page) => {
   page.on("console", (log) => {
     logs.push(log.text());
   });
-  return (...messages: string[]) =>
+  return (...messages: (string | RegExp)[]) =>
     expect
       .poll(() => {
-        if (messages.every((m) => logs.includes(m))) {
+        if (
+          messages.every((m) =>
+            typeof m === "string"
+              ? logs.includes(m)
+              : logs.some((l) => m.test(l)),
+          )
+        ) {
           logs = [];
           return true;
         }
