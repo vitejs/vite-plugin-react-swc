@@ -43,8 +43,8 @@ importers:
         specifier: ^5.4.5
         version: 5.4.5
       vite:
-        specifier: ^6.0.0-alpha.14
-        version: 6.0.0-alpha.14(@types/node@20.11.5)
+        specifier: ^6.0.0-alpha.15
+        version: 6.0.0-alpha.15(@types/node@20.11.5)
 
   playground/base-path:
     dependencies:
@@ -3212,8 +3212,8 @@ packages:
       fsevents: 2.3.3
     dev: false
 
-  /vite@6.0.0-alpha.14(@types/node@20.11.5):
-    resolution: {integrity: sha512-p5tx01jGcddMxFoGOSG7E4iQxmAzzjgENdBRfj8+D6N2LRCdLsqdde4emtycmIfgTy3WW6sf3dOta40hvvHSwg==}
+  /vite@6.0.0-alpha.15(@types/node@20.11.5):
+    resolution: {integrity: sha512-wwC7BNvrAuNOgBdUvEXaqaySdktDhRmXGthwq7+Im/OPcr0+mpk4vIFNTQPqL8Mnbaycp5bAncX5WyhoRYR+BQ==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
     peerDependencies:

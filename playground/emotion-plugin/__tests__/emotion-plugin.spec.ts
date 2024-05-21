@@ -27,7 +27,7 @@ test("Emotion plugin HMR", async ({ page }) => {
   const { testUrl, server, editFile } = await setupDevServer("emotion-plugin");
   const waitForLogs = await setupWaitForLogs(page);
   await page.goto(testUrl);
-  await waitForLogs("connected.");
+  await waitForLogs("[vite] connected.");
 
   const button = page.locator("button");
   await button.hover();

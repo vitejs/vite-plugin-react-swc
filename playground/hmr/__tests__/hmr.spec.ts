@@ -19,7 +19,7 @@ test("HMR invalidate", async ({ page }) => {
   const { testUrl, server, editFile } = await setupDevServer("hmr");
   const waitForLogs = await setupWaitForLogs(page);
   await page.goto(testUrl);
-  await waitForLogs("connected.");
+  await waitForLogs("[vite] connected.");
 
   await page.click("button");
   await expect(page.locator("button")).toHaveText("count is 1");

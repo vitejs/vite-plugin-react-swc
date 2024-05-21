@@ -16,7 +16,7 @@ test("MDX HMR", async ({ page }) => {
   const { testUrl, server, editFile } = await setupDevServer("mdx");
   const waitForLogs = await setupWaitForLogs(page);
   await page.goto(testUrl);
-  await waitForLogs("connected.");
+  await waitForLogs("[vite] connected.");
 
   await expect(page.getByRole("heading", { name: "Hello" })).toBeVisible();
 
