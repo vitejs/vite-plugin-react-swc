@@ -4,6 +4,10 @@
 
 ## 3.7.0
 
+### Support HMR for class components
+
+This is a long overdue and should fix some issues people had with HMR when migrating from CRA.
+
 ## 3.6.0
 
 ### Add parserConfig option
