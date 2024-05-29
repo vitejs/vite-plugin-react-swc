@@ -30,7 +30,7 @@ This plugin has limited options to enable good performances and be transpiler ag
 - `jsx runtime` is always `automatic`
 - In development:
   - esbuild is disabled, so the [esbuild configuration](https://vitejs.dev/config/shared-options.html#esbuild) has no effect
-  - `target` is `es2020`
+  - `target` is ignored and defaults to `es2020` (see [`devTarget`](#devtarget))
   - JS files are not transformed
   - tsconfig is not resolved, so properties other than the ones listed above behaves like TS defaults
 
