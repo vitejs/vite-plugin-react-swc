@@ -12,7 +12,7 @@
     "qa": "tsc && pnpm prettier-ci && pnpm build && pnpm test",
     "release": "pnpm build && tnode scripts/release.ts"
   },
-  "packageManager": "pnpm@8.15.8",
+  "packageManager": "pnpm@9.4.0",
   "dependencies": {
     "@swc/core": "^1.5.7"
   },
