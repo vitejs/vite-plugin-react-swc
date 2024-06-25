@@ -547,7 +547,7 @@ function isLikelyComponentType(type) {
  * Plugin utils
  */
 
-if (window.$RefreshReg$) {
+if (globalThis.$RefreshReg$) {
   throw new Error(
     "React refresh runtime was loaded twice. Maybe you forgot the base path?",
   );
@@ -582,7 +582,7 @@ function debounce(fn, delay) {
 }
 
 const hooks = [];
-window.__registerBeforePerformReactRefresh = (cb) => {
+globalThis.__registerBeforePerformReactRefresh = (cb) => {
   hooks.push(cb);
 };
 const enqueueUpdate = debounce(async () => {
@@ -595,7 +595,7 @@ export function validateRefreshBoundaryAndEnqueueUpdate(
   prevExports,
   nextExports,
 ) {
-  const ignoredExports = window.__getReactRefreshIgnoredExports?.({ id }) ?? [];
+  const ignoredExports = globalThis.__getReactRefreshIgnoredExports?.({ id }) ?? [];
   if (
     predicateOnExport(
       ignoredExports,
