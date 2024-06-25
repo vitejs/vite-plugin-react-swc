@@ -155,17 +155,29 @@ const react = (_options?: Options): PluginOption[] => {
 ${result.code}`;
 
         if (hasRefresh) {
-          sourceMap.mappings = ";;;;;;" + sourceMap.mappings;
-          result.code = `if (!window.$RefreshReg$) throw new Error("React refresh preamble was not loaded. Something is wrong.");
-const prevRefreshReg = window.$RefreshReg$;
-const prevRefreshSig = window.$RefreshSig$;
-window.$RefreshReg$ = RefreshRuntime.getRefreshReg("${id}");
-window.$RefreshSig$ = RefreshRuntime.createSignatureFunctionForTransform;
+          sourceMap.mappings = ";;;;;;;;;;;;;;;" + sourceMap.mappings;
+          result.code = `let prevRefreshReg;
+let prevRefreshSig;
+ 
+const inWebWorker = typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope;
+ 
+if (import.meta.hot && !inWebWorker) {
+  if (!window.$RefreshReg$) throw new Error("React refresh preamble was not loaded. Something is wrong.");
+  prevRefreshReg = window.$RefreshReg$;
+  prevRefreshSig = window.$RefreshSig$;
+  window.$RefreshReg$ = RefreshRuntime.getRefreshReg("${id}");
+  window.$RefreshSig$ = RefreshRuntime.createSignatureFunctionForTransform;
+} else if (inWebWorker) {
+  // Provide noop for swc.
+  globalThis.$RefreshReg$ = () => {};
+}
 
 ${result.code}
 
-window.$RefreshReg$ = prevRefreshReg;
-window.$RefreshSig$ = prevRefreshSig;
+if (import.meta.hot && !inWebWorker) {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
 `;
         }
 

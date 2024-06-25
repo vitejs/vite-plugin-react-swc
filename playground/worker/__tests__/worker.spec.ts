@@ -18,7 +18,7 @@ test("Worker HMR", async ({ page }) => {
   const { testUrl, server, editFile } = await setupDevServer("worker");
   const waitForLogs = await setupWaitForLogs(page);
   await page.goto(testUrl);
-  await waitForLogs("Worker lives!", "Worker imported!");
+  await waitForLogs("Worker lives!", "Worker imported!", "Worker with react lives!");
 
   editFile("src/worker-via-url.ts", ["Worker lives!", "Worker updates!"]);
   await waitForLogs("Worker updates!");
