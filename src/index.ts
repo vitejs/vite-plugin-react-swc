@@ -41,6 +41,11 @@ type Options = {
    */
   tsDecorators?: boolean;
   /**
+   * Enable ECMA Stage 3 decorators. Requires `experimentalDecorators: false` in tsconfig.
+   * @default false
+   */
+  jsDecorators?: boolean;
+  /**
    * Use SWC plugins. Enable SWC at build time.
    * @default undefined
    */
@@ -67,6 +72,7 @@ const react = (_options?: Options): PluginOption[] => {
   const options = {
     jsxImportSource: _options?.jsxImportSource ?? "react",
     tsDecorators: _options?.tsDecorators,
+    jsDecorators: _options?.jsDecorators,
     plugins: _options?.plugins
       ? _options?.plugins.map((el): typeof el => [resolve(el[0]), el[1]])
       : undefined,
@@ -221,7 +227,7 @@ const transformWithOptions = async (
   options: Options,
   reactConfig: ReactConfig,
 ) => {
-  const decorators = options?.tsDecorators ?? false;
+  const decorators = options?.tsDecorators ?? options.jsDecorators ?? false;
   const parser: ParserConfig | undefined = options.parserConfig
     ? options.parserConfig(id)
     : id.endsWith(".tsx")
@@ -250,6 +256,11 @@ const transformWithOptions = async (
         transform: {
           useDefineForClassFields: true,
           react: reactConfig,
+          decoratorVersion: options.jsDecorators 
+            ? "2022-03" 
+            : options.tsDecorators 
+            ? "2021-12" 
+            : undefined
         },
       },
     });
