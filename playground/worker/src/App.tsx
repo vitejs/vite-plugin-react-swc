@@ -1,7 +1,9 @@
 import { useState } from "react";
 import MyWorker from "./worker-via-import.ts?worker&inline";
+import MyWorkerWithReact from "./worker-via-import-with-react?worker";
 
 new MyWorker();
+new MyWorkerWithReact();
 
 export const App = () => {
   const [count, setCount] = useState(0);
