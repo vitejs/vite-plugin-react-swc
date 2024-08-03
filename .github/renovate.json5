@@ -6,6 +6,5 @@
   ignoreDeps: [
     "generouted", // testing lib shipping JSX (new version ship transpiled JS)
     "prettier", // waiting for stable choice on ternaries
-    "@types/node", // https://github.com/paulmillr/chokidar/issues/1299
   ],
 }
