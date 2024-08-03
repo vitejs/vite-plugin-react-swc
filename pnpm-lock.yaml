@@ -43,8 +43,8 @@ importers:
         specifier: ^5.5.3
         version: 5.5.3
       vite:
-        specifier: ^5.3.4
-        version: 5.3.4(@types/node@20.14.11)
+        specifier: ^6.0.0-alpha.19
+        version: 6.0.0-alpha.19(@types/node@20.14.11)
 
   playground/base-path:
     dependencies:
@@ -251,10 +251,10 @@ importers:
     dependencies:
       '@generouted/react-router':
         specifier: ^1.19.6
-        version: 1.19.6(react-router-dom@6.25.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(vite@5.3.4(@types/node@20.14.11))
+        version: 1.19.6(react-router-dom@6.25.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(vite@6.0.0-alpha.19(@types/node@20.14.11))
       generouted:
         specifier: 1.11.7
-        version: 1.11.7(vite@5.3.4(@types/node@20.14.11))
+        version: 1.11.7(vite@6.0.0-alpha.19(@types/node@20.14.11))
       react:
         specifier: ^18.3.1
         version: 18.3.1
@@ -1025,9 +1025,6 @@ packages:
 
   '@types/estree-jsx@1.0.0':
     resolution: {integrity: sha512-3qvGd0z8F2ENTGr/GG1yViqfiKmRfrXVx5sJyHGFu3z7m5g5utCQtGp/g29JnjflhtQJBv1WDQukHiT58xPcYQ==}
-
-  '@types/estree@1.0.0':
-    resolution: {integrity: sha512-WulqXMDUTYAXCjZnk6JtIHPigp55cVtDgDrO2gHRwhyJto21+1zbVCtOYB2L1F9w4qCQ0rOGWBnBe0FNTiEJIQ==}
 
   '@types/estree@1.0.5':
     resolution: {integrity: sha512-/kYRxGDLWzHOB7q+wtSUQlFrtcdUccpfy+X+9iMBpHK8QLLhx2wIPYuS5DYtR9Wa/YlZAbIovy7qVdB1Aq6Lyw==}
@@ -1871,8 +1868,8 @@ packages:
   vfile@6.0.1:
     resolution: {integrity: sha512-1bYqc7pt6NIADBJ98UiG0Bn/CHIVOoZ/IyEkqIruLg0mE1BKzkOXY2D6CSqQIcKqgadppE5lrxgWXJmXd7zZJw==}
 
-  vite@5.3.4:
-    resolution: {integrity: sha512-Cw+7zL3ZG9/NZBB8C+8QbQZmR54GwqIz+WMI4b3JgdYJvX+ny9AjJXqkGQlDXSXRP9rP0B4tbciRMOVEKulVOA==}
+  vite@6.0.0-alpha.19:
+    resolution: {integrity: sha512-2V6xvCnK+JWOQlbNdNJ3f8slenE9PayJg0USD01gYemny7bAfP7RPJ4yuXIjZmx9LfGLHIQOIqJ3haEYw0/3ew==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
     peerDependencies:
@@ -2246,17 +2243,17 @@ snapshots:
   '@esbuild/win32-x64@0.23.0':
     optional: true
 
-  '@generouted/react-router@1.19.6(react-router-dom@6.25.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(vite@5.3.4(@types/node@20.14.11))':
+  '@generouted/react-router@1.19.6(react-router-dom@6.25.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(vite@6.0.0-alpha.19(@types/node@20.14.11))':
     dependencies:
       fast-glob: 3.3.2
-      generouted: 1.19.6(vite@5.3.4(@types/node@20.14.11))
+      generouted: 1.19.6(vite@6.0.0-alpha.19(@types/node@20.14.11))
       react: 18.3.1
       react-router-dom: 6.25.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      vite: 5.3.4(@types/node@20.14.11)
+      vite: 6.0.0-alpha.19(@types/node@20.14.11)
 
   '@mdx-js/mdx@3.0.0':
     dependencies:
-      '@types/estree': 1.0.0
+      '@types/estree': 1.0.5
       '@types/estree-jsx': 1.0.0
       '@types/hast': 3.0.2
       '@types/mdx': 2.0.3
@@ -2312,7 +2309,7 @@ snapshots:
 
   '@rollup/pluginutils@5.0.2(rollup@4.17.2)':
     dependencies:
-      '@types/estree': 1.0.0
+      '@types/estree': 1.0.5
       estree-walker: 2.0.2
       picomatch: 2.3.1
     optionalDependencies:
@@ -2436,9 +2433,7 @@ snapshots:
 
   '@types/estree-jsx@1.0.0':
     dependencies:
-      '@types/estree': 1.0.0
-
-  '@types/estree@1.0.0': {}
+      '@types/estree': 1.0.5
 
   '@types/estree@1.0.5': {}
 
@@ -2699,7 +2694,7 @@ snapshots:
 
   estree-util-attach-comments@3.0.0:
     dependencies:
-      '@types/estree': 1.0.0
+      '@types/estree': 1.0.5
 
   estree-util-build-jsx@3.0.1:
     dependencies:
@@ -2725,7 +2720,7 @@ snapshots:
 
   estree-walker@3.0.3:
     dependencies:
-      '@types/estree': 1.0.0
+      '@types/estree': 1.0.5
 
   execa@8.0.1:
     dependencies:
@@ -2775,13 +2770,13 @@ snapshots:
 
   function-bind@1.1.1: {}
 
-  generouted@1.11.7(vite@5.3.4(@types/node@20.14.11)):
+  generouted@1.11.7(vite@6.0.0-alpha.19(@types/node@20.14.11)):
     dependencies:
-      vite: 5.3.4(@types/node@20.14.11)
+      vite: 6.0.0-alpha.19(@types/node@20.14.11)
 
-  generouted@1.19.6(vite@5.3.4(@types/node@20.14.11)):
+  generouted@1.19.6(vite@6.0.0-alpha.19(@types/node@20.14.11)):
     dependencies:
-      vite: 5.3.4(@types/node@20.14.11)
+      vite: 6.0.0-alpha.19(@types/node@20.14.11)
 
   get-stream@8.0.1: {}
 
@@ -2807,7 +2802,7 @@ snapshots:
 
   hast-util-to-estree@3.1.0:
     dependencies:
-      '@types/estree': 1.0.0
+      '@types/estree': 1.0.5
       '@types/estree-jsx': 1.0.0
       '@types/hast': 3.0.2
       comma-separated-tokens: 2.0.3
@@ -2895,7 +2890,7 @@ snapshots:
 
   is-reference@3.0.1:
     dependencies:
-      '@types/estree': 1.0.0
+      '@types/estree': 1.0.5
 
   is-stream@3.0.0: {}
 
@@ -3309,7 +3304,7 @@ snapshots:
 
   periscopic@3.1.0:
     dependencies:
-      '@types/estree': 1.0.0
+      '@types/estree': 1.0.5
       estree-walker: 3.0.3
       is-reference: 3.0.1
 
@@ -3582,7 +3577,7 @@ snapshots:
       unist-util-stringify-position: 4.0.0
       vfile-message: 4.0.2
 
-  vite@5.3.4(@types/node@20.14.11):
+  vite@6.0.0-alpha.19(@types/node@20.14.11):
     dependencies:
       esbuild: 0.21.3
       postcss: 8.4.39
