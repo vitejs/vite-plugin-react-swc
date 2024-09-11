@@ -7,6 +7,7 @@ import {
   ParserConfig,
   ReactConfig,
   JscTarget,
+  TransformConfig,
   transform,
 } from "@swc/core";
 import { PluginOption, UserConfig, BuildOptions } from "vite";
@@ -24,10 +25,20 @@ const _dirname =
     ? __dirname
     : dirname(fileURLToPath(import.meta.url));
 const resolve = createRequire(
-  typeof __filename !== "undefined" ? __filename : import.meta.url,
+  typeof __filename !== "undefined" ? __filename : import.meta.url
 ).resolve;
 const reactCompRE = /extends\s+(?:React\.)?(?:Pure)?Component/;
 const refreshContentRE = /\$Refresh(?:Reg|Sig)\$\(/;
+
+interface ScriptDecoratorsConfig {
+  legacyDecorator?: TransformConfig["legacyDecorator"];
+  decoratorMetadata?: TransformConfig["decoratorMetadata"];
+  /**
+   * The version of the decorator proposal to use. 2021-12 or 2022-03
+   * @default 2021-12
+   */
+  decoratorVersion?: TransformConfig["decoratorVersion"];
+}
 
 type Options = {
   /**
@@ -58,6 +69,12 @@ type Options = {
    * Exclusion of node_modules should be handled by the function if needed.
    */
   parserConfig?: (id: string) => ParserConfig | undefined;
+  /**
+   * Use SWC jsc transform.
+   * For production target, see https://swc.rs/docs/configuration/compilation#jsctransform
+   * @default { legacyDecorator: true }
+   */
+  decorators?: ScriptDecoratorsConfig;
 };
 
 const isWebContainer = globalThis.process?.versions?.webcontainer;
@@ -72,6 +89,7 @@ const react = (_options?: Options): PluginOption[] => {
       : undefined,
     devTarget: _options?.devTarget ?? "es2020",
     parserConfig: _options?.parserConfig,
+    decorators: _options?.decorators,
   };
 
   return [
@@ -234,6 +252,12 @@ const transformWithOptions = async (
     ? // JSX is required to trigger fast refresh transformations, even if MDX already transforms it
       { syntax: "ecmascript", jsx: true }
     : undefined;
+  
+  const jscTransform =
+    id.endsWith(".jsx") && options.decorators
+      ? options.decorators
+      : { legacyDecorator: true };
+
   if (!parser) return;
 
   let result: Output;
@@ -250,6 +274,7 @@ const transformWithOptions = async (
         transform: {
           useDefineForClassFields: true,
           react: reactConfig,
+          ...jscTransform,
         },
       },
     });
