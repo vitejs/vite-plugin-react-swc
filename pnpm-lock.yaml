@@ -43,8 +43,8 @@ importers:
         specifier: ^5.5.3
         version: 5.5.3
       vite:
-        specifier: ^6.0.0-beta.0
-        version: 6.0.0-beta.0(@types/node@20.14.11)
+        specifier: ^6.0.0-beta.1
+        version: 6.0.0-beta.1(@types/node@20.14.11)
 
   playground/base-path:
     dependencies:
@@ -251,10 +251,10 @@ importers:
     dependencies:
       '@generouted/react-router':
         specifier: ^1.19.6
-        version: 1.19.6(react-router-dom@6.25.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(vite@6.0.0-beta.0(@types/node@20.14.11))
+        version: 1.19.6(react-router-dom@6.25.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(vite@6.0.0-beta.1(@types/node@20.14.11))
       generouted:
         specifier: 1.11.7
-        version: 1.11.7(vite@6.0.0-beta.0(@types/node@20.14.11))
+        version: 1.11.7(vite@6.0.0-beta.1(@types/node@20.14.11))
       react:
         specifier: ^18.3.1
         version: 18.3.1
@@ -1766,10 +1766,6 @@ packages:
   sisteransi@1.0.5:
     resolution: {integrity: sha512-bLGGlR1QxBcynn2d5YmDX4MGjlZvy2MRBDRNHLJ8VI6l6+9FUiyTFNJ0IveOSP0bcXgVDPRcfGqA0pjaqUpfVg==}
 
-  source-map-js@1.2.0:
-    resolution: {integrity: sha512-itJW8lvSA0TXEphiRoawsCksnlf8SyvmFzIhltqAHluXd88pkCd+cXJVHTDwdCr0IzwptSm035IHQktUu1QUMg==}
-    engines: {node: '>=0.10.0'}
-
   source-map-js@1.2.1:
     resolution: {integrity: sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA==}
     engines: {node: '>=0.10.0'}
@@ -1875,8 +1871,8 @@ packages:
   vfile@6.0.1:
     resolution: {integrity: sha512-1bYqc7pt6NIADBJ98UiG0Bn/CHIVOoZ/IyEkqIruLg0mE1BKzkOXY2D6CSqQIcKqgadppE5lrxgWXJmXd7zZJw==}
 
-  vite@6.0.0-beta.0:
-    resolution: {integrity: sha512-ziqwdNyPl/Azbp8R8yM1vFn9yWHyDJK8fqv4IWs4m3fgv1b9H4I7S++9fJNG/7qE8et2hpw4kMyrB8iNYOqRYw==}
+  vite@6.0.0-beta.1:
+    resolution: {integrity: sha512-E22XKY2pvL12/sJV4oEtoOnMC6HPaC3HmSBFAjwWontAtbf0Oj2eK3sYgg3ggWvfNx1PlKDdOccxMD4wXGKwPQ==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
     peerDependencies:
@@ -2253,13 +2249,13 @@ snapshots:
   '@esbuild/win32-x64@0.23.0':
     optional: true
 
-  '@generouted/react-router@1.19.6(react-router-dom@6.25.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(vite@6.0.0-beta.0(@types/node@20.14.11))':
+  '@generouted/react-router@1.19.6(react-router-dom@6.25.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(vite@6.0.0-beta.1(@types/node@20.14.11))':
     dependencies:
       fast-glob: 3.3.2
-      generouted: 1.19.6(vite@6.0.0-beta.0(@types/node@20.14.11))
+      generouted: 1.19.6(vite@6.0.0-beta.1(@types/node@20.14.11))
       react: 18.3.1
       react-router-dom: 6.25.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      vite: 6.0.0-beta.0(@types/node@20.14.11)
+      vite: 6.0.0-beta.1(@types/node@20.14.11)
 
   '@mdx-js/mdx@3.0.0':
     dependencies:
@@ -2780,13 +2776,13 @@ snapshots:
 
   function-bind@1.1.1: {}
 
-  generouted@1.11.7(vite@6.0.0-beta.0(@types/node@20.14.11)):
+  generouted@1.11.7(vite@6.0.0-beta.1(@types/node@20.14.11)):
     dependencies:
-      vite: 6.0.0-beta.0(@types/node@20.14.11)
+      vite: 6.0.0-beta.1(@types/node@20.14.11)
 
-  generouted@1.19.6(vite@6.0.0-beta.0(@types/node@20.14.11)):
+  generouted@1.19.6(vite@6.0.0-beta.1(@types/node@20.14.11)):
     dependencies:
-      vite: 6.0.0-beta.0(@types/node@20.14.11)
+      vite: 6.0.0-beta.1(@types/node@20.14.11)
 
   get-stream@8.0.1: {}
 
@@ -3337,8 +3333,8 @@ snapshots:
   postcss@8.4.38:
     dependencies:
       nanoid: 3.3.7
-      picocolors: 1.0.1
-      source-map-js: 1.2.0
+      picocolors: 1.1.0
+      source-map-js: 1.2.1
 
   postcss@8.4.47:
     dependencies:
@@ -3475,8 +3471,6 @@ snapshots:
 
   sisteransi@1.0.5: {}
 
-  source-map-js@1.2.0: {}
-
   source-map-js@1.2.1: {}
 
   source-map@0.5.7: {}
@@ -3591,7 +3585,7 @@ snapshots:
       unist-util-stringify-position: 4.0.0
       vfile-message: 4.0.2
 
-  vite@6.0.0-beta.0(@types/node@20.14.11):
+  vite@6.0.0-beta.1(@types/node@20.14.11):
     dependencies:
       esbuild: 0.21.3
       postcss: 8.4.47
