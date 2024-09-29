@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 3.7.1
+
+Ignore directive sourcemap error [#231](https://github.com/vitejs/vite-plugin-react/issues/231)
+
 ## 3.7.0
 
 ### Support HMR for class components
