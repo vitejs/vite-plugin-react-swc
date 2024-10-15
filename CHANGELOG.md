@@ -4,7 +4,7 @@
 
 ## 3.7.1
 
-Ignore directive sourcemap error [#231](https://github.com/vitejs/vite-plugin-react/issues/231)
+Ignore directive sourcemap error [#231](https://github.com/vitejs/vite-plugin-react-swc/issues/231)
 
 ## 3.7.0
 
