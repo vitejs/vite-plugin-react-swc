@@ -93,6 +93,22 @@ react({
 });
 ```
 
+### env
+
+Configure the SWC env options.
+
+By default, build.target is used. However, the env option can provide for more fine-tuned browserlist support.
+
+See https://swc.rs/docs/configuration/compilation#env
+
+```ts
+react({
+  env: {
+    targets: ["last 4 chrome versions", "last 4 safari version", "ios>=15"],
+  },
+});
+```
+
 ## Consistent components exports
 
 For React refresh to work correctly, your file should only export React components. The best explanation I've read is the one from the [Gatsby docs](https://www.gatsbyjs.com/docs/reference/local-development/fast-refresh/#how-it-works).
