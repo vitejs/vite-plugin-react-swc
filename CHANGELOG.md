@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+Revert the throw when refresh runtime is loaded twice to enable usage in micro frontend apps. This was added to help fix setup usage, and this is not worth an annoying warning for others or a config parameter.
+
+This revert was done in the Babel plugin last year and I didn't port it back.
+
 ## 3.7.1
 
 Ignore directive sourcemap error [#231](https://github.com/vitejs/vite-plugin-react-swc/issues/231)
