@@ -547,12 +547,6 @@ function isLikelyComponentType(type) {
  * Plugin utils
  */
 
-if (window.$RefreshReg$) {
-  throw new Error(
-    "React refresh runtime was loaded twice. Maybe you forgot the base path?",
-  );
-}
-
 export function getRefreshReg(filename) {
   return (type, id) => register(type, filename + " " + id);
 }
