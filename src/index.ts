@@ -8,6 +8,7 @@ import {
   ReactConfig,
   JscTarget,
   transform,
+  EnvConfig,
 } from "@swc/core";
 import { PluginOption, UserConfig, BuildOptions } from "vite";
 import { createRequire } from "module";
@@ -58,6 +59,13 @@ type Options = {
    * Exclusion of node_modules should be handled by the function if needed.
    */
   parserConfig?: (id: string) => ParserConfig | undefined;
+  /**
+   * Configure the SWC env options. By default, build.target is used.
+   * However, the env option can provide for more fine-tuned browserlist support.
+   * See https://swc.rs/docs/configuration/compilation#env
+   * @default undefined
+   */
+  env?: EnvConfig;
 };
 
 const isWebContainer = globalThis.process?.versions?.webcontainer;
@@ -72,6 +80,7 @@ const react = (_options?: Options): PluginOption[] => {
       : undefined,
     devTarget: _options?.devTarget ?? "es2020",
     parserConfig: _options?.parserConfig,
+    env: _options?.env,
   };
 
   return [
@@ -243,8 +252,9 @@ const transformWithOptions = async (
       swcrc: false,
       configFile: false,
       sourceMaps: true,
+      ...(options.env ? { env: options.env } : {}),
       jsc: {
-        target,
+        ...(options.env ? {} : { target }),
         parser,
         experimental: { plugins: options.plugins },
         transform: {
