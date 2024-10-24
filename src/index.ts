@@ -94,6 +94,9 @@ const react = (_options?: Options): PluginOption[] => {
           include: [`${options.jsxImportSource}/jsx-dev-runtime`],
           esbuildOptions: { jsx: "automatic" },
         },
+        resolve: {
+          dedupe: ['react', 'react-dom'],
+        },
       }),
       configResolved(config) {
         if (config.server.hmr === false) hmrDisabled = true;
