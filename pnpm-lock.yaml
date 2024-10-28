@@ -43,8 +43,8 @@ importers:
         specifier: ^5.6.2
         version: 5.6.2
       vite:
-        specifier: 6.0.0-beta.5
-        version: 6.0.0-beta.5(@types/node@20.16.10)
+        specifier: ^6.0.0-beta.6
+        version: 6.0.0-beta.6(@types/node@20.16.10)
 
   playground/base-path:
     dependencies:
@@ -251,10 +251,10 @@ importers:
     dependencies:
       '@generouted/react-router':
         specifier: ^1.19.6
-        version: 1.19.6(react-router-dom@6.26.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(vite@6.0.0-beta.5(@types/node@20.16.10))
+        version: 1.19.6(react-router-dom@6.26.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(vite@6.0.0-beta.6(@types/node@20.16.10))
       generouted:
         specifier: 1.11.7
-        version: 1.11.7(vite@6.0.0-beta.5(@types/node@20.16.10))
+        version: 1.11.7(vite@6.0.0-beta.6(@types/node@20.16.10))
       react:
         specifier: ^18.3.1
         version: 18.3.1
@@ -1733,12 +1733,13 @@ packages:
   vfile@6.0.3:
     resolution: {integrity: sha512-KzIbH/9tXat2u30jf+smMwFCsno4wHVdNmzFyL+T/L3UGqqk6JKfVqOFOZEpZSHADH1k40ab6NUIXZq422ov3Q==}
 
-  vite@6.0.0-beta.5:
-    resolution: {integrity: sha512-1B6whxfcGTR67jApESbkkf1ocfgUoVHPQoiKp3O4l/Xgz7kFpp5OQ4Wd1rnLzoHyxFJYL1o39bXfshiP0Er54Q==}
+  vite@6.0.0-beta.6:
+    resolution: {integrity: sha512-XbMzqwx2CDrOOKDDRvenHMQx+JwUTSm/1a/GgjTL6oC5XwpAk+PgoxmB6vGh2UQi0t9EIVS5d2GZXMWd4P5ahA==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
     peerDependencies:
       '@types/node': ^18.0.0 || >=20.0.0
+      jiti: '>=1.21.0'
       less: '*'
       lightningcss: ^1.21.0
       sass: '*'
@@ -1746,8 +1747,12 @@ packages:
       stylus: '*'
       sugarss: '*'
       terser: ^5.16.0
+      tsx: ^4.8.1
+      yaml: ^2.4.2
     peerDependenciesMeta:
       '@types/node':
+        optional: true
+      jiti:
         optional: true
       less:
         optional: true
@@ -1762,6 +1767,10 @@ packages:
       sugarss:
         optional: true
       terser:
+        optional: true
+      tsx:
+        optional: true
+      yaml:
         optional: true
 
   which@2.0.2:
@@ -2051,13 +2060,13 @@ snapshots:
   '@esbuild/win32-x64@0.24.0':
     optional: true
 
-  '@generouted/react-router@1.19.6(react-router-dom@6.26.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(vite@6.0.0-beta.5(@types/node@20.16.10))':
+  '@generouted/react-router@1.19.6(react-router-dom@6.26.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(vite@6.0.0-beta.6(@types/node@20.16.10))':
     dependencies:
       fast-glob: 3.3.2
-      generouted: 1.19.6(vite@6.0.0-beta.5(@types/node@20.16.10))
+      generouted: 1.19.6(vite@6.0.0-beta.6(@types/node@20.16.10))
       react: 18.3.1
       react-router-dom: 6.26.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      vite: 6.0.0-beta.5(@types/node@20.16.10)
+      vite: 6.0.0-beta.6(@types/node@20.16.10)
 
   '@mdx-js/mdx@3.0.1':
     dependencies:
@@ -2552,13 +2561,13 @@ snapshots:
 
   function-bind@1.1.1: {}
 
-  generouted@1.11.7(vite@6.0.0-beta.5(@types/node@20.16.10)):
+  generouted@1.11.7(vite@6.0.0-beta.6(@types/node@20.16.10)):
     dependencies:
-      vite: 6.0.0-beta.5(@types/node@20.16.10)
+      vite: 6.0.0-beta.6(@types/node@20.16.10)
 
-  generouted@1.19.6(vite@6.0.0-beta.5(@types/node@20.16.10)):
+  generouted@1.19.6(vite@6.0.0-beta.6(@types/node@20.16.10)):
     dependencies:
-      vite: 6.0.0-beta.5(@types/node@20.16.10)
+      vite: 6.0.0-beta.6(@types/node@20.16.10)
 
   get-stream@8.0.1: {}
 
@@ -3363,7 +3372,7 @@ snapshots:
       '@types/unist': 3.0.3
       vfile-message: 4.0.2
 
-  vite@6.0.0-beta.5(@types/node@20.16.10):
+  vite@6.0.0-beta.6(@types/node@20.16.10):
     dependencies:
       esbuild: 0.24.0
       postcss: 8.4.47
