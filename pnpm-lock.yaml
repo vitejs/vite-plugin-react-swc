@@ -144,8 +144,8 @@ importers:
         version: 18.3.1(react@18.3.1)
     devDependencies:
       '@swc/plugin-emotion':
-        specifier: ^4.0.2
-        version: 4.0.2
+        specifier: ^6.0.0
+        version: 6.0.0
       '@types/react':
         specifier: ^18.3.10
         version: 18.3.10
@@ -1017,8 +1017,8 @@ packages:
   '@swc/counter@0.1.3':
     resolution: {integrity: sha512-e2BR4lsJkkRlKZ/qCHPw9ZaSxc0MVUd7gtbtaB7aMvHeJVYe8sOB8DBZkP2DtISHGSku9sCK6T6cnY0CtXrOCQ==}
 
-  '@swc/plugin-emotion@4.0.2':
-    resolution: {integrity: sha512-CFRqg+GyGybRLm4n9DrohKG8lBY8wS7QtDI7HfS0KY8odIREJZ4WQJC88OpAOjTmBtxqzRt7VQmhAOb2/H9fxg==}
+  '@swc/plugin-emotion@6.0.0':
+    resolution: {integrity: sha512-7FQrDBCVnVnmM/8wXxS9e3B0IgkRBO7yuDYS/S2E5eI0UnFfQsNKCTkmnYvTtjctPyqedsh8tPfH4cZ3yC7xYg==}
 
   '@swc/plugin-styled-components@3.0.2':
     resolution: {integrity: sha512-ga3065ACLCHBfE3h6bsXABK3usFyqGr0BB/EWReGWu3igUinI6IqK50g76xEqcaEgF6ywM0cmrZ7ARqPPVOe+w==}
@@ -2438,7 +2438,7 @@ snapshots:
 
   '@swc/counter@0.1.3': {}
 
-  '@swc/plugin-emotion@4.0.2':
+  '@swc/plugin-emotion@6.0.0':
     dependencies:
       '@swc/counter': 0.1.3
 
