@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+## 3.7.2
+
+### Add Vite 6 to peerDependencies range [#207](https://github.com/vitejs/vite-plugin-react-swc/pull/207)
+
+Thanks @RobinTail
+
+### Revert throw when refresh runtime is loaded twice [#237](https://github.com/vitejs/vite-plugin-react-swc/issues/237)
+
 Revert the throw when refresh runtime is loaded twice to enable usage in micro frontend apps. This was added to help fix setup usage, and this is not worth an annoying warning for others or a config parameter.
 
 This revert was done in the Babel plugin last year and I didn't port it back.
