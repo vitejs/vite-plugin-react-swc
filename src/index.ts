@@ -52,6 +52,12 @@ type Options = {
    */
   devTarget?: JscTarget;
   /**
+   * Run SWC plugins before other transformations.
+   * Required for plugins that mutate TypeScript decorators.
+   * @default false
+   */
+  runPluginFirst?: boolean;
+  /**
    * Override the default include list (.ts, .tsx, .mts, .jsx, .mdx).
    * This requires to redefine the config for any file you want to be included.
    * If you want to trigger fast refresh on compiled JS, use `jsx: true`.
@@ -72,6 +78,7 @@ const react = (_options?: Options): PluginOption[] => {
       : undefined,
     devTarget: _options?.devTarget ?? "es2020",
     parserConfig: _options?.parserConfig,
+    runPluginFirst: _options?.runPluginFirst ?? false,
   };
 
   return [
@@ -246,7 +253,10 @@ const transformWithOptions = async (
       jsc: {
         target,
         parser,
-        experimental: { plugins: options.plugins },
+        experimental: {
+          plugins: options.plugins,
+          runPluginFirst: options.runPluginFirst,
+        },
         transform: {
           useDefineForClassFields: true,
           react: reactConfig,
