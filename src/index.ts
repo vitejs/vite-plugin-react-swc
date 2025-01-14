@@ -66,7 +66,7 @@ type Options = {
    * Also debugging why some specific version of decorators with some other unstable/legacy
    * feature doesn't work is not fun, so we won't provide support for it, hence the name `useAtYourOwnRisk`
    */
-  useAtYourOwnRiskEditConfig?: (options: SWCOptions) => void;
+  useAtYourOwnRisk_mutateSwcOptions?: (options: SWCOptions) => void;
 };
 
 const isWebContainer = globalThis.process?.versions?.webcontainer;
@@ -81,7 +81,8 @@ const react = (_options?: Options): PluginOption[] => {
       : undefined,
     devTarget: _options?.devTarget ?? "es2020",
     parserConfig: _options?.parserConfig,
-    useAtYourOwnRiskEditConfig: _options?.useAtYourOwnRiskEditConfig,
+    useAtYourOwnRisk_mutateSwcOptions:
+      _options?.useAtYourOwnRisk_mutateSwcOptions,
   };
 
   return [
@@ -263,8 +264,8 @@ const transformWithOptions = async (
         },
       },
     };
-    if (options.useAtYourOwnRiskEditConfig) {
-      options.useAtYourOwnRiskEditConfig(swcOptions);
+    if (options.useAtYourOwnRisk_mutateSwcOptions) {
+      options.useAtYourOwnRisk_mutateSwcOptions(swcOptions);
     }
     result = await transform(code, swcOptions);
   } catch (e: any) {
