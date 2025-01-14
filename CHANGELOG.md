@@ -2,6 +2,20 @@
 
 ## Unreleased
 
+### Add useAtYourOwnRisk_mutateSwcOptions option
+
+The future of Vite is with OXC, and from the beginning this was a design choice to not exposed too many specialties from SWC so that Vite React users can move to another transformer later.
+Also debugging why some specific version of decorators with some other unstable/legacy feature doesn't work is not fun, so we won't provide support for it, hence the name `useAtYourOwnRisk`.
+
+```ts
+react({
+  useAtYourOwnRisk_mutateSwcOptions(options) {
+    options.jsc.parser.decorators = true;
+    options.jsAc.transform.decoratorVersion = "2022-03";
+  },
+});
+```
+
 ## 3.7.2
 
 ### Add Vite 6 to peerDependencies range [#207](https://github.com/vitejs/vite-plugin-react-swc/pull/207)
