@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 3.8.0
+
 ### Add useAtYourOwnRisk_mutateSwcOptions option
 
 The future of Vite is with OXC, and from the beginning this was a design choice to not exposed too many specialties from SWC so that Vite React users can move to another transformer later.
