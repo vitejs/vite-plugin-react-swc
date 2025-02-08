@@ -8,7 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@generouted/react-router": "^1.19.6",
+    "@generouted/react-router": "^1.20.0",
     "generouted": "1.11.7",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

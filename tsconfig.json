@@ -7,24 +7,25 @@
     "playground/*/__tests__"
   ],
   "compilerOptions": {
-    /* Target node 14 */
-    "module": "ES2020",
-    "lib": ["ES2020", "DOM"],
-    "target": "ES2020",
+    /* Target node 22 */
+    "module": "ESNext",
+    "lib": ["ES2023", "DOM"],
+    "target": "ES2023",
     "skipLibCheck": true,
 
-    /* Transpile with esbuild */
+    /* Bundler mode */
     "moduleResolution": "bundler",
-    "noEmit": true,
-    "isolatedModules": true,
     "allowImportingTsExtensions": true,
-    "resolveJsonModule": true,
+    "verbatimModuleSyntax": true,
+    "noEmit": true,
 
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "useUnknownInCatchVariables": true
+    "useUnknownInCatchVariables": true,
+    "noUncheckedSideEffectImports": true,
+    "noPropertyAccessFromIndexSignature": true
   }
 }

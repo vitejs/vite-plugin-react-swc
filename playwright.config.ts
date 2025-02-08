@@ -1,5 +1,5 @@
 import { fileURLToPath } from "node:url";
-import { devices, PlaywrightTestConfig } from "@playwright/test";
+import { devices, type PlaywrightTestConfig } from "@playwright/test";
 import fs from "fs-extra";
 
 const tempDir = fileURLToPath(new URL("playground-temp", import.meta.url));
@@ -13,10 +13,10 @@ fs.copySync(fileURLToPath(new URL("playground", import.meta.url)), tempDir, {
 });
 
 const config: PlaywrightTestConfig = {
-  forbidOnly: !!process.env.CI,
+  forbidOnly: !!process.env["CI"],
   workers: 1,
   timeout: 10_000,
-  reporter: process.env.CI ? "github" : "list",
+  reporter: process.env["CI"] ? "github" : "list",
   projects: [{ name: "chromium", use: devices["Desktop Chrome"] }],
 };
 

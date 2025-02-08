@@ -1,4 +1,4 @@
-import { expect, Locator, Page } from "@playwright/test";
+import { expect, type Locator, type Page } from "@playwright/test";
 import {
   createServer,
   loadConfigFromFile,
@@ -33,7 +33,7 @@ export const setupWaitForLogs = async (page: Page) => {
 
 let port = 5173;
 export const setupDevServer = async (name: string) => {
-  process.env.NODE_ENV = "development";
+  process.env["NODE_ENV"] = "development";
   const root = `playground-temp/${name}`;
   const res = await loadConfigFromFile(
     { command: "serve", mode: "development" },
@@ -68,7 +68,7 @@ export const setupDevServer = async (name: string) => {
 };
 
 export const setupBuildAndPreview = async (name: string) => {
-  process.env.NODE_ENV = "production";
+  process.env["NODE_ENV"] = "production";
   const root = `playground-temp/${name}`;
   const res = await loadConfigFromFile(
     { command: "build", mode: "production" },

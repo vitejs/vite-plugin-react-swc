@@ -1,16 +1,16 @@
 import { readFileSync } from "fs";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
-import { SourceMapPayload } from "module";
+import type { SourceMapPayload } from "module";
 import {
-  Output,
-  ParserConfig,
-  ReactConfig,
-  JscTarget,
+  type Output,
+  type ParserConfig,
+  type ReactConfig,
+  type JscTarget,
   transform,
   type Options as SWCOptions,
 } from "@swc/core";
-import { PluginOption, UserConfig, BuildOptions } from "vite";
+import type { PluginOption, UserConfig, BuildOptions } from "vite";
 import { createRequire } from "module";
 
 const runtimePublicPath = "/@react-refresh";
@@ -69,7 +69,7 @@ type Options = {
   useAtYourOwnRisk_mutateSwcOptions?: (options: SWCOptions) => void;
 };
 
-const isWebContainer = globalThis.process?.versions?.webcontainer;
+const isWebContainer = globalThis.process?.versions?.["webcontainer"];
 
 const react = (_options?: Options): PluginOption[] => {
   let hmrDisabled = false;
