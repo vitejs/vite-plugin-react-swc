@@ -13,7 +13,7 @@ Also debugging why some specific version of decorators with some other unstable/
 react({
   useAtYourOwnRisk_mutateSwcOptions(options) {
     options.jsc.parser.decorators = true;
-    options.jsAc.transform.decoratorVersion = "2022-03";
+    options.jsc.transform.decoratorVersion = "2022-03";
   },
 });
 ```
