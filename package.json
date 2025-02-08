@@ -23,7 +23,7 @@
     "@arnaud-barre/tnode": "^0.19.2",
     "@playwright/test": "^1.47.2",
     "@types/fs-extra": "^11.0.4",
-    "@types/node": "20.16.10",
+    "@types/node": "22.13.1",
     "@vitejs/release-scripts": "^1.3.2",
     "esbuild": "^0.24.0",
     "fs-extra": "^11.2.0",
