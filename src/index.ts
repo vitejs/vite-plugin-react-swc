@@ -8,6 +8,7 @@ import {
   ReactConfig,
   JscTarget,
   transform,
+  type Options as SWCOptions,
 } from "@swc/core";
 import { PluginOption, UserConfig, BuildOptions } from "vite";
 import { createRequire } from "module";
@@ -58,6 +59,14 @@ type Options = {
    * Exclusion of node_modules should be handled by the function if needed.
    */
   parserConfig?: (id: string) => ParserConfig | undefined;
+  /**
+   * The future of Vite is with OXC, and from the beginning this was a design choice
+   * to not exposed too many specialties from SWC so that Vite React users can move to
+   * another transformer later.
+   * Also debugging why some specific version of decorators with some other unstable/legacy
+   * feature doesn't work is not fun, so we won't provide support for it, hence the name `useAtYourOwnRisk`
+   */
+  useAtYourOwnRisk_mutateSwcOptions?: (options: SWCOptions) => void;
 };
 
 const isWebContainer = globalThis.process?.versions?.webcontainer;
@@ -72,6 +81,8 @@ const react = (_options?: Options): PluginOption[] => {
       : undefined,
     devTarget: _options?.devTarget ?? "es2020",
     parserConfig: _options?.parserConfig,
+    useAtYourOwnRisk_mutateSwcOptions:
+      _options?.useAtYourOwnRisk_mutateSwcOptions,
   };
 
   return [
@@ -238,7 +249,7 @@ const transformWithOptions = async (
 
   let result: Output;
   try {
-    result = await transform(code, {
+    const swcOptions: SWCOptions = {
       filename: id,
       swcrc: false,
       configFile: false,
@@ -252,7 +263,11 @@ const transformWithOptions = async (
           react: reactConfig,
         },
       },
-    });
+    };
+    if (options.useAtYourOwnRisk_mutateSwcOptions) {
+      options.useAtYourOwnRisk_mutateSwcOptions(swcOptions);
+    }
+    result = await transform(code, swcOptions);
   } catch (e: any) {
     const message: string = e.message;
     const fileStartIndex = message.indexOf("╭─[");
