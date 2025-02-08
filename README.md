@@ -114,9 +114,3 @@ For React refresh to work correctly, your file should only export React componen
 If an incompatible change in exports is found, the module will be invalidated and HMR will propagate. To make it easier to export simple constants alongside your component, the module is only invalidated when their value changes.
 
 You can catch mistakes and get more detailed warning with this [eslint rule](https://github.com/ArnaudBarre/eslint-plugin-react-refresh).
-
-## Migrating from `vite-plugin-swc-react-refresh`
-
-The documentation for the previous version of the plugin is available in the [v2 branch](https://github.com/vitejs/vite-plugin-react-swc/tree/v2)
-
-To migrate, see this [changelog](https://github.com/vitejs/vite-plugin-react-swc/releases/tag/v3.0.0-beta.0)
