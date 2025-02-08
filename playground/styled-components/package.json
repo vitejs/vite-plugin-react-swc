@@ -11,10 +11,10 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-is": "^19.0.0",
-    "styled-components": "^6.1.13"
+    "styled-components": "^6.1.15"
   },
   "devDependencies": {
-    "@swc/plugin-styled-components": "^3.0.2",
+    "@swc/plugin-styled-components": "^3.0.3",
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
     "@types/styled-components": "^5.1.34",
