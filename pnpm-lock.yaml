@@ -144,8 +144,8 @@ importers:
         version: 19.0.0(react@19.0.0)
     devDependencies:
       '@swc/plugin-emotion':
-        specifier: ^8.6.0
-        version: 8.6.0
+        specifier: ^9.0.0
+        version: 9.0.0
       '@types/react':
         specifier: ^19.0.8
         version: 19.0.8
@@ -251,8 +251,8 @@ importers:
         version: 6.1.15(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
     devDependencies:
       '@swc/plugin-styled-components':
-        specifier: ^6.7.0
-        version: 6.7.0
+        specifier: ^7.1.0
+        version: 7.1.0
       '@types/react':
         specifier: ^19.0.8
         version: 19.0.8
@@ -1066,11 +1066,11 @@ packages:
   '@swc/counter@0.1.3':
     resolution: {integrity: sha512-e2BR4lsJkkRlKZ/qCHPw9ZaSxc0MVUd7gtbtaB7aMvHeJVYe8sOB8DBZkP2DtISHGSku9sCK6T6cnY0CtXrOCQ==}
 
-  '@swc/plugin-emotion@8.6.0':
-    resolution: {integrity: sha512-qOSIfKKFxfJNUnkWFypMEMpgtKEdx8wZbfN6E9U0XY1ZlJXkovuSYyyfe8V2zTUqt1edm77xRPWRk/Xa+0FLnQ==}
+  '@swc/plugin-emotion@9.0.0':
+    resolution: {integrity: sha512-Nefly+nsqGnuQPAf90BtjNjimgjyisFAFtaOReHZvRWP793ryg0u3djQHhn3Hln5LXLmX+0rSj3p8a3IeDu91w==}
 
-  '@swc/plugin-styled-components@6.7.0':
-    resolution: {integrity: sha512-da9RL9GEWnyYzvQ/haupYkgcmt7AKlstzhbxVY0BEHuolHlhEpxqLLkKAExU/Mb/76XIdmevkH8r20JjRtB1kA==}
+  '@swc/plugin-styled-components@7.1.0':
+    resolution: {integrity: sha512-4xOWM1+bqNkZXjJuHSAbg3Wyje+IxOiX9I9lTjuBXxQNHmGcT5oEDIOlC+WzwhptbPU7UF9B571V7ETnMb6l5w==}
 
   '@swc/types@0.1.17':
     resolution: {integrity: sha512-V5gRru+aD8YVyCOMAjMpWR1Ui577DD5KSJsHP8RAxopAH22jFz6GZd/qxqjO6MJHQhcsjvjOFXyDhyLQUnMveQ==}
@@ -2497,11 +2497,11 @@ snapshots:
 
   '@swc/counter@0.1.3': {}
 
-  '@swc/plugin-emotion@8.6.0':
+  '@swc/plugin-emotion@9.0.0':
     dependencies:
       '@swc/counter': 0.1.3
 
-  '@swc/plugin-styled-components@6.7.0':
+  '@swc/plugin-styled-components@7.1.0':
     dependencies:
       '@swc/counter': 0.1.3
 
