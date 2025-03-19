@@ -4,7 +4,7 @@
 
 ## 3.8.1
 
-## Remove WebContainers warning [#268](https://github.com/vitejs/vite-plugin-react-swc/pull/268)
+### Remove WebContainers warning [#268](https://github.com/vitejs/vite-plugin-react-swc/pull/268)
 
 SWC is now supported in WebContainers 🎉
 
