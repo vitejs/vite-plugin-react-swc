@@ -69,8 +69,6 @@ type Options = {
   useAtYourOwnRisk_mutateSwcOptions?: (options: SWCOptions) => void;
 };
 
-const isWebContainer = globalThis.process?.versions?.["webcontainer"];
-
 const react = (_options?: Options): PluginOption[] => {
   let hmrDisabled = false;
   const options = {
@@ -118,11 +116,6 @@ const react = (_options?: Options): PluginOption[] => {
         ) {
           throw new Error(
             "[vite:react-swc] The MDX plugin should be placed before this plugin",
-          );
-        }
-        if (isWebContainer) {
-          config.logger.warn(
-            "[vite:react-swc] SWC is currently not supported in WebContainers. You can use the default React plugin instead.",
           );
         }
       },
