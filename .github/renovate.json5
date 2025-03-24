@@ -7,7 +7,12 @@
     {
       "matchFileNames": ["**/react-18/**"],
       "ignoreDeps": ["react", "react-dom", "@types/react", "@types/react-dom"]
-    }
+    },
+    {
+      "matchDepTypes": ["action"],
+      "excludePackagePrefixes": ["actions/", "github/"],
+      "pinDigests": true,
+    },
   ],
   ignoreDeps: [
     "generouted", // testing lib shipping JSX (new version ship transpiled JS)
