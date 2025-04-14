@@ -15,7 +15,7 @@ jobs:
     environment: Release
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -26,4 +26,4 @@ jobs:
       - run: pnpm tnode scripts/publish.ts ${{ github.ref_name }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - uses: ArnaudBarre/github-release@v1
+      - uses: ArnaudBarre/github-release@4fa6eafe8e2449c7c1c5a91ae50de4ee34db0b40 # v1
